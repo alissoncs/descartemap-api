@@ -83,7 +83,7 @@ echo 'server {
 
 }
 ' > tmp.conf
-sudo mv tmp3248.conf /etc/nginx/sites-available/descartemap
+sudo mv tmp.conf /etc/nginx/sites-available/descartemap
 sudo ln -s /etc/nginx/sites-available/descartemap /etc/nginx/sites-enabled/descartemap
 
 sudo service nginx start
