@@ -9,9 +9,13 @@ class PlaceService {
     $faker = $app['faker'];
 
     return [
-      'id' => $faker->unique()->randomDigitNotNull,
+      'id' => $faker->randomDigitNotNull,
       'name' => $faker->company,
       'type' => $this->gen($faker),
+      'location' => [
+        'lat' => $faker->latitude,
+        'lng' => $faker->longitude
+      ],
       'contact' => [
         'phones' => [
           [
@@ -21,9 +25,9 @@ class PlaceService {
             'number' => $faker->phoneNumber,
           ]
         ],
-        'email' => $faker->freeEmail,
+        'email' => strtolower($faker->freeEmail),
         'facebook_fp' => $faker->url,
-        'site' => $faker->domainName,
+        'site' => strtolower($faker->domainName),
       ],
       'address' => [
         'street' => $faker->streetAddress,
@@ -32,10 +36,6 @@ class PlaceService {
         'state' => $faker->state,
         'country' => $faker->country,
         'zipcode' => $faker->postCode
-      ],
-      'location' => [
-        'lat' => $faker->latitude,
-        'lng' => $faker->longitude
       ],
       'accepted_materials' => [
         [
@@ -72,9 +72,9 @@ class PlaceService {
     $faker = $app['faker'];
 
     $data = array();
-    for($i = 0; $i < $app['faker']->randomDigitNotNull; $i++) {
+    for($i = 0; $i < 50; $i++) {
       $data[] = [
-        'id' => $faker->unique()->randomDigitNotNull,
+        'id' => $faker->randomDigitNotNull,
         'name' => $faker->company,
         'type' => $this->gen($faker),
         'location' => [

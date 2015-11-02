@@ -20,7 +20,7 @@ $app['response'] = $app->share(function(){
 
 $app['faker'] = $app->share(function(){
 
-  $faker = \Faker\Factory::create();
+  $faker = \Faker\Factory::create('pt_BR');
   $faker->addProvider(new \Faker\Provider\pt_BR\PhoneNumber($faker));
   $faker->addProvider(new \Faker\Provider\pt_BR\Person($faker));
   $faker->addProvider(new \Faker\Provider\pt_BR\Address($faker));
