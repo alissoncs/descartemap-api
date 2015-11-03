@@ -9,7 +9,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Service\PlaceService;
 
 $app->get('/', function () use ($app) {
-    return $app['response']->setContent(['sample' => 1]);
+    return $app['response']->setData(['sample' => 1]);
 });
 
 $app->get('/places/{id}', function($id) use ($app) {
