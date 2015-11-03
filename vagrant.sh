@@ -13,15 +13,20 @@ echo 'Installed Vim'
 #curl
 sudo apt-get install -y curl
 
-#mysql
-sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password password root'
-sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password root'
-sudo apt-get -y install mysql-server
+#mongodb
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
+echo "deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.0.list
+sudo apt-get update
+sudo apt-get install -y mongodb-org=3.0.7 mongodb-org-server=3.0.7 mongodb-org-shell=3.0.7 mongodb-org-mongos=3.0.7 mongodb-org-tools=3.0.7
+
+echo 'Installed Mongo DB'
+sudo service mongod start
+sudo service mongod stop
 
 #php
 sudo add-apt-repository ppa:ondrej/php5-5.6
 sudo apt-get update
-sudo apt-get install -y php5-fpm php5-cli php5-gd php5-mysql php5-dev php5-curl php5-mcrypt gcc make libpcre3-dev
+sudo apt-get install -y php5-fpm php5-cli php5-gd php5-mongo php5-dev php5-curl php5-mcrypt gcc make libpcre3-dev
 echo 'Installed PHP'
 
 #removing apache2
@@ -99,6 +104,7 @@ sudo sed -i 's/display_errors = .*/display_errors = On/g' /etc/php5/fpm/php.ini
 sudo sed -i 's/display_startup_errors = .*/display_startup_errors = Off/g' /etc/php5/fpm/php.ini
 
 sudo service php5-fpm restart
+sudo service mongod restart
 
 # phpunit
 cd /tmp/
