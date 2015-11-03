@@ -19,6 +19,7 @@ sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password_again p
 sudo apt-get -y install mysql-server
 
 #php
+sudo apt-get install -y software-properties-common
 sudo add-apt-repository ppa:ondrej/php5-5.6
 sudo apt-get update
 sudo apt-get install -y php5-fpm php5-cli php5-gd php5-mysql php5-dev php5-curl php5-mcrypt gcc make libpcre3-dev
