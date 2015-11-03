@@ -1,1 +1,1 @@
-{"virtualbox":{"/vagrant":{"mount_options":["dmode=775","fmode=644"],"owner":"www-data","group":"www-data","guestpath":"/vagrant","hostpath":"/home/alissoncs/projetos/descartemap-api","disabled":false}}}
+{"virtualbox":{"/vagrant":{"mount_options":["dmode=775","fmode=644"],"owner":"www-data","group":"www-data","guestpath":"/vagrant","hostpath":"/home/alisson/webalissoncs/descartemap-api","disabled":false}}}
