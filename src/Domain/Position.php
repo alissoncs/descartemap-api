@@ -26,9 +26,9 @@ class Position {
 
   }
 
-  public function setLatitude($longitude) {
+  public function setLongitude($longitude) {
 
-    $this->longitude = $longitudelongitude;
+    $this->longitude = $longitude;
 
   } 
 

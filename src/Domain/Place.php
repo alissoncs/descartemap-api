@@ -2,23 +2,56 @@
 
 namespace Domain;
 
-use Domain\Location;
+use Domain\Position;
+use Domain\Address;
 
 class Place {
 
   private $name;
 
-  private $location;
+  private $position;
 
-  public function setLocation(PositiLocationon $location) {
+  private $address;
 
-    $this->location = $location;
+  public function __construct(Position $position) {
+
+    $this->setPosition($position);
 
   }
 
-  public function getLocation() {
+  public function setName($name) {
 
-    return $this->location;
+    $this->name = $name;
+
+  }
+
+  public function getName() {
+
+    return $this->name;
+
+  }
+
+  public function setPosition(Position $position) {
+
+    $this->position = $position;
+
+  }
+
+  public function getPosition() {
+
+    return $this->position;
+
+  }
+
+  public function setAddress(Address $address) {
+
+    $this->address = $address;
+
+  }
+
+  public function getAddress() {
+
+    return $this->address;
 
   }
 

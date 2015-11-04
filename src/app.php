@@ -8,16 +8,24 @@ use Silex\Provider\ServiceControllerServiceProvider;
 use Silex\Provider\HttpFragmentServiceProvider;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-$app = new Application();
-$app->register(new UrlGeneratorServiceProvider());
-$app->register(new ValidatorServiceProvider());
-$app->register(new ServiceControllerServiceProvider());
-$app->register(new HttpFragmentServiceProvider());
+use Provider\RepositoryCollectionProvider;
+use Provider\MongoConnectionProvider;
 
-$app['response'] = $app->share(function(){
-  return new JsonResponse;
+$app = new Application();
+
+// Serviço de repositórios
+$app->register(new RepositoryCollectionProvider());
+
+// Serviço do Mongo
+$app->register(new MongoConnectionProvider());
+
+// Json
+$app['json'] = $app->share(function(){
+  $r = new JsonResponse;
+  return $r;
 });
 
+// Faker
 $app['faker'] = $app->share(function(){
 
   $faker = \Faker\Factory::create('pt_BR');
