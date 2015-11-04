@@ -121,3 +121,7 @@ wget https://phar.phpunit.de/phpunit.phar
 chmod +x phpunit.phar
 sudo mv phpunit.phar /usr/local/bin/phpunit
 cd /
+
+curl -sS https://getcomposer.org/installer | php
+sudo chmod +x composer.phar
+sudo mv composer.phar /usr/local/bin/composer
