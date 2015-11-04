@@ -6,21 +6,7 @@
     "require": {
         "php": ">=5.5",
         "silex/silex": "~1.3",
-        "silex/web-profiler": "*",
-        "symfony/browser-kit": "*",
-        "symfony/class-loader": "*",
-        "symfony/config": "*",
-        "symfony/console": "*",
-        "symfony/css-selector": "*",
-        "symfony/debug": "*",
-        "symfony/finder": "*",
-        "symfony/form": "*",
-        "symfony/monolog-bridge": "*",
-        "symfony/process": "*",
-        "symfony/security": "*",
-        "symfony/translation": "*",
-        "symfony/twig-bridge": "*",
-        "symfony/validator": "*",
+        "doctrine/mongodb-odm": "~1.0",
         "fzaninotto/faker":"*"
     },
     "autoload": {
