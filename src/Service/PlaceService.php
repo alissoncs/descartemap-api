@@ -2,96 +2,28 @@
 
 namespace Service;
 
+use Silex\Application;
+
 class PlaceService {
 
-  public function getOne($app) {
+  private $app;
 
-    $faker = $app['faker'];
+  public function __construct(Application $app) {
 
-    return [
-      'id' => $faker->randomDigitNotNull,
-      'name' => $faker->company,
-      'type' => $this->gen($faker),
-      'location' => [
-        'lat' => $faker->latitude,
-        'lng' => $faker->longitude
-      ],
-      'contact' => [
-        'phones' => [
-          [
-            'number' => $faker->phoneNumber,
-          ],
-          [
-            'number' => $faker->phoneNumber,
-          ]
-        ],
-        'email' => strtolower($faker->freeEmail),
-        'facebook_fp' => $faker->url,
-        'site' => strtolower($faker->domainName),
-      ],
-      'address' => [
-        'street' => $faker->streetAddress,
-        'neighborhood' => $faker->streetName,
-        'city' => $faker->city,
-        'state' => $faker->state,
-        'country' => $faker->country,
-        'zipcode' => $faker->postCode
-      ],
-      'accepted_materials' => [
-        [
-          'id' => $faker->randomDigitNotNull,
-          'name' => $faker->colorName
-        ],
-        [
-          'id' => $faker->randomDigitNotNull,
-          'name' => $faker->colorName
-        ],
-        [
-          'id' => $faker->randomDigitNotNull,
-          'name' => $faker->colorName
-        ]
-      ],
-      'avaliation' => [
-        'up_vote' => $faker->randomDigitNotNull,
-        'down_vote' => $faker->randomDigitNotNull,
-      ],
-      'date_insert' => $faker->dateTimeThisCentury->format('Y-m-d H:i:s'),
-      'date_last_update' => $faker->dateTimeThisCentury->format('Y-m-d H:i:s')
-    ];
+    $this->app =& $app;
 
   }
 
-  public function getAll($app) {
+  /**
+   * Retorna todos
+   * @return array
+   */
+  public function findAll() {
 
-    return $this->getAllSimple($app);
+    $mongo = $app['mongo.db'];
 
-  }
+    return ['array' => 'data'];
 
-  public function getAllSimple($app) {
-
-    $faker = $app['faker'];
-
-    $data = array();
-    for($i = 0; $i < 50; $i++) {
-      $data[] = [
-        'id' => $faker->randomDigitNotNull,
-        'name' => $faker->company,
-        'type' => $this->gen($faker),
-        'location' => [
-          'lat' => $faker->latitude,
-          'lng' => $faker->longitude
-        ],
-      ];
-    }
-
-    return $data;
-
-  }
-
-  private function gen($faker) {
-    return strtoupper($faker->randomElement(
-      ['ALL', 'recycling', 'COOK_OIL', 'OTHER', 'BATTERY', 'ELETRONIC', 'HOSPITAL']
-    ));
   }
 
 }

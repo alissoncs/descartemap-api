@@ -2,6 +2,7 @@
 
 namespace Domain;
 
+use InvalidArgumentException as Invalid;
 use Domain\Position;
 use Domain\Address;
 
@@ -13,13 +14,21 @@ class Place {
 
   private $address;
 
-  public function __construct(Position $position) {
+  private $type;
 
+  public function __construct($name, $type, Position $position) {
+
+    $this->setName($name);
+    $this->setType($type);
     $this->setPosition($position);
 
   }
 
   public function setName($name) {
+
+    if(!is_string($name)) {
+      throw new Invalid('Name must be int');
+    }
 
     $this->name = $name;
 
@@ -52,6 +61,22 @@ class Place {
   public function getAddress() {
 
     return $this->address;
+
+  }
+
+  public function setType($type) {
+
+    if(!is_string($type)) {
+      throw new Invalid('Type must be int');
+    }
+
+    $this->type = $type;
+
+  }
+
+  public function getType() {
+
+    return $this->type;
 
   }
 

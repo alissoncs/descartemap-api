@@ -4,7 +4,6 @@ namespace Provider;
 
 use Silex\Application;
 use Silex\ServiceProviderInterface;
-
 use Service\PlaceService;
 
 class RepositoryCollectionProvider implements ServiceProviderInterface {

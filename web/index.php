@@ -6,11 +6,11 @@ if(!file_exists(__DIR__.'/../vendor/autoload.php')) {
 
 require_once __DIR__.'/../vendor/autoload.php';
 
-$app = require __DIR__.'/../src/api.php';
+$app = require __DIR__.'/../src/app.php';
 
 error_reporting(E_ALL);
 $app['debug'] = true;
 
-require __DIR__.'/../src/controllers.php';
+require __DIR__.'/../src/api.php';
 
 $app->run();

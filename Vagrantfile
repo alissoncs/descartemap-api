@@ -2,7 +2,7 @@ VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
-  config.vm.box = "ARTACK/debian-jessie"
+  config.vm.box = "debian/wheezy64"
   
   config.vm.network "forwarded_port", guest: 80, host: 4001
 

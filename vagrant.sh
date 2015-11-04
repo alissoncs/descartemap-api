@@ -14,20 +14,28 @@ echo 'Installed Vim'
 sudo apt-get install -y curl
 
 #mongodb
-sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
-echo "deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.0.list
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv 7F0CEB10
+echo "deb http://repo.mongodb.org/apt/debian wheezy/mongodb-org/3.0 main" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.0.list
+
+dpkg-reconfigure locales
+export LC_ALL=C
 sudo apt-get update
 sudo apt-get install -y mongodb-org=3.0.7 mongodb-org-server=3.0.7 mongodb-org-shell=3.0.7 mongodb-org-mongos=3.0.7 mongodb-org-tools=3.0.7
 
 echo 'Installed Mongo DB'
 sudo service mongod start
 sudo service mongod stop
+sudo service mongod restart
 
 #php
 sudo apt-get install -y software-properties-common
 sudo add-apt-repository ppa:ondrej/php5-5.6
 sudo apt-get update
-sudo apt-get install -y php5-fpm php5-cli php5-gd php5-mongo php5-dev php5-curl php5-mcrypt gcc make libpcre3-dev
+sudo apt-get install -y php-pear make php5-fpm php5-cli php5-gd php5-dev php5-curl php5-mcrypt
+
+sudo pecl install mongo
+sudo echo "extension=mongo.so" | sudo tee /etc/php5/mods-available/mongo.ini
+
 echo 'Installed PHP'
 
 #removing apache2

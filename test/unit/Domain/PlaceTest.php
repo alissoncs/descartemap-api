@@ -7,7 +7,7 @@ class PlaceTest extends \PHPUnit_Framework_TestCase {
 
   public function setUp() {
 
-    $this->instance = new Place(new Position());
+    $this->instance = new Place('Casa no Campo', 'COOK_OIL', new Position());
 
   }
 
@@ -30,6 +30,24 @@ class PlaceTest extends \PHPUnit_Framework_TestCase {
     $position = new Position();
     $this->instance->setPosition($position);
     $this->assertEquals($position, $this->instance->getPosition());
+
+  }
+
+  /**
+   * @expectedException InvalidArgumentException
+   */
+  public function testInvalidName() {
+
+    $this->instance->setName(13);
+
+  }
+
+  /**
+   * @expectedException InvalidArgumentException
+   */
+  public function testInvalidType() {
+
+    $this->instance->setType(true);
 
   }
 
