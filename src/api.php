@@ -23,9 +23,7 @@ $app->get('/places/{id}', function($id) use ($app) {
 
 $app->get('/places', function () use ($app) {
     
-    // $sv = new PlaceService;
-    // $json = $sv->getAll($app);
-    $json = ['sample' => '1'];
+    $json = $app['service.place']->findAll();
 
     return $app['json']->setData($json); 
 

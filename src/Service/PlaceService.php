@@ -20,7 +20,18 @@ class PlaceService {
    */
   public function findAll() {
 
-    $mongo = $app['mongo.db'];
+    $db = $this->app['mongo.db'];
+    
+    $collection = new \MongoCollection($db, 'users');
+    $cursor = $collection->find();
+
+    return iterator_to_array($cursor);
+
+    foreach ($cursor as $doc) {
+      var_dump($doc);
+    }
+
+    die;
 
     return ['array' => 'data'];
 

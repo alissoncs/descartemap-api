@@ -10,9 +10,9 @@ class RepositoryCollectionProvider implements ServiceProviderInterface {
 
     public function register(Application $app) {
 
-        $app['service.place'] = $app->share(function(){
+        $app['service.place'] = $app->share(function() use(&$app){
           
-          return new PlaceService();
+          return new PlaceService($app);
 
         });
 
