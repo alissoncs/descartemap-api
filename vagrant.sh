@@ -32,11 +32,15 @@ sudo apt-get install -y software-properties-common
 sudo add-apt-repository ppa:ondrej/php5-5.6
 sudo apt-get update
 sudo apt-get install -y php-pear make php5-fpm php5-cli php5-gd php5-dev php5-curl php5-mcrypt
-
-sudo pecl install mongo
-sudo echo "extension=mongo.so" | sudo tee /etc/php5/mods-available/mongo.ini
-
 echo 'Installed PHP'
+
+#configuring mongo
+sudo pecl install mongo
+sudo -i
+echo "extension=mongo.so" >> /etc/php5/fpm/php.ini
+echo "extension=mongo.so" >> /etc/php5/cli/php.ini
+echo 'Mongo configured'
+
 
 #removing apache2
 sudo apt-get purge apache2
