@@ -16,23 +16,32 @@ class PlaceService {
 
   }
 
+  public function insert(array $data) {
+
+    $mongo = $this->app['mongo.dm'];
+
+    // Salva um service
+
+    $place = new Place("Casa de cultura Mário Quintana", "STATUS", new Position(51.20098, -24.34874));
+    $mongo->persist($place);
+    $mongo->flush();
+
+  }
+
   /**
    * Retorna todos
    * @return array
    */
   public function findAll() {
 
-    $mongo = $this->app['mongo.dm'];
+    $dm = $this->app['mongo.dm'];
 
-    // Salva um service
-    //
-    $place = new Place("sample", "sample", new Position(51.31884, -24.34874));
+    $document = $dm->getRepository('Domain\Place')->findAll();
 
-    $mongo->persist($place);
-    $mongo->flush();
+    $dm->getHydratorFactory($document);
 
-    return ['sample' => 1];
-
+    var_dump($document);
+    die;
 
   }
 
