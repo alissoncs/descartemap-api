@@ -13,14 +13,15 @@ echo 'Installed Vim'
 #curl
 sudo apt-get install -y curl
 
-#mongodb
-sudo apt-key adv --keyserver keyserver.ubuntu.com --recv 7F0CEB10
-echo "deb http://repo.mongodb.org/apt/debian wheezy/mongodb-org/3.0 main" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.0.list
+#configuracoes locale
+sudo locale-gen en_US en_US.UTF-8 hu_HU hu_HU.UTF-8
+sudo dpkg-reconfigure locales
 
-dpkg-reconfigure locales
-export LC_ALL=C
+#mongodb
+echo "deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.0.list
+
 sudo apt-get update
-sudo apt-get install -y mongodb-org=3.0.7 mongodb-org-server=3.0.7 mongodb-org-shell=3.0.7 mongodb-org-mongos=3.0.7 mongodb-org-tools=3.0.7
+sudo apt-get install -y --force-yes mongodb-org
 
 echo 'Installed Mongo DB'
 sudo service mongod start
@@ -36,11 +37,11 @@ echo 'Installed PHP'
 
 #configuring mongo
 sudo pecl install mongo
+sudo apt-get install -y libsasl2-dev
 sudo -i
 echo "extension=mongo.so" >> /etc/php5/fpm/php.ini
 echo "extension=mongo.so" >> /etc/php5/cli/php.ini
 echo 'Mongo configured'
-
 
 #removing apache2
 sudo apt-get purge apache2
@@ -124,8 +125,10 @@ cd /tmp/
 wget https://phar.phpunit.de/phpunit.phar
 chmod +x phpunit.phar
 sudo mv phpunit.phar /usr/local/bin/phpunit
-cd /
+echo "Installed PHPUnit"
 
+#composer
 curl -sS https://getcomposer.org/installer | php
 sudo chmod +x composer.phar
 sudo mv composer.phar /usr/local/bin/composer
+echo "Installed Composer"

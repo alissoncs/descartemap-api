@@ -2,9 +2,9 @@ VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
-  config.vm.box = "debian/wheezy64"
-  
-  config.vm.network "forwarded_port", guest: 80, host: 4001
+  config.vm.box = "ubuntu/trusty64"
+
+  config.vm.network "forwarded_port", guest: 80, host: 4058
 
   config.vm.synced_folder ".", "/vagrant/", :mount_options => [ "dmode=775", "fmode=644" ], :owner => 'www-data', :group => 'www-data'
 
