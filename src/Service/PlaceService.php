@@ -3,6 +3,8 @@
 namespace Service;
 
 use Silex\Application;
+use Domain\Place;
+use Domain\Position;
 
 class PlaceService {
 
@@ -21,6 +23,13 @@ class PlaceService {
   public function findAll() {
 
     $mongo = $this->app['mongo.dm'];
+
+    // Salva um service
+    //
+    $place = new Place("sample", "sample", new Position(51.31884, -24.34874));
+
+    $mongo->persist($place);
+    $mongo->flush();
 
     return ['sample' => 1];
 

@@ -20,6 +20,7 @@ class MongoConnectionProvider implements ServiceProviderInterface {
         AnnotationDriver::registerAnnotationClasses();
 
         $config = new Configuration();
+        $config->setDefaultDB('descartemap');
         $config->setProxyDir(ROOT . '/var/proxies');
         $config->setProxyNamespace('Proxies');
         $config->setHydratorDir(ROOT . '/var/hydrators');
