@@ -9,7 +9,7 @@ use Domain\Position;
 use Domain\Address;
 
 /**
- * @Document(collection="places")
+ * @ODM\Document(collection="places")
  */
 class Place {
 
@@ -23,10 +23,16 @@ class Place {
    */
   private $name;
 
+  /**
+   * @ODM\EmbedOne(targetDocument="Position")
+   */
   private $position;
 
   private $address;
 
+  /**
+   * @ODM\String
+   */
   private $type;
 
   public function __construct($name, $type, Position $position) {

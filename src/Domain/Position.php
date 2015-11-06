@@ -1,12 +1,28 @@
-<?php 
+<?php
 
 namespace Domain;
 
+use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
+
+/** @ODM\EmbeddedDocument */
 class Position {
 
+  /**
+   * @ODM\Float
+   */
   private $latitude;
 
+  /**
+   * @ODM\Float
+   */
   private $longitude;
+
+  public function __construct($lat, $lng) {
+
+      $this->setLatitude($lat);
+      $this->setLongitude($lng);
+
+  }
 
   public function getLatitude() {
 
@@ -30,6 +46,6 @@ class Position {
 
     $this->longitude = $longitude;
 
-  } 
+  }
 
 }
