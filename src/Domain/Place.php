@@ -1,13 +1,26 @@
-<?php 
+<?php
 
 namespace Domain;
+
+use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 
 use InvalidArgumentException as Invalid;
 use Domain\Position;
 use Domain\Address;
 
+/**
+ * @Document(collection="places")
+ */
 class Place {
 
+  /**
+   * @ODM\Id
+   */
+  private $id;
+
+  /**
+   * @ODM\String
+   */
   private $name;
 
   private $position;

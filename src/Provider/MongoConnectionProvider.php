@@ -1,33 +1,36 @@
-<?php 
+<?php
 
 namespace Provider;
 
 use Silex\Application;
 use Silex\ServiceProviderInterface;
-use MongoClient;
 use RuntimeException;
+
+use Doctrine\MongoDB\Connection;
+use Doctrine\ODM\MongoDB\Configuration;
+use Doctrine\ODM\MongoDB\DocumentManager;
+use Doctrine\ODM\MongoDB\Mapping\Driver\AnnotationDriver;
 
 class MongoConnectionProvider implements ServiceProviderInterface {
 
     public function register(Application $app) {
 
-        if(!class_exists('MongoClient')) {
-          throw new RuntimeException('MongoClient extension is not available');
-        }
+      $app['mongo.dm'] = $app->share(function() {
 
-        $app['mongo.client'] = $app->share(function(){
+        AnnotationDriver::registerAnnotationClasses();
 
-          $client = new MongoClient();
+        $config = new Configuration();
+        $config->setProxyDir(ROOT . '/var/proxies');
+        $config->setProxyNamespace('Proxies');
+        $config->setHydratorDir(ROOT . '/var/hydrators');
+        $config->setHydratorNamespace('Hydrators');
+        $config->setMetadataDriverImpl(AnnotationDriver::create(ROOT . '/var/cache'));
 
-          return $client;
+        $dm = DocumentManager::create(new Connection(), $config);
 
-        });
+        return $dm;
 
-        $app['mongo.db'] = $app->share(function() use(&$app) {
-
-          return $app['mongo.client']->selectDB('descartemap');            
-
-        });
+      });
 
     }
 

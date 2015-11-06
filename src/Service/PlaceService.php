@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Service;
 
@@ -20,20 +20,10 @@ class PlaceService {
    */
   public function findAll() {
 
-    $db = $this->app['mongo.db'];
-    
-    $collection = new \MongoCollection($db, 'users');
-    $cursor = $collection->find();
+    $mongo = $this->app['mongo.dm'];
 
-    return iterator_to_array($cursor);
+    return ['sample' => 1];
 
-    foreach ($cursor as $doc) {
-      var_dump($doc);
-    }
-
-    die;
-
-    return ['array' => 'data'];
 
   }
 
