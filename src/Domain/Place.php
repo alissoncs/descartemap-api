@@ -28,6 +28,9 @@ class Place {
    */
   private $position;
 
+  /**
+   * @ODM\EmbedOne(targetDocument="Address")
+   */
   private $address;
 
   /**
