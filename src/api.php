@@ -70,7 +70,7 @@ $app->get('/places', function () use ($app) {
 
 $app->post('/places', function () use ($app) {
 
-    $app['service.place']->insert($app['request']->request->all());
+    $app['service.place']->insert($app['data']);
 
     return $app['json']->setStatusCode(201);
 
@@ -78,7 +78,7 @@ $app->post('/places', function () use ($app) {
 
 $app->put('/places/{id}', function ($id) use ($app) {
 
-    $app['service.place']->update($id, $app['request']->request->all());
+    $app['service.place']->update($id, $app['data']);
 
     return $app['json']->setStatusCode(202);
 

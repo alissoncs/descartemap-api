@@ -41,6 +41,25 @@ $app['serializer'] = $app->share(function(){
 
 });
 
+// Retorna array com request
+$app['data'] = function() use(&$app) {
+
+  $raw = $app['request']->getContent();
+
+  if(!empty($raw)) {
+    $raw = json_decode($raw, true);
+  }
+
+  if(empty($raw)) {
+
+    $raw = $this->request->all();
+
+  }
+
+  return $raw;
+
+};
+
 // Json
 $app['json'] = $app->share(function(){
   $r = new JsonResponse;
