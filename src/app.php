@@ -52,7 +52,7 @@ $app['data'] = function() use(&$app) {
 
   if(empty($raw)) {
 
-    $raw = $this->request->all();
+    $raw = $app['request']->request->all();
 
   }
 

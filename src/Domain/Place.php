@@ -167,11 +167,11 @@ class Place {
     $place->setType($data['type']);
     $place->setActive($data['active']);
 
-    $position = new Position($data['latitude'], $data['longitude']);
+    $position = new Position($data['position']['latitude'], $data['position']['longitude']);
     $place->setPosition($position);
-    $place->setAddress(Address::create($data));
+    $place->setAddress(Address::create($data['address']));
 
-    $contact = ContactData::create($data);
+    $contact = ContactData::create($data['contact']);
     if($contact !== null)
       $place->setContact($contact);
 

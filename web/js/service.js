@@ -13,11 +13,7 @@ dmap.service('PlacesApi', ['$http', 'global', function($http, $global){
   };
 
   this.save = function(data, success, error) {
-
-    postData = {};
-    postData.name = data.name;
-
-    $http.post($global.url('/places'), postData).then(function(response){
+    $http.post($global.url('/places'), data).then(function(response){
       success(response);
     }, function(response){
       error(response);
@@ -25,6 +21,21 @@ dmap.service('PlacesApi', ['$http', 'global', function($http, $global){
 
   };
 
+  this.delete = function(id, success, error){
+    $http.delete($global.url('/places/'+id)).then(function(response){
+      success(response);
+    }, function(response){
+      error(response);
+    });
+  };
+
+  this.update = function(id, data, success, error){
+    $http.put($global.url('/places/'+id), data).then(function(response){
+      success(response);
+    }, function(response){
+      error(response);
+    });
+  };
   return this;
 
 }]);

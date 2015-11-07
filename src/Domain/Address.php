@@ -111,8 +111,12 @@ class Address {
 
     $add = new self;
     $add->setStreet($data['street']);
+
     $add->setCity($data['city']);
+
     $add->setState($data['state']);
+
+    $add->setCountry($data['country']);
 
     if(isset($data['number'])) {
       $add->setNumber($data['number']);

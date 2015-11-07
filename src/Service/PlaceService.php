@@ -20,20 +20,33 @@ class PlaceService {
 
     $this->app =& $app;
 
-    $this->rules = new Assert\Collection(array(
+    $collection = new Assert\Collection(array(
         'name' => new Assert\Length(array('min' => 2)),
         'type' => new Assert\Choice(['ALL', 'COOK_OIL', 'BATTERY', 'ELETRONIC', 'HOSPITAL']),
-        'latitude' =>  [new Assert\NotBlank(), new Assert\Type(['type' => 'numeric'])],
-        'longitude' =>  [new Assert\NotBlank(), new Assert\Type(['type' => 'numeric'])],
-        'street' => new Assert\NotBlank(),
-        'city' => [new Assert\Regex(['pattern' => '/^[a-zA-ZÁ-Úá-ú ]+$/']), new Assert\NotBlank()],
-        'state' => [new Assert\Regex(['pattern' => '/^[A-Z]{2}$/']), new Assert\NotBlank()],
-        'zipcode' => [new Assert\Regex(['pattern' => '/^[0-9\-]+$/'])],
-        'email' => [new Assert\Email()],
-        'phone' => [new Assert\Regex(['pattern' => '/^\(\d+\) [0-9\-]+$/'])],
-        'phone' => [new Assert\Regex(['pattern' => '/^\(\d+\) [0-9\-]+$/'])],
+        'position' => new Assert\Collection([
+          'latitude' =>  [new Assert\NotBlank(), new Assert\Type(['type' => 'numeric'])],
+          'longitude' =>  [new Assert\NotBlank(), new Assert\Type(['type' => 'numeric'])],
+        ]),
+        'address' => new Assert\Collection([
+          'street' => new Assert\NotBlank(),
+          'city' => [new Assert\Regex(['pattern' => '/^[a-zA-ZÁ-Úá-ú 0-9]+$/']), new Assert\NotBlank()],
+          'state' => [new Assert\Regex(['pattern' => '/^[A-Z]{2}$/']), new Assert\NotBlank()],
+          'number' => [],
+          'zipcode' => [new Assert\Regex(['pattern' => '/^[0-9\-]+$/'])],
+          'country' => [new Assert\Regex(['pattern' => '/^[a-zA-ZÁ-Úá-ú \-]+$/']), new Assert\NotBlank()],
+        ]),
+        'contact' => new Assert\Collection([
+            'email' => [new Assert\Email()],
+            'facebook' => [new Assert\Url()],
+            'phones' => [],
+        ]),
         'active' => [new Assert\Choice(['1','0'])]
     ));
+
+    $collection->allowExtraFields = true;
+    $collection->allowMissingFields = true;
+
+    $this->rules = $collection;
 
   }
 
@@ -94,7 +107,6 @@ class PlaceService {
     $mongo = $this->app['mongo.dm'];
 
     $validator = $this->app['validator']->validateValue($data, $this->rules);
-    // $validator->allowMissingFields = true;
 
     if(count($validator) > 0) {
       throw new ValidationException($validator);

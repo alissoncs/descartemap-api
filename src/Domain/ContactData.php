@@ -39,7 +39,7 @@ class ContactData {
       throw new \InvalidArgumentException('Invalid phone');
 
     $phone = trim($phone);
-    
+
     if(empty($phone))
       return;
 
@@ -61,7 +61,7 @@ class ContactData {
     $this->email = trim($email);
 
   }
-  public function getEmails() {
+  public function getEmail() {
     return $this->email;
   }
 
@@ -113,8 +113,8 @@ class ContactData {
       $contact->setEmail($data['email']);
       $is = true;
     }
-    if(isset($data['phone'])) {
-      $contact->addPhone($data['phone']);
+    if(isset($data['phones'])) {
+      $contact->setPhones($data['phones']);
       $is = true;
     }
     if(isset($data['email'])) {
