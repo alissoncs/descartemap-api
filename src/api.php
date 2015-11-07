@@ -54,9 +54,9 @@ $app->post('/places', function () use ($app) {
 
 });
 
-$app->put('/places', function () use ($app) {
+$app->put('/places/{id}', function ($id) use ($app) {
 
-    $app['service.place']->update($app['request']->request->all());
+    $app['service.place']->update($id, $app['request']->request->all());
 
     return $app['json']->setStatusCode(202);
 

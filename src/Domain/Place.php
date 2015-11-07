@@ -47,11 +47,16 @@ class Place {
    */
   private $type;
 
-  public function __construct($name, $type, Position $position) {
+  public function __construct($name = null, $type = null, Position $position = null) {
 
-    $this->setName($name);
-    $this->setType($type);
-    $this->setPosition($position);
+    if($name !== null)
+      $this->setName($name);
+
+    if($type !== null)
+      $this->setType($type);
+
+    if($position instanceof Position)
+      $this->setPosition($position);
 
   }
 
@@ -135,9 +140,17 @@ class Place {
 
   }
 
-  static public function create(array $data) {
+  static public function create(array $data, $place = null) {
 
-    $place = new self($data['title'], $data['type'], new Position($data['latitude'], $data['longitude']));
+    if($place == null) {
+      $place = new self;
+    }
+
+    $place->setName($data['name']);
+    $place->setType($data['type']);
+
+    $position = new Position($data['latitude'], $data['longitude']);
+    $place->setPosition($position);
 
     $place->setAddress(Address::create($data));
 

@@ -17,14 +17,18 @@ class Position {
    */
   private $longitude;
 
-  public function __construct($lat, $lng) {
+  public function __construct($lat = null, $lng = null) {
 
+    if($lat !== null) {
       $lat = (float) $lat;
-      $lng = (float) $lng;
-
       $this->setLatitude($lat);
-      $this->setLongitude($lng);
+    }
 
+    if($lng !== null) {
+        $lng = (float) $lng;
+        $this->setLongitude($lng);
+    }
+    
   }
 
   public function getLatitude() {

@@ -21,7 +21,7 @@ class PlaceService {
     $this->app =& $app;
 
     $this->rules = new Assert\Collection(array(
-        'title' => new Assert\Length(array('min' => 2)),
+        'name' => new Assert\Length(array('min' => 2)),
         'type' => new Assert\Choice(['ALL', 'COOK_OIL', 'BATTERY', 'ELETRONIC', 'HOSPITAL']),
         'latitude' =>  [new Assert\NotBlank(), new Assert\Type(['type' => 'numeric'])],
         'longitude' =>  [new Assert\NotBlank(), new Assert\Type(['type' => 'numeric'])],
@@ -86,11 +86,29 @@ class PlaceService {
 
   }
 
+  public function update($id, $data) {
+
+    $current = $this->findOne($id);
+
+    $mongo = $this->app['mongo.dm'];
+
+    $validator = $this->app['validator']->validateValue($data, $this->rules);
+    // $validator->allowMissingFields = true;
+
+    if(count($validator) > 0) {
+      throw new ValidationException($validator);
+    }
+
+    $mongo->persist(Place::create($data, $current));
+    $mongo->flush();
+
+  }
+
   /**
    * Retorna todos
    * @return array
    */
-  public function findAll() {
+  public function findAll(array $options = array()) {
 
     $data = $this->app['mongo.dm']->getRepository('Domain\Place')->findAll();
 
