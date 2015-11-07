@@ -19,6 +19,9 @@ class Position {
 
   public function __construct($lat, $lng) {
 
+      $lat = (float) $lat;
+      $lng = (float) $lng;
+
       $this->setLatitude($lat);
       $this->setLongitude($lng);
 

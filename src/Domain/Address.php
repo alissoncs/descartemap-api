@@ -1,33 +1,60 @@
 <?php
 
 namespace Domain;
+use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 
+/** @ODM\EmbeddedDocument */
 class Address {
 
+  /**
+   * @ODM\String
+   */
   private $street;
 
+  /**
+   * @ODM\Int
+   */
   private $number;
 
+  /**
+   * @ODM\String
+   */
   private $city;
 
+  /**
+   * @ODM\String
+   */
   private $state;
 
+  /**
+   * @ODM\String
+   */
   private $country;
 
+  /**
+   * @ODM\String
+   */
   private $zipcode;
 
   public function __construct($street = null, $number = null, $city = null, $state = null) {
 
-    $this->setStreet($street);
-    $this->setNumber($number);
-    $this->setCity($city);
-    $this->setState($state);
+    if(!is_null($street))
+      $this->setStreet($street);
+
+    if(!is_null($number))
+      $this->setNumber($number);
+
+    if(!is_null($city))
+      $this->setCity($city);
+
+    if(!is_null($state))
+      $this->setState($state);
 
   }
 
   public function setStreet($street) {
     if(!is_string($street))
-      throw new \InvalidArgumentException('Invalid');
+      throw new \InvalidArgumentException('Invalid street');
 
     $this->street = $street;
   }
@@ -36,7 +63,7 @@ class Address {
   }
   public function setNumber($number) {
     if(!is_string($number))
-      throw new \InvalidArgumentException('Invalid');
+      throw new \InvalidArgumentException('Invalid number');
 
     $this->number = $number;
   }
@@ -45,7 +72,7 @@ class Address {
   }
   public function setCity($city) {
     if(!is_string($city))
-      throw new \InvalidArgumentException('Invalid');
+      throw new \InvalidArgumentException('Invalid city');
 
     $this->city = $city;
   }
@@ -54,7 +81,7 @@ class Address {
   }
   public function setState($state) {
     if(!is_string($state))
-      throw new \InvalidArgumentException('Invalid');
+      throw new \InvalidArgumentException('Invalid state');
 
     $this->state = $state;
   }
@@ -78,6 +105,25 @@ class Address {
   }
   public function getZipcode() {
     return $this->zipcode;
+  }
+
+  static public function create(array $data) {
+
+    $add = new self;
+    $add->setStreet($data['street']);
+    $add->setCity($data['city']);
+    $add->setState($data['state']);
+
+    if(isset($data['number'])) {
+      $add->setNumber($data['number']);
+    }
+
+    if(isset($data['zipcode'])) {
+      $add->setZipcode($data['zipcode']);
+    }
+
+    return $add;
+
   }
 
 }

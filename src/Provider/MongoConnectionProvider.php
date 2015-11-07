@@ -25,7 +25,7 @@ class MongoConnectionProvider implements ServiceProviderInterface {
         $config->setProxyNamespace('Proxies');
         $config->setHydratorDir(ROOT . '/var/hydrators');
         $config->setHydratorNamespace('Hydrators');
-        $config->setMetadataDriverImpl(AnnotationDriver::create(ROOT . '/var/cache'));
+        $config->setMetadataDriverImpl(AnnotationDriver::create(ROOT . '/var/cache/'));
 
         $dm = DocumentManager::create(new Connection(), $config);
 

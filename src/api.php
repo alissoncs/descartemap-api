@@ -13,28 +13,51 @@ $app->get('/', function () use ($app) {
 });
 
 $app->get('/places/{id}', function($id) use ($app) {
-    
-    $sv = new PlaceService;
-    $json = $sv->getOne($app);
 
-    return $app['json']->setData($json); 
+    $json = $app['service.place']->findOne($id);
+
+    $parse = $app['serializer']->serialize($json, 'json');
+
+    return $app['json']->setContent($parse)->setStatusCode(200);
+
+});
+
+$app->delete('/places/{id}', function($id) use ($app) {
+
+    if($app['service.place']->delete($id) == true) {
+
+      return $app['json']->setStatusCode(202);
+
+    } else {
+
+      return $app['json']->setStatusCode(500);
+
+    }
 
 });
 
 $app->get('/places', function () use ($app) {
-    
+
     $json = $app['service.place']->findAll();
 
-    return $app['json']->setData($json); 
+    $parse = $app['serializer']->serialize($json, 'json');
+
+    return $app['json']->setContent($parse);
 
 });
 
-$app->error(function (\Exception $e, $code) use ($app) {
+$app->post('/places', function () use ($app) {
 
-    if ($app['debug']) {
-        return;
-    }
+    $app['service.place']->insert($app['request']->request->all());
 
-    return $app['json']->setData(['error' => true])->setStatusCode(500); 
+    return $app['json']->setStatusCode(201);
+
+});
+
+$app->put('/places', function () use ($app) {
+
+    $app['service.place']->update($app['request']->request->all());
+
+    return $app['json']->setStatusCode(202);
 
 });

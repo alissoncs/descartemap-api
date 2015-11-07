@@ -5,8 +5,12 @@ namespace Domain;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 
 use InvalidArgumentException as Invalid;
+use LogicException;
+
 use Domain\Position;
 use Domain\Address;
+use Domain\ContactData;
+
 
 /**
  * @ODM\Document(collection="places")
@@ -32,6 +36,11 @@ class Place {
    * @ODM\EmbedOne(targetDocument="Address")
    */
   private $address;
+
+  /**
+   * @ODM\EmbedOne(targetDocument="ContactData")
+   */
+  private $contact;
 
   /**
    * @ODM\String
@@ -111,6 +120,32 @@ class Place {
   public function getType() {
 
     return $this->type;
+
+  }
+
+  public function setContact(ContactData $contact) {
+
+    $this->contact = $contact;
+
+  }
+
+  public function getContact() {
+
+    return $this->contact;
+
+  }
+
+  static public function create(array $data) {
+
+    $place = new self($data['title'], $data['type'], new Position($data['latitude'], $data['longitude']));
+
+    $place->setAddress(Address::create($data));
+
+    $contact = ContactData::create($data);
+    if($contact !== null)
+      $place->setContact($contact);
+
+    return $place;
 
   }
 

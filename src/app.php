@@ -8,8 +8,16 @@ use Silex\Provider\ServiceControllerServiceProvider;
 use Silex\Provider\HttpFragmentServiceProvider;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\Encoder\XmlEncoder;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+
 use Provider\RepositoryCollectionProvider;
 use Provider\MongoConnectionProvider;
+
+use Exception\ValidationException;
+use Exception\NotFoundException;
 
 $app = new Application();
 
@@ -18,6 +26,20 @@ $app->register(new RepositoryCollectionProvider());
 
 // Serviço do Mongo
 $app->register(new MongoConnectionProvider());
+
+// Validator
+$app->register(new Silex\Provider\ValidatorServiceProvider());
+
+$app['debug'] = true;
+
+$app['serializer'] = $app->share(function(){
+
+  $encoders = array(new XmlEncoder(), new JsonEncoder());
+  $normalizers = array(new ObjectNormalizer());
+
+  return new Serializer($normalizers, $encoders);
+
+});
 
 // Json
 $app['json'] = $app->share(function(){
@@ -34,6 +56,27 @@ $app['faker'] = $app->share(function(){
   $faker->addProvider(new \Faker\Provider\pt_BR\Address($faker));
 
   return $faker;
+
+});
+
+$app->error(function(\Exception $e, $code) use (&$app){
+
+  if($e instanceof ValidationException) {
+
+    return $app['json']
+    ->setData($e->getErrors())
+    ->setStatusCode(422);
+
+  } else if($e instanceof NotFoundException) {
+
+    return $app['json']
+    ->setStatusCode(404);
+
+  } else {
+
+    return $e->getMessage() . PHP_EOL . $e->getCode() . PHP_EOL . $e->getTraceAsString();
+
+  }
 
 });
 

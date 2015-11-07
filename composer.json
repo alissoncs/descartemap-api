@@ -6,8 +6,12 @@
     "require": {
         "php": ">=5.5",
         "silex/silex": "~1.3",
-        "doctrine/mongodb-odm": "*",
-        "fzaninotto/faker":"*"
+        "doctrine/mongodb-odm": "~1.0.3",
+        "fzaninotto/faker":"*",
+        "symfony/validator": "^2.7",
+        "symfony/serializer": "^2.7",
+        "symfony/property-access": "^2.7"
+
     },
     "autoload": {
         "psr-0": { "": "src/" }
