@@ -67,10 +67,12 @@ echo 'server {
   root /vagrant/web;
   index index.php index.html index.htm;
   server_name localhost;
+  sendfile  off;
 
   location / {
         # try to serve file directly, fallback to front controller
         try_files $uri /index.php$is_args$args;
+        expires 0;
     }
 
     # If you have 2 front controllers for dev|prod use the following line instead

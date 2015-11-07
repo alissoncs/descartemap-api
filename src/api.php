@@ -12,6 +12,28 @@ $app->get('/', function () use ($app) {
     return $app['json']->setData(['sample' => 1]);
 });
 
+$app->get('/types', function () use ($app) {
+
+  $in = [
+    'ALL' => 'Todos',
+    'COOK_OIL' => 'Óleo de cozinha',
+    'HOSPITAL' => 'Hospitalar',
+    'BATTERY' => 'Baterias/Pilhas',
+    'ELETRONIC' => 'Eletrônicos',
+    'RECYCLING' => 'Reciclagem',
+    'OTHER' => 'Outros'
+  ];
+
+  $data = array();
+
+  foreach($in as $index => $value) {
+    $data[] = ['alias' => $index, 'name' => $value];
+  }
+
+  return $app['json']->setData($data);
+
+});
+
 $app->get('/places/{id}', function($id) use ($app) {
 
     $json = $app['service.place']->findOne($id);

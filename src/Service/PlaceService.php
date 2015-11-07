@@ -31,7 +31,8 @@ class PlaceService {
         'zipcode' => [new Assert\Regex(['pattern' => '/^[0-9\-]+$/'])],
         'email' => [new Assert\Email()],
         'phone' => [new Assert\Regex(['pattern' => '/^\(\d+\) [0-9\-]+$/'])],
-
+        'phone' => [new Assert\Regex(['pattern' => '/^\(\d+\) [0-9\-]+$/'])],
+        'active' => [new Assert\Choice(['1','0'])]
     ));
 
   }

@@ -47,6 +47,11 @@ class Place {
    */
   private $type;
 
+  /**
+   * @ODM\Boolean
+   */
+  private $active;
+
   public function __construct($name = null, $type = null, Position $position = null) {
 
     if($name !== null)
@@ -140,6 +145,18 @@ class Place {
 
   }
 
+  public function setActive($active) {
+
+    $this->active = (bool) $active;
+
+  }
+
+  public function isActive() {
+
+    return $this->active;
+
+  }
+
   static public function create(array $data, $place = null) {
 
     if($place == null) {
@@ -148,10 +165,10 @@ class Place {
 
     $place->setName($data['name']);
     $place->setType($data['type']);
+    $place->setActive($data['active']);
 
     $position = new Position($data['latitude'], $data['longitude']);
     $place->setPosition($position);
-
     $place->setAddress(Address::create($data));
 
     $contact = ContactData::create($data);

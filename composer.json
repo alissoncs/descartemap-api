@@ -10,7 +10,8 @@
         "fzaninotto/faker":"*",
         "symfony/validator": "^2.7",
         "symfony/serializer": "^2.7",
-        "symfony/property-access": "^2.7"
+        "symfony/property-access": "^2.7",
+        "twig/twig": "^1.23"
 
     },
     "autoload": {
