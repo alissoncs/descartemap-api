@@ -1,18 +1,17 @@
 <?php
 
-if(!file_exists(__DIR__.'/../vendor/autoload.php')) {
+define('ROOT', realpath(__DIR__ . "/../") . '/');
+
+if(!file_exists(ROOT . 'vendor/autoload.php')) {
 	die('Run \'composer install\'');
 }
 
-require_once __DIR__.'/../vendor/autoload.php';
+require_once ROOT . 'vendor/autoload.php';
 
-$app = require __DIR__.'/../src/app.php';
-
-define('ROOT', realpath(__DIR__ . "/../"));
-
-error_reporting(E_ALL);
+$app = require ROOT . 'src/app.php';
 $app['debug'] = true;
 
-require __DIR__.'/../src/api.php';
+require ROOT . 'src/api.php';
+require ROOT . 'src/manager.php';
 
 $app->run();
