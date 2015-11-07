@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 use Domain\Place;
 use Domain\Position;
@@ -7,7 +7,7 @@ class PositionTest extends \PHPUnit_Framework_TestCase {
 
   public function setUp() {
 
-    $this->instance = new Position;
+    $this->instance = new Position(54.6748, 64.1987);
 
   }
 
@@ -17,19 +17,21 @@ class PositionTest extends \PHPUnit_Framework_TestCase {
 
   }
 
-  public function testLatitudeAttribute() {
+  /**
+   * @expectedException InvalidArgumentException
+   */
+  public function testInvalidLat() {
 
-    $this->instance->setLatitude(-54.34843548);
-
-    $this->assertEquals(-54.34843548, $this->instance->getLatitude());
+    $this->instance->setLatitude('teste');
 
   }
 
-  public function testLongitudeAttribute() {
-    
-    $this->instance->setLongitude(-54.34843548);
+  /**
+   * @expectedException InvalidArgumentException
+   */
+  public function testInvalidLng() {
 
-    $this->assertEquals(-54.34843548, $this->instance->getLongitude());
+    $this->instance->setLongitude('teste');
 
   }
 

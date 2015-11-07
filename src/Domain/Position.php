@@ -38,11 +38,19 @@ class Position {
 
   public function setLatitude($latitude) {
 
+    if(!is_float($latitude)) {
+      throw new \InvalidArgumentException('Invalid');
+    }
+
     $this->latitude = $latitude;
 
   }
 
   public function setLongitude($longitude) {
+
+    if(!is_float($longitude)) {
+      throw new \InvalidArgumentException('Invalid');
+    }
 
     $this->longitude = $longitude;
 
