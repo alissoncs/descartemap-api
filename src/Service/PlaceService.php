@@ -5,10 +5,7 @@ namespace Service;
 use Silex\Application;
 use Domain\Place;
 use Domain\Position;
-
 use Exception\ValidationException;
-
-use Symfony\Component\Validator\Constraints as Assert;
 
 class PlaceService {
 
@@ -20,34 +17,6 @@ class PlaceService {
 
     $this->app =& $app;
 
-    $collection = new Assert\Collection(array(
-        'name' => new Assert\Length(array('min' => 2)),
-        'type' => new Assert\Choice(['ALL', 'COOK_OIL', 'BATTERY', 'ELETRONIC', 'HOSPITAL']),
-        'position' => new Assert\Collection([
-          'latitude' =>  [new Assert\NotBlank(), new Assert\Type(['type' => 'numeric'])],
-          'longitude' =>  [new Assert\NotBlank(), new Assert\Type(['type' => 'numeric'])],
-        ]),
-        'address' => new Assert\Collection([
-          'street' => new Assert\NotBlank(),
-          'city' => [new Assert\Regex(['pattern' => '/^[a-zA-ZÁ-Úá-ú 0-9]+$/']), new Assert\NotBlank()],
-          'state' => [new Assert\Regex(['pattern' => '/^[A-Z]{2}$/']), new Assert\NotBlank()],
-          'number' => [],
-          'zipcode' => [new Assert\Regex(['pattern' => '/^[0-9\-]+$/'])],
-          'country' => [new Assert\Regex(['pattern' => '/^[a-zA-ZÁ-Úá-ú \-]+$/']), new Assert\NotBlank()],
-        ]),
-        'contact' => new Assert\Collection([
-            'email' => [new Assert\Email()],
-            'facebook' => [new Assert\Url()],
-            'phones' => [],
-        ]),
-        'active' => [new Assert\Choice(['1','0'])]
-    ));
-
-    $collection->allowExtraFields = true;
-    $collection->allowMissingFields = true;
-
-    $this->rules = $collection;
-
   }
 
   /**
@@ -57,9 +26,30 @@ class PlaceService {
 
     $mongo = $this->app['mongo.dm'];
 
-    $validator = $this->app['validator']->validateValue($data, $this->rules);
+    $rules = array(
+        'email' => 'required|max:200'
+    );
 
-    if(count($validator) > 0) {
+    $validator = $this->app['validator'];
+
+    $validator->add('name', 'required | maxlength(250)');
+
+    $validator->add('position[latitude]', 'required | number');
+    $validator->add('position[longitude]', 'required | number');
+
+    $validator->add('contact[phones][*]', 'regex(/^[\(\d{2}\) \d+\-\d+$/)');
+
+    $validator->add('contact[email]', 'email');
+    $validator->add('address[street]', 'required');
+    $validator->add('address[city]', 'required');
+    $validator->add('address[state]', 'regex(/^\w{2}$/)');
+    $validator->add('address[country]', 'required');
+    $validator->add('address[number]', 'number');
+    $validator->add('address[neighborhood]', 'required');
+    $validator->add('address[zipcode]', 'regex(/^[0-9 \-]+$/)');
+    $validator->add('active', 'match', [0,1]);
+
+    if(!$validator->validate($data)) {
       throw new ValidationException($validator);
     }
 

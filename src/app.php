@@ -16,6 +16,8 @@ use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Provider\RepositoryCollectionProvider;
 use Provider\MongoConnectionProvider;
 
+use Sirius\Validation\Validator;
+
 use Exception\ValidationException;
 use Exception\NotFoundException;
 
@@ -40,6 +42,12 @@ $app['serializer'] = $app->share(function(){
   return new Serializer($normalizers, $encoders);
 
 });
+
+$app['validator'] = function(){
+
+  return new Validator;
+
+};
 
 // Retorna array com request
 $app['data'] = function() use(&$app) {
