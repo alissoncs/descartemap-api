@@ -44,17 +44,15 @@ $app->get('/places/{id}', function($id) use ($app) {
 
 });
 
-$app->delete('/places/{id}', function($id) use ($app) {
+$app->post('/places', function () use ($app) {
 
-    if($app['service.place']->delete($id) == true) {
+    $created = $app['service.place']->insert($app['data']);
 
-      return $app['json']->setStatusCode(202);
-
-    } else {
-
+    if($created == null)
       return $app['json']->setStatusCode(500);
 
-    }
+    return $app['json']->setStatusCode(201)
+    ->setData(['id' => $created->getId()]);
 
 });
 
@@ -68,18 +66,24 @@ $app->get('/places', function () use ($app) {
 
 });
 
-$app->post('/places', function () use ($app) {
-
-    $app['service.place']->insert($app['data']);
-
-    return $app['json']->setStatusCode(201);
-
-});
-
 $app->put('/places/{id}', function ($id) use ($app) {
 
     $app['service.place']->update($id, $app['data']);
 
     return $app['json']->setStatusCode(202);
+
+});
+
+$app->delete('/places/{id}', function($id) use ($app) {
+
+    if($app['service.place']->delete($id) == true) {
+
+      return $app['json']->setStatusCode(202);
+
+    } else {
+
+      return $app['json']->setStatusCode(500);
+
+    }
 
 });

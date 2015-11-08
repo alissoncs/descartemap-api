@@ -32,4 +32,10 @@ abstract class BaseTest extends \PHPUnit_Framework_TestCase {
 
   }
 
+  public function checkJson($response) {
+
+  	// $this->assertRegExp('/application\/json/', $response->getHeader('Content-type'));
+
+  }
+
 }

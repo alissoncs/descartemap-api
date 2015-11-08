@@ -19,6 +19,7 @@ class PlaceService {
 
     $this->v = $this->app['validator'];
     $this->v->add('name', 'required | maxlength(250)');
+    $this->v->add('type', 'required');
     $this->v->add('type', 'inlist', ['list' => [
       'ALL', 'HOSPITAL', 'COOK_OIL', 'ELETRONIC', 'BATTERY', 'RECYCLING', 'OTHER'
       ]
@@ -29,7 +30,7 @@ class PlaceService {
     $this->v->add('contact[email]', 'email');
     $this->v->add('address[street]', 'required');
     $this->v->add('address[city]', 'required');
-    $this->v->add('address[state]', 'regex(/^\w{2}$/)');
+    $this->v->add('address[state]', 'required | regex(/^\w{2}$/)');
     $this->v->add('address[country]', 'required');
     $this->v->add('address[number]', 'number');
     $this->v->add('address[neighborhood]', 'required');
@@ -53,7 +54,7 @@ class PlaceService {
     $mongo->persist($place);
     $mongo->flush();
 
-    return true;
+    return $place;
 
   }
 
