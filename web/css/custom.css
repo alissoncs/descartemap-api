@@ -1,0 +1,17 @@
+.form-group .control-label.required:after {
+  content:" *";
+  color: #f55549;
+  font-weight: bold;
+  font-size: .85em;
+}
+.modal-content .modal-footer {
+  padding: 22px;
+}
+
+select {
+  cursor: pointer;
+}
+#map {
+  height: 290px;
+  width: 100%;
+}

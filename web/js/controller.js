@@ -1,7 +1,12 @@
 var dmap = angular.module('dmap');
 
-dmap.controller('MainController', ['$scope', 'global', '$http', 'PlacesApi',
-function($scope, $global, $http, PlacesApi){
+dmap.controller('MainController', ['$scope', 'global', '$http', 'PlacesApi', '$window',
+function($scope, $global, $http, PlacesApi, $window){
+
+  $scope.map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 9,
+    center: new google.maps.LatLng(20, -98)
+  });
 
   $scope.types = {};
   $scope.place = null;
@@ -27,7 +32,14 @@ function($scope, $global, $http, PlacesApi){
     $scope.placeStatement = "edit";
   };
   $scope.openCreate = function(place){
-    $scope.place = null;
+    $scope.place = {
+      active: true,
+      type: "ALL",
+      address: {
+        country: "Brasil",
+        state: "RS"
+      }
+    };
     $scope.placeStatement = "create";
   };
 
