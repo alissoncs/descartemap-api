@@ -7,6 +7,7 @@ use Silex\Provider\ValidatorServiceProvider;
 use Silex\Provider\ServiceControllerServiceProvider;
 use Silex\Provider\HttpFragmentServiceProvider;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\Encoder\XmlEncoder;
@@ -43,6 +44,12 @@ $app['serializer'] = $app->share(function(){
 
 });
 
+$app['session'] = $app->share(function(){
+  $session = new Session();
+  $session->start();
+  return $session;
+});
+
 $app['validator'] = function(){
 
   return new Validator;
@@ -68,10 +75,31 @@ $app['data'] = function() use(&$app) {
 
 };
 
+$app->before(function() use (&$app){
+
+  $token = $app['request']->headers->get("Authorization");
+  
+  if($app['request']->getPathInfo() === "/manager/login") {
+    return;
+  }
+
+  if($app['session']->has('user')) {
+    return;
+  }
+
+  if($token == null) {
+    return $app['json']->setStatusCode(403);
+  }
+
+  if(!$app['service.auth']->isAllowed($token)) {
+    return $app['json']->setStatusCode(403);
+  }
+
+});
+
 // Json
 $app['json'] = $app->share(function(){
-  $r = new JsonResponse;
-  return $r;
+  return new JsonResponse;
 });
 
 // Faker

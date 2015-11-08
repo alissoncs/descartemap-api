@@ -1,0 +1,25 @@
+{% extends "skin.html" %}
+
+{% block content %}
+
+<div class="container">
+	
+	<br><br>
+	<div class="well col-lg-6 col-xs-12">
+		<h1>Login</h1>
+		<form action="/manager/login" method="post" autocomplete="off">
+			<br>
+			<div class="form-group">
+				<input type="text" class="form-control" placeholder="Login" name="login">
+			</div>
+			<div class="form-group">
+				<input type="text" class="form-control" placeholder="Senha" name="pass">
+			</div>
+			<div class="form-group">
+				<button class="btn btn-success" type="submit">Entrar</button>
+			</div>
+		</form>
+	</div>
+
+</div>
+{% endblock %}
