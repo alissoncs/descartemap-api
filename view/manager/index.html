@@ -58,100 +58,185 @@
 
   <div ng-controller='MainController'>
 
-    <div class="col-xs-5">
-      <ul class='list-group'>
-        <li ng-repeat="place in places" class="list-group-item">
+    <div class="row">
+      <h1 class="col-xs-5">Locais</h1>
 
-          <strong>
-            [[place.name]]
-          </strong>
-          <button class="btn btn-sm btn-danger pull-right" ng-click="delete(place)">Excluir</button>
-          <button class="btn btn-sm btn-info pull-right" ng-click="edit(place)">Editar</button>
+      <div class="col-xs-4">
 
-        </li>
-      </ul>
+        <br>
+        <input type="text" placeholder="Filtrar" class="form-control" ng-model="search.$">
+
+      </div>
+
+      <div class="col-xs-3 text-right">
+        <button class="btn btn-success btn-lg btn-raised"
+        data-toggle="modal" data-target="#place-modal" ng-click="openCreate(null)" type="button">Adicionar novo</button>
+      </div>
     </div>
 
-    <div class="col-xs-7">
+    <br>
 
-      <div class="well">
-        <form action="#" method="post" ng-show="place != null">
+    <div class="well">
+      <table class="table">
 
-          <div class="form-group row">
-            <label class="col-lg-2 control-label">Nome</label>
-            <div class="col-lg-10">
-              <input type="text" class="form-control" ng-model="place.name"
-              ng-required="true"
-              ng-minlength="1"
-              ng-maxlength="100">
-            </div>
-          </div>
+        <thead>
+          <tr>
+            <td>Nome</td>
+            <td>Cidade</td>
+            <td>Bairro</td>
+            <td>Rua</td>
+            <td></td>
+          </tr>
+        </thead>
 
-          <div class="form-group row">
-            <label class="col-lg-2 control-label">Tipo</label>
-            <div class="col-lg-10">
-              <select class="form-control" ng-model="place.type">
-                <option>Selecione</option>
-                <option ng-repeat="type in types" value="[[type.alias]]">[[type.name]]</option>
-              </select>
-            </div>
-          </div>
+        <tbody>
+          <tr ng-repeat="item in places | filter:search:strict">
 
-          <div class="form-group row">
-            <label class="col-lg-2 control-label">Longitude</label>
-            <div class="col-lg-10">
-              <input type="text" class="form-control" ng-model="place.position.longitude">
-            </div>
-          </div>
+            <td>
+              <strong>
+                [[item.name]]
+              </strong>
+            </td>
 
-          <div class="form-group row">
-            <label class="col-lg-2 control-label">Latitude</label>
-            <div class="col-lg-10">
-              <input type="text" class="form-control" ng-model="place.position.latitude">
-            </div>
-          </div>
+            <td>
+              [[item.address.city]]
+            </td>
+            <td>
+              [[item.address.city]]
+            </td>
+            <td>
+              [[item.address.street]]
+            </td>
+            <td>
+              <span class="label label-success" ng-show="item.active == true">Ativo</span>
+              <span class="label label-default" ng-show="item.active == false">Desativado</span>
+            </td>
 
-          <div class="form-group row">
-            <label class="col-lg-2 control-label">País</label>
-            <div class="col-lg-10">
-              <input type="text" class="form-control" ng-model="place.address.country">
-            </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-lg-2 control-label">Estado</label>
-            <div class="col-lg-10">
-              <input type="text" class="form-control" ng-model="place.address.state">
-            </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-lg-2 control-label">Cidade</label>
-            <div class="col-lg-10">
-              <input type="text" class="form-control" ng-model="place.address.city">
-            </div>
-          </div>
+            <td class="text-right">
+              <button class="btn btn-sm btn-info" ng-click="openEdit(item)" data-toggle="modal" data-target="#place-modal">Editar</button>
+              <button class="btn btn-sm btn-danger" ng-click="delete(item)">Excluir</button>
+            </td>
 
-          <div class="form-group row">
-            <label class="col-lg-2 control-label">Bairro</label>
-            <div class="col-lg-10">
+          </tr>
+        </tbody>
+      </table>
 
-            </div>
-          </div>
-
-          <div class="form-group row">
-            <label class="col-lg-2 control-label">Rua</label>
-            <div class="col-lg-10">
-              <input type="text" class="form-control" ng-model="place.address.street">
-            </div>
-          </div>
-
-          <button ng-click="update(place)" type="button" ng-disabled="loading == true" class="btn btn-success">
-            Salvar
-          </button>
-
-        </form>
+      <div class="text-center">
+        <hr>
+        <p>
+          Resultados encontrados: [[places.length]]
+        </p>
       </div>
 
     </div>
+
+  <div class="well">
+
+<div class="modal" id="place-modal">
+  <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+          <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              <h4 class="modal-title" ng-show="placeStatement == 'create'">Cadastrar</h4>
+              <h4 class="modal-title" ng-show="placeStatement == 'edit'">Editar local</h4>
+          </div>
+          <div class="modal-body">
+            <br><br>
+              <form>
+
+                <div class="form-group row">
+                  <label class="col-lg-2 control-label">Nome</label>
+                  <div class="col-lg-10">
+                    <input type="text" class="form-control" ng-model="place.name"
+                    ng-required="true"
+                    ng-minlength="1"
+                    ng-maxlength="100">
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-lg-2 control-label">Ativo</label>
+                  <div class="col-lg-10">
+                          <input type="checkbox" ng-model="place.active">
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-lg-2 control-label">Tipo</label>
+                  <div class="col-lg-10">
+                    <select class="form-control" ng-model="place.type">
+                      <option>Selecione</option>
+                      <option ng-repeat="type in types" value="[[type.alias]]">[[type.name]]</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-lg-2 control-label">Longitude</label>
+                  <div class="col-lg-10">
+                    <input type="text" class="form-control" ng-model="place.position.longitude">
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-lg-2 control-label">Latitude</label>
+                  <div class="col-lg-10">
+                    <input type="text" class="form-control" ng-model="place.position.latitude">
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-lg-2 control-label">País</label>
+                  <div class="col-lg-10">
+                    <input type="text" class="form-control" ng-model="place.address.country">
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-lg-2 control-label">Estado</label>
+                  <div class="col-lg-10">
+                    <input type="text" class="form-control" ng-model="place.address.state">
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-lg-2 control-label">Cidade</label>
+                  <div class="col-lg-10">
+                    <input type="text" class="form-control" ng-model="place.address.city">
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-lg-2 control-label">Bairro</label>
+                  <div class="col-lg-10">
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-lg-2 control-label">Rua</label>
+                  <div class="col-lg-10">
+                    <input type="text" class="form-control" ng-model="place.address.street">
+                  </div>
+                </div>
+
+              </form>
+
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-success btn-lg btn-raised"
+              ng-disabled="loading == true"
+              ng-show="placeStatement == 'create'" ng-click="save(place)">Finalizar</button>
+              <button type="button" class="btn btn-info btn-lg btn-raised"
+              ng-show="placeStatement == 'edit'"
+              ng-disabled="loading == true"
+              ng-click="update(place)">Salvar alterações</button>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+  </div>
 
   </div>
 
