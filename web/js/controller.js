@@ -27,12 +27,13 @@ function($scope, $global, $http, PlacesApi){
     $scope.placeStatement = "edit";
   };
   $scope.openCreate = function(place){
-    console.log(place);
     $scope.place = null;
     $scope.placeStatement = "create";
   };
 
-  $scope.delete = function(place){
+  $scope.delete = function(index){
+
+    var place = $scope.places[index];
 
     if(!confirm("Tem certeza que deseja excluir " + place.name + "?")) {
       return;
@@ -41,7 +42,7 @@ function($scope, $global, $http, PlacesApi){
     $scope.loading = true;
     PlacesApi.delete(place.id, function(r){
 
-      $scope.places.splice(place, 1);
+      $scope.places.splice(index, 1);
 
       $scope.loading = false;
 
@@ -56,18 +57,14 @@ function($scope, $global, $http, PlacesApi){
   $scope.save = function(place){
 
     $scope.loading = true;
+
     PlacesApi.save(place, function(r){
+      $scope.places.push(place);
       $scope.loading = false;
 
     }, function(r){
       $scope.loading = false;
-
-      console.log(r);
-
-      if(r.status == 422) {
-        alert("Erro de validação. Verifique os dados");
-      }
-
+      alert("Erro de validação. Verifique os dados");
     });
 
   };
@@ -75,6 +72,7 @@ function($scope, $global, $http, PlacesApi){
   $scope.update = function(place){
 
     $scope.loading = true;
+
     PlacesApi.update(place.id, place, function(r){
       $scope.loading = false;
     }, function(r){

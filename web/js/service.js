@@ -13,9 +13,12 @@ dmap.service('PlacesApi', ['$http', 'global', function($http, $global){
   };
 
   this.save = function(data, success, error) {
+    console.log("PlaceService.save", data);
     $http.post($global.url('/places'), data).then(function(response){
+      console.log("PlaceService.save.success", response);
       success(response);
     }, function(response){
+      console.log("PlaceService.save.error", response);
       error(response);
     });
 
@@ -30,12 +33,16 @@ dmap.service('PlacesApi', ['$http', 'global', function($http, $global){
   };
 
   this.update = function(id, data, success, error){
+    console.log("PlaceService.update", data);
     $http.put($global.url('/places/'+id), data).then(function(response){
+      console.log("PlaceService.update.success", response);
       success(response);
     }, function(response){
+      console.log("PlaceService.update.error", response);
       error(response);
     });
   };
+
   return this;
 
 }]);

@@ -50,7 +50,7 @@ class Place {
   /**
    * @ODM\Boolean
    */
-  private $active;
+  private $active = true;
 
   public function __construct($name = null, $type = null, Position $position = null) {
 
@@ -147,6 +147,15 @@ class Place {
 
   public function setActive($active) {
 
+    if(is_string($active)) {
+
+        if($active == 'true')
+          $active = true;
+        else if($active == 'false')
+          $active = false;
+
+    }
+
     $this->active = (bool) $active;
 
   }
@@ -163,17 +172,26 @@ class Place {
       $place = new self;
     }
 
-    $place->setName($data['name']);
+    if(isset($data['name']))
+      $place->setName($data['name']);
+
+    if(isset($data['type']))
     $place->setType($data['type']);
-    $place->setActive($data['active']);
+
+    if(isset($data['active']))
+      $place->setActive($data['active']);
 
     $position = new Position($data['position']['latitude'], $data['position']['longitude']);
     $place->setPosition($position);
-    $place->setAddress(Address::create($data['address']));
 
-    $contact = ContactData::create($data['contact']);
-    if($contact !== null)
-      $place->setContact($contact);
+    if(isset($data['address']))
+      $place->setAddress(Address::create($data['address']));
+
+    if(isset($data['contact'])) {
+      $contact = ContactData::create($data['contact']);
+      if($contact !== null)
+        $place->setContact($contact);
+    }
 
     return $place;
 

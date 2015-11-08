@@ -11,11 +11,29 @@ class PlaceService {
 
   private $app;
 
-  private $rules = null;
+  private $v = null;
 
   public function __construct(Application $app) {
 
     $this->app =& $app;
+
+    $this->v = $this->app['validator'];
+    $this->v->add('name', 'required | maxlength(250)');
+    $this->v->add('type', 'inlist', ['list' => [
+      'ALL', 'HOSPITAL', 'COOK_OIL', 'ELETRONIC', 'BATTERY', 'RECYCLING', 'OTHER'
+      ]
+    ]);
+    $this->v->add('position[latitude]', 'required | number');
+    $this->v->add('position[longitude]', 'required | number');
+    $this->v->add('contact[phones][*]', 'regex(/^[\(\d{2}\) \d+\-\d+$/)');
+    $this->v->add('contact[email]', 'email');
+    $this->v->add('address[street]', 'required');
+    $this->v->add('address[city]', 'required');
+    $this->v->add('address[state]', 'regex(/^\w{2}$/)');
+    $this->v->add('address[country]', 'required');
+    $this->v->add('address[number]', 'number');
+    $this->v->add('address[neighborhood]', 'required');
+    $this->v->add('address[zipcode]', 'regex(/^[0-9 \-]+$/)');
 
   }
 
@@ -26,31 +44,8 @@ class PlaceService {
 
     $mongo = $this->app['mongo.dm'];
 
-    $rules = array(
-        'email' => 'required|max:200'
-    );
-
-    $validator = $this->app['validator'];
-
-    $validator->add('name', 'required | maxlength(250)');
-
-    $validator->add('position[latitude]', 'required | number');
-    $validator->add('position[longitude]', 'required | number');
-
-    $validator->add('contact[phones][*]', 'regex(/^[\(\d{2}\) \d+\-\d+$/)');
-
-    $validator->add('contact[email]', 'email');
-    $validator->add('address[street]', 'required');
-    $validator->add('address[city]', 'required');
-    $validator->add('address[state]', 'regex(/^\w{2}$/)');
-    $validator->add('address[country]', 'required');
-    $validator->add('address[number]', 'number');
-    $validator->add('address[neighborhood]', 'required');
-    $validator->add('address[zipcode]', 'regex(/^[0-9 \-]+$/)');
-    $validator->add('active', 'match', [0,1]);
-
-    if(!$validator->validate($data)) {
-      throw new ValidationException($validator);
+    if(!$this->v->validate($data)) {
+      throw new ValidationException($this->v);
     }
 
     $place = Place::create($data);
@@ -94,14 +89,11 @@ class PlaceService {
 
     $current = $this->findOne($id);
 
-    $mongo = $this->app['mongo.dm'];
-
-    $validator = $this->app['validator']->validateValue($data, $this->rules);
-
-    if(count($validator) > 0) {
-      throw new ValidationException($validator);
+    if(!$this->v->validate($data)) {
+      throw new ValidationException($this->v);
     }
 
+    $mongo = $this->app['mongo.dm'];
     $mongo->persist(Place::create($data, $current));
     $mongo->flush();
 

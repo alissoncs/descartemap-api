@@ -19,6 +19,11 @@ class Address {
   /**
    * @ODM\String
    */
+  private $neighborhood;
+
+  /**
+   * @ODM\String
+   */
   private $city;
 
   /**
@@ -36,13 +41,16 @@ class Address {
    */
   private $zipcode;
 
-  public function __construct($street = null, $number = null, $city = null, $state = null) {
+  public function __construct($street = null, $number = null, $neighborhood = null, $city = null, $state = null) {
 
     if(!is_null($street))
       $this->setStreet($street);
 
     if(!is_null($number))
       $this->setNumber($number);
+
+    if(!is_null($neighborhood))
+      $this->setNeighborhood($neighborhood);
 
     if(!is_null($city))
       $this->setCity($city);
@@ -62,13 +70,22 @@ class Address {
     return $this->street;
   }
   public function setNumber($number) {
-    if(!is_string($number))
+    if(!is_int($number))
       throw new \InvalidArgumentException('Invalid number');
 
     $this->number = $number;
   }
   public function getNumber() {
     return $this->number;
+  }
+  public function setNeighborhood($neighborhood) {
+    if(!is_string($neighborhood))
+      throw new \InvalidArgumentException('Invalid neighborhood');
+
+    $this->neighborhood = $neighborhood;
+  }
+  public function getNeighborhood() {
+    return $this->neighborhood;
   }
   public function setCity($city) {
     if(!is_string($city))
@@ -118,8 +135,10 @@ class Address {
 
     $add->setCountry($data['country']);
 
+    $add->setNeighborhood($data['neighborhood']);
+
     if(isset($data['number'])) {
-      $add->setNumber($data['number']);
+      $add->setNumber((int)$data['number']);
     }
 
     if(isset($data['zipcode'])) {
