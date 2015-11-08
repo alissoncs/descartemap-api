@@ -33,7 +33,7 @@ $app->register(new MongoConnectionProvider());
 // Validator
 $app->register(new Silex\Provider\ValidatorServiceProvider());
 
-$app['debug'] = true;
+$app['debug'] = !file_exists(ROOT . 'production');
 
 $app['serializer'] = $app->share(function(){
 
