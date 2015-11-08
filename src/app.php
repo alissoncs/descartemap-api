@@ -78,19 +78,23 @@ $app['data'] = function() use(&$app) {
 $app->before(function() use (&$app){
 
   $token = $app['request']->headers->get("Authorization");
-  
+
+  // Login no manager não pode ter acesso
   if($app['request']->getPathInfo() === "/manager/login") {
     return;
   }
 
+  // Caso tenha um usuário na sessão, deixa acessar
   if($app['session']->has('user')) {
     return;
   }
 
+  // Caso não tenha Token
   if($token == null) {
     return $app['json']->setStatusCode(403);
   }
 
+  // Permissão via Token
   if(!$app['service.auth']->isAllowed($token)) {
     return $app['json']->setStatusCode(403);
   }
