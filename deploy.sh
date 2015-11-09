@@ -35,4 +35,8 @@ sudo rm -rf web/js/
 #adiciona arquivo production
 touch production
 
+# restarta os serviços
+sudo service php5-fpm restart
+sudo service nginx restart
+
 echo "Deploy finalizado"
