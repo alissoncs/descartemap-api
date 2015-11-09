@@ -19,7 +19,7 @@ function($scope, $global, $http, PlacesApi, $window){
     $scope.places = r.data;
   }, function(r){});
 
-  $http.get($global.url(types)).then(function(response){
+  $http.get($global.url('/types')).then(function(response){
     if(response.status == 200) {
       $scope.types = response.data;
     }
