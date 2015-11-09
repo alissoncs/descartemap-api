@@ -9,7 +9,6 @@ if(!file_exists(ROOT . 'vendor/autoload.php')) {
 require_once ROOT . 'vendor/autoload.php';
 
 $app = require ROOT . 'src/app.php';
-$app['debug'] = true;
 
 require ROOT . 'src/api.php';
 require ROOT . 'src/manager.php';

@@ -130,6 +130,7 @@ node -v
 npm -v
 sudo npm install -g bower
 sudo npm install -g grunt
+sudo npm install -g grunt-cli
 
 # phpunit
 cd /tmp/

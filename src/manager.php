@@ -2,13 +2,6 @@
 
 $manager = $app['controllers_factory'];
 
-$app->register(new Silex\Provider\TwigServiceProvider(), array(
-    'twig.path' => ROOT . 'view/manager/',
-    'twig.options' => [
-    	'cache' => ROOT . 'var/twig'
-    ]
-));
-
 $manager->get('/login', function() use (&$app){
 
   return $app['twig']->render('login.html');

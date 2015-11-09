@@ -118,6 +118,13 @@ $app['faker'] = $app->share(function(){
 
 });
 
+$app->register(new Silex\Provider\TwigServiceProvider(), array(
+    'twig.path' => ROOT . 'view/manager/',
+    'twig.options' => [
+      'cache' => ROOT . 'var/twig'
+    ]
+));
+
 $app->error(function(\Exception $e, $code) use (&$app){
 
   if($e instanceof ValidationException) {
