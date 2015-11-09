@@ -122,6 +122,15 @@ sudo sed -i 's/display_startup_errors = .*/display_startup_errors = Off/g' /etc/
 sudo service php5-fpm restart
 sudo service mongod restart
 
+#node 
+sudo apt-get remove --purge node
+sudo apt-get install -y --force-yes nodejs npm
+sudo ln -s /usr/bin/nodejs /usr/bin/node
+node -v 
+npm -v
+sudo npm install -g bower
+sudo npm install -g grunt
+
 # phpunit
 cd /tmp/
 wget https://phar.phpunit.de/phpunit.phar
