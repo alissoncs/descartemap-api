@@ -10,6 +10,12 @@ git pull origin master
 sudo composer update
 sudo composer dump-autoload --optimize
 
+#atualiza pacotes NPM
+#TODO
+
+#roda o grunt
+#TODO
+
 #remove passtas não usdas
 sudo rm -rf test
 

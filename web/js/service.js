@@ -16,6 +16,7 @@ dmap.service('PlacesApi', ['$http', 'global', function($http, $global){
     console.log("PlaceService.save", data);
     $http.post($global.url('/places'), data).then(function(response){
       console.log("PlaceService.save.success", response);
+      data.id = response.data.id;
       success(response);
     }, function(response){
       console.log("PlaceService.save.error", response);
