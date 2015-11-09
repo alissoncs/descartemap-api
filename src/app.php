@@ -140,7 +140,12 @@ $app->error(function(\Exception $e, $code) use (&$app){
 
   } else {
 
-    return $e->getMessage() . PHP_EOL . $e->getCode() . PHP_EOL . $e->getTraceAsString();
+    if($app['debug'])
+      return $e->getMessage() . PHP_EOL . $e->getCode() . PHP_EOL . $e->getTraceAsString();
+    else 
+      return $app['json']
+      ->setContent("Erro")
+      ->setStatusCode(500);
 
   }
 
