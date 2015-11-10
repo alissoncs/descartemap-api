@@ -12,7 +12,7 @@ sudo composer dump-autoload --optimize
 
 #atualiza pacotes NPM
 cd web/
-sudo npm update
+sudo npm install
 
 # atualiza bower
 sudo bower install --allow-root
