@@ -59,8 +59,8 @@ sudo apt-get autoremove
 
 sudo service nginx stop
 
-sudo rm -rf /etc/nginx/sites-available/default
-sudo rm -rf /etc/nginx/sites-enabled/default
+sudo rm -rf /etc/nginx/sites-available/*
+sudo rm -rf /etc/nginx/sites-enabled/*
 
 cd ~
 echo 'server {

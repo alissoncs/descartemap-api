@@ -18,7 +18,7 @@ sudo npm install
 sudo bower install --allow-root
 
 #roda o grunt
-grunt default
+sudo grunt default
 cd ../
 
 #remove passtas não usdas
