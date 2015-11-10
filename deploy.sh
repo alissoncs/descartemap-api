@@ -11,10 +11,15 @@ sudo composer update
 sudo composer dump-autoload --optimize
 
 #atualiza pacotes NPM
-#TODO
+cd web/
+sudo npm update
+
+# atualiza bower
+sudo bower install --allow-root
 
 #roda o grunt
-#TODO
+grunt default
+cd ../
 
 #remove passtas não usdas
 sudo rm -rf test
