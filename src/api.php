@@ -33,14 +33,19 @@ $app->get('/types', function () use ($app) {
   return $app['json']->setData($data);
 
 });
+$app->get('/places', function () use ($app) {
+
+    $json = $app['service.place']->findAll(array(), true);
+
+    return $app['json']->setData($json);
+
+});
 
 $app->get('/places/{id}', function($id) use ($app) {
 
-    $json = $app['service.place']->findOne($id);
+    $json = $app['service.place']->findOne($id, true);
 
-    $parse = $app['serializer']->serialize($json, 'json');
-
-    return $app['json']->setContent($parse)->setStatusCode(200);
+    return $app['json']->setData($json)->setStatusCode(200);
 
 });
 
@@ -53,16 +58,6 @@ $app->post('/places', function () use ($app) {
 
     return $app['json']->setStatusCode(201)
     ->setData(['id' => $created->getId()]);
-
-});
-
-$app->get('/places', function () use ($app) {
-
-    $json = $app['service.place']->findAll();
-
-    $parse = $app['serializer']->serialize($json, 'json');
-
-    return $app['json']->setContent($parse);
 
 });
 

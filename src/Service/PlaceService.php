@@ -58,9 +58,34 @@ class PlaceService {
 
   }
 
-  public function findOne($id) {
+  /**
+   * Retorna todos
+   * @return array
+   */
+  public function findAll(array $options = array(), $resultArray = false) {
 
-    $place = $this->app['mongo.dm']->getRepository('Domain\Place')->find($id);
+    $data = $this->app['mongo.dm']
+    ->createQueryBuilder('Domain\Place')
+
+    ->hydrate(!$resultArray)
+    ->getQuery()
+    ->execute();
+
+    if($resultArray == true) {
+      return $data->toArray(false);
+    }
+
+    return $data;
+
+  }
+
+  public function findOne($id, $resultArray = false) {
+
+    $place = $this->app['mongo.dm']
+    ->createQueryBuilder('Domain\Place')
+    ->field('_id')->equals($id)
+    ->hydrate(!$resultArray)
+    ->getQuery()->getSingleResult();
 
     if($place == null) {
       throw new \Exception\NotFoundException();
@@ -97,18 +122,6 @@ class PlaceService {
     $mongo = $this->app['mongo.dm'];
     $mongo->persist(Place::create($data, $current));
     $mongo->flush();
-
-  }
-
-  /**
-   * Retorna todos
-   * @return array
-   */
-  public function findAll(array $options = array()) {
-
-    $data = $this->app['mongo.dm']->getRepository('Domain\Place')->findAll();
-
-    return $data;
 
   }
 
