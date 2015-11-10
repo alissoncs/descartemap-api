@@ -1,42 +1,24 @@
-echo "Inicializando deploy..."
+echo "Inicializando deploy"
 
-{
 #limpa edições
 git checkout -- .
 
 # baixa nova versão
 git pull origin master
 
-} &> /dev/null
-
-echo "---> Git atualizado"
-
-{
 # atualiza o composer
 sudo composer update
 sudo composer dump-autoload --optimize
-} &> /dev/null
-echo "--> Pacotes do Composer atualizado"
 
-cd web/
-{
 #atualiza pacotes NPM
+cd web/
 sudo npm install
-} &> /dev/null
-echo "--> Pacotes NPM atualizados"
 
-{
 # atualiza bower
 sudo bower install --allow-root
-} &> /dev/null
-echo "--> Pacotes Bower atualizados"
 
-{
 #roda o grunt
 grunt default
-} &> /dev/null
-echo "--> Arquivos Grunt gerados"
-
 cd ../
 
 #remove passtas não usdas
@@ -61,16 +43,11 @@ sudo rm -rf web/Gruntfile.js
 sudo rm -rf web/css/
 sudo rm -rf web/js/
 
-echo "Limpa arquivos desnecessários"
-
 #adiciona arquivo production
 touch production
 
-{
 # restarta os serviços
 sudo service php5-fpm restart
 sudo service nginx restart
-} &> /dev/null
-echo "--> Reload no NGINX e PHP"
 
 echo "Deploy finalizado"
