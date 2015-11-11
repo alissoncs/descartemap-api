@@ -52,17 +52,36 @@ dmap.service('GoogleMaps', ['$http', 'global', function($http, $global){
 
   var map = null;
 
-  this.set = function(map){
+  var markers = [];
 
-    map = map;
+  var myLatlng = {lat: -25.363, lng: 131.044};
+
+  this.set = function(element){
+
+    map = new google.maps.Map(element, {
+      zoom: 9,
+      center: myLatlng
+    });
+
+    var marker = new google.maps.Marker({
+      position: myLatlng,
+      map: map,
+      title: 'Click to zoom'
+    });
+
+    marker.addListener('click', function() {
+      map.setZoom(8);
+      map.setCenter(marker.getPosition());
+    });
 
   };
 
   this.goTo = function(lat, lng) {
 
-    
 
   };
+
+
 
   return this;
 

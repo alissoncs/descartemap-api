@@ -2,10 +2,7 @@ var dmap = angular.module('dmap');
 dmap.controller('MainController', ['$scope', 'global', '$http', 'PlacesApi', 'GoogleMaps', '$window',
 function($scope, $global, $http, PlacesApi, GoogleMaps, $window){
 
-  $scope.map = GoogleMaps.set(new google.maps.Map(document.getElementById('map'), {
-    zoom: 9,
-    center: new google.maps.LatLng(20, -98)
-  }));
+  $scope.map = GoogleMaps.set(document.getElementById('map'));
 
   $scope.types = {};
   $scope.place = null;
