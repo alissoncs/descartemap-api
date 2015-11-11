@@ -40,7 +40,28 @@ dmap.service('PlacesApi', ['$http', 'global', function($http, $global){
     }, function(response){
       error(response);
     });
+
+  };
+
+  return this;
+
+}]);
+
+
+dmap.service('GoogleMaps', ['$http', 'global', function($http, $global){
+
+  var map = null;
+
+  this.set = function(map){
+
+    map = map;
+
+  };
+
+  this.goTo = function(lat, lng) {
+
     
+
   };
 
   return this;
