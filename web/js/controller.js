@@ -12,10 +12,8 @@ function($scope, $global, $http, PlacesApi, GoogleMaps, $window){
   $scope.search = {$:""};
 
   PlacesApi.get(function(r){
-    console.log("PlacesApi.data", r);
     $scope.places = r.data;
   }, function(r){
-    console.log("PlacesApi.error");
   });
 
   $http.get($global.url('/types')).then(function(response){
@@ -25,6 +23,11 @@ function($scope, $global, $http, PlacesApi, GoogleMaps, $window){
   }, function(error){
   });
 
+  // Funcionalidades do mapa
+  $scope.$watch('place.position.latitude', function(n,o) {
+  });
+  $scope.$watch('place.position.longitude', function(n,o) {
+  });
 
   $scope.openEdit = function(place){
     $scope.place = place;
