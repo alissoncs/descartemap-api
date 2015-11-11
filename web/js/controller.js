@@ -1,5 +1,4 @@
 var dmap = angular.module('dmap');
-
 dmap.controller('MainController', ['$scope', 'global', '$http', 'PlacesApi', '$window',
 function($scope, $global, $http, PlacesApi, $window){
 
@@ -16,8 +15,11 @@ function($scope, $global, $http, PlacesApi, $window){
   $scope.search = {$:""};
 
   PlacesApi.get(function(r){
+    console.log("PlacesApi.data", r);
     $scope.places = r.data;
-  }, function(r){});
+  }, function(r){
+    console.log("PlacesApi.error");
+  });
 
   $http.get($global.url('/types')).then(function(response){
     if(response.status == 200) {
@@ -47,12 +49,12 @@ function($scope, $global, $http, PlacesApi, $window){
 
     var place = $scope.places[index];
 
-    if(!confirm("Tem certeza que deseja excluir " + place.name + "?")) {
+    if(!confirm("Tem certeza que deseja excluir "+place.name+"?")) {
       return;
     }
 
     $scope.loading = true;
-    PlacesApi.delete(place.id, function(r){
+    PlacesApi.delete(place._id.$id, function(r){
 
       $scope.places.splice(index, 1);
 
@@ -85,7 +87,7 @@ function($scope, $global, $http, PlacesApi, $window){
 
     $scope.loading = true;
 
-    PlacesApi.update(place.id, place, function(r){
+    PlacesApi.update(place._id.$id, place, function(r){
       $scope.loading = false;
     }, function(r){
       $scope.loading = false;
