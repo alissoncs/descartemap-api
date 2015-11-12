@@ -181,17 +181,17 @@
                 </div>
 
                 <div class="form-group row">
-                  <label class="col-lg-1 control-label">Número *</label>
-                  <div class="col-lg-3">
+                  <label class="col-lg-2 control-label required">Número</label>
+                  <div class="col-lg-2">
                     <input type="text" placeholder="7637" class="form-control" ng-model="place.address.number" ng-required="true">
                   </div>
 
                   <label class="col-lg-1 control-label">CEP</label>
-                  <div class="col-lg-5">
+                  <div class="col-lg-3">
                     <input type="text" placeholder="90000-000" class="form-control" ng-model="place.address.zipcode" ng-required="false" ng-disabled="true" disabled>
                   </div>
                   
-                  <div class="col-lg-2">
+                  <div class="col-lg-2 pull-right">
                     <button class="google-maps btn btn-block btn-sm btn-info"
                     type="button"
                     style="margin:0;"
