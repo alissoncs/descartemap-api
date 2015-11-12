@@ -50,34 +50,113 @@ dmap.service('PlacesApi', ['$http', 'global', function($http, $global){
 
 dmap.service('GoogleMaps', ['$http', 'global', function($http, $global){
 
-  var map = null;
+  var mMap = null;
 
   var markers = [];
 
-  var myLatlng = {lat: -25.363, lng: 131.044};
+  var mMarker = null;
 
-  this.set = function(element){
+  var myLatlng = {lat: -30.0370096, lng: -51.2200382};
 
-    map = new google.maps.Map(element, {
-      zoom: 9,
-      center: myLatlng
+  var mMarkCallback = null;
+
+  var mScope = null;
+
+  var mGeocoder = null;
+
+  this.setMarkCallback = function(callback){
+    mMarkCallback = callback;
+  };
+
+  this.set = function(element, $scope){
+    
+    mScope = $scope;
+
+    mGeocoder = new google.maps.Geocoder();
+
+    mMap = new google.maps.Map(element, {
+      zoom: 15,
+      center: myLatlng,
+      disableDefaultUI: true
     });
 
-    var marker = new google.maps.Marker({
-      position: myLatlng,
-      map: map,
-      title: 'Click to zoom'
-    });
+    mMap.addListener('rightclick', function(e){
 
-    marker.addListener('click', function() {
-      map.setZoom(8);
-      map.setCenter(marker.getPosition());
+      var latLng = e.latLng;
+      addMarker(latLng);
+      mMap.panTo(latLng);
+
+      if(mMarkCallback) {
+        mMarkCallback(latLng);
+      }
+
     });
 
   };
 
-  this.goTo = function(lat, lng) {
+  var addMarker = function(latLng){
 
+    if(mMarker != null) {
+      mMarker.setMap(null);
+    }
+    mMarker = new google.maps.Marker({
+      position: latLng
+    });
+
+    mMarker.setMap(mMap);
+
+  };
+
+  this.updateLatLng = function(position) {
+    var myLatlng = {
+      lat: parseFloat(position.latitude), 
+      lng: parseFloat(position.longitude)
+    };
+
+    addMarker(myLatlng);
+    mMap.panTo(myLatlng);
+    mMap.setZoom(15);
+
+  };
+
+  this.locateByAddress = function(address) {
+
+    console.log("Buscando...", address);
+
+    if(!address.number){
+      alert("Informe o número");return;
+    }
+
+    if(!address.street){
+      alert("Informe a rua");return;
+    }
+
+    if(!address.city){
+      alert("Informe a cidade");return;
+    }
+
+    var string = address.number+', '+address.street+', '+address.city+', '+address.country;
+
+    console.log("Mounted String", string);
+
+    mGeocoder.geocode({
+      'address': string}, 
+      function(results, status){
+
+      if(status === google.maps.GeocoderStatus.OK) {
+        var location = results[0].geometry.location;
+        addMarker(location);
+        mMap.panTo(location);
+        mMap.setZoom(15);
+        mMarkCallback(location);
+        alert("Local encontrado");
+      } else {
+        alert("Local não encontrado");
+      }
+
+    });
+
+    return true;
 
   };
 

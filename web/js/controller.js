@@ -2,7 +2,16 @@ var dmap = angular.module('dmap');
 dmap.controller('MainController', ['$scope', 'global', '$http', 'PlacesApi', 'GoogleMaps', '$window',
 function($scope, $global, $http, PlacesApi, GoogleMaps, $window){
 
-  $scope.map = GoogleMaps.set(document.getElementById('map'));
+  GoogleMaps.set(document.getElementById('map'), $scope);
+  GoogleMaps.setMarkCallback(function(latLng){
+     
+      $scope.place.position = {};
+      $scope.place.position.latitude = latLng.lat();
+      $scope.place.position.longitude = latLng.lng();
+      $scope.$apply();
+      console.log('New Marker Position', $scope.place.position);
+
+  });
 
   $scope.types = {};
   $scope.place = null;
@@ -24,7 +33,6 @@ function($scope, $global, $http, PlacesApi, GoogleMaps, $window){
     }
   }, function(error){
   });
-
 
   $scope.openEdit = function(place){
     $scope.place = place;
@@ -56,10 +64,12 @@ function($scope, $global, $http, PlacesApi, GoogleMaps, $window){
       $scope.places.splice(index, 1);
 
       $scope.loading = false;
+      alert("Item excluído com sucesso!");
 
     }, function(r){
 
       $scope.loading = false;
+      alert("Erro ao tentar excluir!");
 
     });
 
@@ -72,6 +82,8 @@ function($scope, $global, $http, PlacesApi, GoogleMaps, $window){
     PlacesApi.save(place, function(r){
       $scope.places.push(place);
       $scope.loading = false;
+
+      alert("Novo item cadastrado com sucesso!");
 
     }, function(r){
       $scope.loading = false;
@@ -86,10 +98,27 @@ function($scope, $global, $http, PlacesApi, GoogleMaps, $window){
 
     PlacesApi.update(place._id.$id, place, function(r){
       $scope.loading = false;
+      alert("Item atualizado com sucesso!");
     }, function(r){
       $scope.loading = false;
+      alert("Erro de validação. Verifique os dados");
     });
 
   };
+
+  $scope.locateMap = function(){
+
+    GoogleMaps.locateByAddress($scope.place.address);
+
+  };
+
+  // Escuta latitude e longitude
+  $scope.$watchCollection('place.position', function(n, o){
+    console.log("$scope.$watch -> place.position", n);
+    GoogleMaps.updateLatLng(n);
+  });
+  $scope.$watch('place.address.zipcode', function(n, o){
+    console.log("$scope.$watch -> Zipcode");
+  });
 
 }]);
