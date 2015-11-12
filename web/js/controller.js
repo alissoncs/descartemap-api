@@ -21,10 +21,8 @@ function($scope, $global, $http, PlacesApi, GoogleMaps, $window){
   $scope.search = {$:""};
 
   PlacesApi.get(function(r){
-    console.log("PlacesApi.data", r);
     $scope.places = r.data;
   }, function(r){
-    console.log("PlacesApi.error");
   });
 
   $http.get($global.url('/types')).then(function(response){
