@@ -32,8 +32,7 @@ class PlaceService {
     $this->v->add('address[city]', 'required');
     $this->v->add('address[state]', 'required | regex(/^\w{2}$/)');
     $this->v->add('address[country]', 'required');
-    $this->v->add('address[number]', 'number');
-    $this->v->add('address[neighborhood]', 'required');
+    $this->v->add('address[number]', 'number | regex(/^\d+$/)');
     $this->v->add('address[zipcode]', 'regex', ['pattern'=>'/^(\d+\-?\d+|)$/']);
 
   }

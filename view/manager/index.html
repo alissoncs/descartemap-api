@@ -114,7 +114,7 @@
                 <div class="form-group row" ng-class="{'has-error': place_form.name.$invalid}">
                   <label class="col-lg-2 control-label">Nome</label>
                   <div class="col-lg-10">
-                    <input type="text" placeholder="Casa de despejo - SM" class="form-control"
+                    <input type="text" placeholder="Nome do local" class="form-control"
                     name="name"
                     ng-model="place.name"
                     ng-required="true"
@@ -188,7 +188,7 @@
 
                   <label class="col-lg-1 control-label">CEP</label>
                   <div class="col-lg-5">
-                    <input type="text" placeholder="90000-000" class="form-control" ng-model="place.address.zipcode" ng-required="false">
+                    <input type="text" placeholder="90000-000" class="form-control" ng-model="place.address.zipcode" ng-required="false" ng-disabled="true" disabled>
                   </div>
                   
                   <div class="col-lg-2">
