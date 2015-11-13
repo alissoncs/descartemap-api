@@ -14,6 +14,7 @@ cssmin: {
 				'bower_components/bootstrap-material-design/dist/css/material.min.css',
 				'bower_components/bootstrap-material-design/dist/css/ripples.min.css',
 				'bower_components/bootstrap-material-design/dist/css/roboto.min.css',
+				'bower_components/chosen/chosen.min.css',
 				'css/custom.css'
 			]
 		}
@@ -24,8 +25,10 @@ uglify: {
 	deploy: {
 		files: {
 			'dist/js/output.min.js': [
-				'bower_components/angular/angular.min.js',
 				'bower_components/jquery/dist/jquery.min.js',
+				'bower_components/chosen/chosen.jquery.min.js',
+				'bower_components/angular/angular.min.js',				
+				'js/angular-chosen.min.js',
 				'bower_components/bootstrap/dist/js/bootstrap.min.js',
 				'bower_components/bootstrap-material-design/dist/js/material.min.js',
 				'bower_components/bootstrap-material-design/dist/js/ripples.min.js',

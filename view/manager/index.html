@@ -141,6 +141,27 @@
                   </div>
                 </div>
 
+                <fieldset> 
+                <hr>
+                <h4>Materiais aceitos</h4>
+                <br>
+                <div class="form-group row">
+                  <label class="col-lg-2 control-label">Site</label>
+                  <div class="col-lg-10">
+                    <select 
+                    ng-model="place.materials"
+                    ng-options="item.ref as item.name for item in materials"
+                    class="form-control"
+                    options="materials"
+                    chosen
+                    multiple>
+                      
+                    </select>
+                  </div>
+                </div>
+
+                </fieldset>
+
                 <hr>
 
                 <div class="form-group row">

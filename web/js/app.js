@@ -1,4 +1,4 @@
-var dmap = angular.module('dmap', []);
+var dmap = angular.module('dmap', ['angular.chosen']);
 
 dmap.constant('global', {
   url: function(p){

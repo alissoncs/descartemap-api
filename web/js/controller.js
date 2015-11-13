@@ -32,6 +32,12 @@ function($scope, $global, $http, PlacesApi, GoogleMaps, $window){
   }, function(error){
   });
 
+  $http.get($global.url('/materials')).then(function(response){
+    $scope.materials = response.data;
+  }, function(error){
+
+  });
+
   $scope.openEdit = function(place){
     $scope.place = place;
     $scope.placeStatement = "edit";

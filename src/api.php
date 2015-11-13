@@ -33,6 +33,44 @@ $app->get('/types', function () use ($app) {
   return $app['json']->setData($data);
 
 });
+
+$app->get('/materials', function() use(&$app){
+
+  $in = [
+    'Papelão',
+    'Caixa de leite',
+    'Garrafas pet',
+    'Frascos de produtos',
+    'Tubos PVC',
+    'Caneta sem tinta',
+    'Jornais e revistas',
+    'Listas telefônicas',
+    'Papel Sulfite',
+    'Papel',
+    'Caixas',
+    'Adesivos',
+    'Garrafas de vidro',
+    'Tampa de garrafa',
+    'Latinhas',
+    'Panelas',
+    'Ferragens',
+    'Pregos',
+    'Papel alumínio limpo',
+    'Clipes',
+    'Grampos',
+    'Solventes'
+  ];
+
+  $data = array();
+  foreach($in as $index => $value) {
+    $data[] = ['ref' => $index, 'name' => $value];
+  }
+
+  return $app['json']->setData($data);
+
+
+});
+
 $app->get('/places', function () use ($app) {
 
     $json = $app['service.place']->findAll(array(), true);
