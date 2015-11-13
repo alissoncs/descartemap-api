@@ -112,7 +112,7 @@
               <form name="place_form">
 
                 <div class="form-group row" ng-class="{'has-error': place_form.name.$invalid}">
-                  <label class="col-lg-2 control-label">Nome</label>
+                  <label class="col-lg-2 control-label required">Nome</label>
                   <div class="col-lg-10">
                     <input type="text" placeholder="Nome do local" class="form-control"
                     name="name"
@@ -132,11 +132,12 @@
                 </div>
 
                 <div class="form-group row">
-                  <label class="col-lg-2 control-label">Tipo</label>
+                  <label class="col-lg-2 control-label required">Tipo</label>
                   <div class="col-lg-10">
-                    <select class="form-control" name="type" ng-model="place.type"
-                    ng-pattern="/^[A-Z]+$/">
-                      <option ng-repeat="type in types" value="[[type.alias]]" ng-required="true">[[type.name]]</option>
+                    <select class="form-control" name="type" 
+                    ng-model="place.type"
+                    chosen
+                    ng-options="item.alias as item.name for item in types">
                     </select>
                   </div>
                 </div>
@@ -146,13 +147,14 @@
                 <h4>Materiais aceitos</h4>
                 <br>
                 <div class="form-group row">
-                  <label class="col-lg-2 control-label">Site</label>
+                  <label class="col-lg-2 control-label">Selecione materiais</label>
                   <div class="col-lg-10">
                     <select 
                     ng-model="place.materials"
                     ng-options="item.ref as item.name for item in materials"
                     class="form-control"
                     options="materials"
+                    data-placeholder="Selecione os materiais que este local aceita"
                     chosen
                     multiple>
                       
