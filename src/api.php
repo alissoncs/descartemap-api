@@ -12,6 +12,13 @@ $app->get('/', function () use ($app) {
     return $app['json']->setData(['sample' => 1]);
 });
 
+$app->post('/token', function() use(&$app) {
+
+  $token = $app['service.auth']->generate();
+  return $app['json']->setData($token);
+
+});
+
 $app->get('/types', function () use ($app) {
 
   $in = [

@@ -5,7 +5,7 @@ namespace SimpleAuth;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 
 /**
- * @ODM\Document(collection="access_clients")
+ * @ODM\Document(collection="auth_clients")
  */
 class Client {
 
@@ -17,80 +17,69 @@ class Client {
 	/**
 	 * @ODM\String
      */
-	private $token;
+	private $name;
 
 	/**
 	 * @ODM\String
      */
-	private $refresh_token;
+	private $secret;
 
 	/**
-	 * @ODM\Boolean
+	 * @ODM\Int
      */
-	private $status = true;
+	private $grant_type = 2;
 
-	/**
-	 * @ODM\String
-     */
-	private $expires;
+	const GRANT_ALL = 1;
+	const GRANT_BASIC = 2;
+	const GRANT_LEVEL_1 = 3;
+	const GRANT_LEVEL_2 = 4;
+	const GRANT_LEVEL_3 = 5;
 
-	/**
-	 * @ODM\Date
-	 */
-	private $create_date;
+	public function __construct() {
+
+
+
+	}
+
+	public function getId() {
+		
+		return $this->id;
+
+	}
 
 	public function setId($id) {
+
 		$this->id = $id;
-	}
-	public function getId() {
-		return $this->id;
-	}
-	public function setToken($token) {
-		$this->token = $token;
-	}
-	public function getToken() {
-		return $this->token;
-	}
-	public function setRefreshToken($refresh_token) {
-		$this->refresh_token = $refresh_token;
-	}
-	public function getRefreshToken() {
-		return $this->refresh_token;
-	}
-	public function setStatus($status) {
-		$this->status = $status;
-	}
-	public function getStatus() {
-		return $this->status;
-	}
-	public function setExpires($expires) {
-		$this->expires = $expires;
-	}
-	public function getExpires() {
-		return $this->expires;
+
 	}
 
-	static public function create(array $data, $client = null) {
-		if($client == null)
-			$client = new self;
+	public function setName($name) {
+		$this->name = $name;
+	}
 
-		if(isset($data['id'])) {
-			$client->setId($data['id']);
-		}
-		if(isset($data['token'])) {
-			$client->setToken($data['token']);
-		}
-		if(isset($data['refresh_token'])) {
-			$client->setRefreshToken($data['refresh_token']);
+	public function getName() {
+		return $this->name;
+	}
+
+	public function setSecret($secret) {
+		$this->secret = $secret;
+	}
+
+	public function getSecret() {
+		return $this->secret;
+	}
+
+	public function setGrantType($grant) {
+
+		if(!is_int($grant)) {
+			throw new \InvalidArgumentException('Grant type Must be int');
 		}
 
-		return $client;
+		if($grant < 1 || $grant > 5) {
+			throw new \InvalidArgumentException('Grant type not exists');
+		}
 
-	}
-
-	static public function genToken() {
-		
-		return md5(uniqid(rand(), true));
+		$this->grant_type = $grant;
 
 	}
 

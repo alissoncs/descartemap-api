@@ -3,11 +3,29 @@
 namespace Service;
 
 use Silex\Application;
-use SimpleAuth\Client;
+use SimpleAuth\AccessToken;
 
 class AuthService {
 
   private $app;
+
+  private $tokenUrl = 'token';
+
+  public function setTokenUrl($tokenUrl) {
+
+    if(!is_string($tokenUrl)) {
+      throw new \InvalidArgumentException('String required');
+    }
+
+    $this->tokenUrl = $tokenUrl;
+
+  }
+
+  public function getTokenUrl() {
+
+    return $this->tokenUrl;
+
+  }
 
   public function __construct(Application &$app) {
 
@@ -22,12 +40,18 @@ class AuthService {
    */
   public function isAllowed($token) {
 
+    if($this->app['request']->getPathInfo() == '/'.$this->getTokenUrl()) {
+
+      return true;
+
+    }
+
     $dm = $this->app['mongo.dm'];
 
-    $client = $dm->getRepository('SimpleAuth\Client')
+    $accessObject = $dm->getRepository('SimpleAuth\AccessToken')
     ->findOneBy(['token' => $token]);
 
-    return $client !== null;
+    return $accessObject !== null;
 
   }
 
@@ -39,16 +63,16 @@ class AuthService {
 
     $dm = $this->app['mongo.dm'];
 
-    $client = new Client();
-    $client->setToken(Client::genToken());
-    $client->setRefreshToken(Client::genToken());
+    $accessObject = new AccessToken();
+    $accessObject->setToken(AccessToken::genToken());
+    $accessObject->setRefreshToken(AccessToken::genToken());
 
-    $dm->persist($client);
+    $dm->persist($accessObject);
     $dm->flush();
 
     return [
-      'token' => $client->getToken(),
-      'refresh_token' => $client->getRefreshToken()
+      'token' => $accessObject->getToken(),
+      'refresh_token' => $accessObject->getRefreshToken()
     ];
 
   }

@@ -79,6 +79,10 @@ $app->before(function() use (&$app){
 
   $token = $app['request']->headers->get("Authorization");
 
+  if($app['request']->getPathInfo() === "/token") {
+    return;
+  }
+
   // Login no manager não pode ter acesso
   if($app['request']->getPathInfo() === "/manager/login") {
     return;
