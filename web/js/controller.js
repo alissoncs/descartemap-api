@@ -112,11 +112,7 @@ function($scope, $global, $http, PlacesApi, GoogleMaps, $window){
 
   // Escuta latitude e longitude
   $scope.$watchCollection('place.position', function(n, o){
-    console.log("$scope.$watch -> place.position", n);
     GoogleMaps.updateLatLng(n);
-  });
-  $scope.$watch('place.address.zipcode', function(n, o){
-    console.log("$scope.$watch -> Zipcode");
   });
 
 }]);

@@ -26,7 +26,7 @@ class PlaceService {
     ]);
     $this->v->add('position[latitude]', 'required | number');
     $this->v->add('position[longitude]', 'required | number');
-    $this->v->add('contact[phones][*]', 'regex(/^[\(\d{2}\) \d+\-\d+$/)');
+    $this->v->add('contact[phones][*]', 'regex', ['pattern' => '/^\(\d{2}\) ?\d+\-\d+$/']);
     $this->v->add('contact[email]', 'email');
     $this->v->add('address[street]', 'required');
     $this->v->add('address[city]', 'required');

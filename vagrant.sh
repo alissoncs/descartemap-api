@@ -88,8 +88,9 @@ echo 'server {
         return 404;
     }
 
-    # error_log /var/log/nginx/project_error.log;
-    # access_log /var/log/nginx/project_access.log;
+    error_log /home/vagrant/logs/error.log;
+    access_log /home/vagrant/logs/access.log;
+
 
 }
 ' > tmp.conf

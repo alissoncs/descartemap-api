@@ -108,6 +108,15 @@ dmap.service('GoogleMaps', ['$http', 'global', function($http, $global){
   };
 
   this.updateLatLng = function(position) {
+    
+    if(position == undefined) {
+      return;
+    }
+
+    if(position.latitude == undefined && position.longitude == undefined) {
+      return;
+    }
+
     var myLatlng = {
       lat: parseFloat(position.latitude), 
       lng: parseFloat(position.longitude)

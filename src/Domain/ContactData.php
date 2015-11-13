@@ -86,10 +86,10 @@ class ContactData {
 
   public function setFacebook($facebook) {
 
-    if(!is_string($site))
-      throw new \InvalidArgumentException('Invalid phone');
+    if(!is_string($facebook))
+      throw new \InvalidArgumentException('Invalid facebook');
 
-    if(empty($site)) {
+    if(empty($facebook)) {
       return;
     }
 

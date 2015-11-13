@@ -225,7 +225,7 @@
                   </div>
 
                   <div class="col-md-5" ng-class="{'has-error': place_form.longitude.$invalid}">
-                    <label class="col-lg-4 control-label">Longitude</label>
+                    <label class="col-lg-4 control-label required">Longitude</label>
                     <div class="col-lg-8">
                       <input type="text" placeholder="-24.1283617" class="form-control" ng-model="place.position.longitude"
                       ng-required="true"
@@ -239,6 +239,41 @@
                     </div>
                   </div>
                 </div>
+
+                <fieldset>
+                <hr>
+                <h4>Contato</h4>
+                <br>
+
+                <div class="form-group row">
+                  <label class="col-lg-2 control-label">E-mail</label>
+                  <div class="col-lg-10">
+                    <input type="text" placeholder="exemplo@exemplo.com" class="form-control" ng-model="place.contact.email">
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-lg-2 control-label">Telefone</label>
+                  <div class="col-lg-10">
+                    <input type="text" value="" placeholder="(15) 9999-9999" class="form-control" ng-model="place.contact.phones[0]">
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-lg-2 control-label">Facebook</label>
+                  <div class="col-lg-10">
+                    <input type="text" placeholder="http://www.facebook.com/something" class="form-control" ng-model="place.contact.facebook">
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-lg-2 control-label">Site</label>
+                  <div class="col-lg-10">
+                    <input type="text" placeholder="http://www.something.com" class="form-control" ng-model="place.contact.site">
+                  </div>
+                </div>
+
+                </fieldset>
 
               </form>
 
