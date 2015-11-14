@@ -230,7 +230,7 @@ class Place {
     }
 
     if(isset($data['materials'])) {
-      $this->materials = $data['materials'];
+      $place->materials = $data['materials'];
     }
 
     return $place;
