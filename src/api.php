@@ -89,7 +89,13 @@ $app->get('/materials', function() use(&$app){
     'Alumínio',
     'Cobre',
     'Lâmpada',
-    'Cartucho de impressora'
+    'Cartucho de impressora',
+    'Gesso',
+    'Galhos',
+    'Pneu',
+    'Plásticos',
+    'Móveis',
+    'Caliça'
   ];
 
   $data = array();
