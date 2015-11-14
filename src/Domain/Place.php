@@ -52,6 +52,16 @@ class Place {
    */
   private $active = true;
 
+  /**
+   * @ODM\Boolean(name="can_buy")
+   */
+  private $canBuy = false;
+
+  /**
+   * @ODM\Collection
+   */
+  private $materials = [];
+
   public function __construct($name = null, $type = null, Position $position = null) {
 
     if($name !== null)
@@ -62,6 +72,8 @@ class Place {
 
     if($position instanceof Position)
       $this->setPosition($position);
+
+    $this->materials = [];
 
   }
 
@@ -166,6 +178,27 @@ class Place {
 
   }
 
+  public function setCanBuy($canBuy) {
+
+    if(is_string($canBuy)) {
+
+        if($canBuy == 'true')
+          $canBuy = true;
+        else if($canBuy == 'false')
+          $canBuy = false;
+
+    }
+
+    $this->canBuy = (bool) $canBuy;
+
+  }
+
+  public function isCanBuy() {
+
+    return $this->canBuy;
+
+  }
+
   static public function create(array $data, $place = null) {
 
     if($place == null) {
@@ -181,6 +214,9 @@ class Place {
     if(isset($data['active']))
       $place->setActive($data['active']);
 
+    if(isset($data['can_buy']))
+      $place->setCanBuy($data['can_buy']);
+
     $position = new Position($data['position']['latitude'], $data['position']['longitude']);
     $place->setPosition($position);
 
@@ -191,6 +227,10 @@ class Place {
       $contact = ContactData::create($data['contact']);
       if($contact !== null)
         $place->setContact($contact);
+    }
+
+    if(isset($data['materials'])) {
+      $this->materials = $data['materials'];
     }
 
     return $place;

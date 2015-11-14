@@ -65,7 +65,10 @@ $app->get('/materials', function() use(&$app){
     'Papel alumínio limpo',
     'Clipes',
     'Grampos',
-    'Solventes'
+    'Solventes',
+    'Alumínio',
+    'Cobre',
+    'Lâmpada'
   ];
 
   $data = array();
