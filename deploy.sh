@@ -1,5 +1,8 @@
 echo "Inicializando deploy"
 
+sudo service nginx stop
+sudo service php5-fpm stop
+
 #limpa edições
 git checkout -- .
 
@@ -45,6 +48,10 @@ sudo rm -rf web/js/
 
 #adiciona arquivo production
 touch production
+
+#permissoes
+sudo chown -R www-data:www-data .
+sudo chmod -R 770 .
 
 # restarta os serviços
 sudo service php5-fpm restart
