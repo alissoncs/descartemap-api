@@ -63,10 +63,24 @@ class PlaceService {
    */
   public function findAll(array $options = array(), $resultArray = false) {
 
-    $data = $this->app['mongo.dm']
-    ->createQueryBuilder('Domain\Place')
+    $qb = $this->app['mongo.dm']
+    ->createQueryBuilder('Domain\Place');
 
-    ->hydrate(!$resultArray)
+    if(isset($options['fields'])) {
+      $qb->select(explode(',', $options['fields']));
+    }
+
+    if(isset($options['limit']) && is_numeric($options['limit'])) {
+      $qb->limit((int)$options['limit']);
+    }
+
+    if(isset($options['type'])) {
+      $qb->field('type')->in(explode(',', $options['type']));
+    }
+
+    $qb->limit(500);
+
+    $data = $qb->hydrate(!$resultArray)
     ->getQuery()
     ->execute();
 

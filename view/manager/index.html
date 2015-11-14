@@ -54,17 +54,33 @@
 
         <thead>
           <tr>
+            <td></td>
             <td>Nome</td>
             <td>Cidade</td>
-            <td>Bairro</td>
-            <td>Rua</td>
+            <td>Endereço</td>
             <td></td>
           </tr>
         </thead>
 
         <tbody>
           <tr ng-repeat="item in places | filter:search:strict">
-
+            
+            <td>
+              <img src="/img/ic_mark_all.png" alt="[[item.name]]" title="[[item.name]]"
+              width="20" ng-show="item.type == 'ALL'">
+              <img src="/img/ic_mark_battery.png" alt="[[item.name]]" title="[[item.name]]"
+              width="20" ng-show="item.type == 'BATTERY'">
+              <img src="/img/ic_mark_cook_oil.png" alt="[[item.name]]" title="[[item.name]]"
+              width="20" ng-show="item.type == 'COOK_OIL'">
+              <img src="/img/ic_mark_eletronic.png" alt="[[item.name]]" title="[[item.name]]"
+              width="20" ng-show="item.type == 'ELETRONIC'">
+              <img src="/img/ic_mark_hospital.png" alt="[[item.name]]" title="[[item.name]]"
+              width="20" ng-show="item.type == 'HOSPITAL'">
+              <img src="/img/ic_mark_other.png" alt="[[item.name]]" title="[[item.name]]"
+              width="20" ng-show="item.type == 'OTHER'">
+              <img src="/img/ic_mark_recycling.png" alt="[[item.name]]" title="[[item.name]]"
+              width="20" ng-show="item.type == 'RECYCLING'">
+            </td>
             <td>
               <strong>
                 [[item.name]]
@@ -75,10 +91,7 @@
               [[item.address.city]]
             </td>
             <td>
-              [[item.address.neighborhood]]
-            </td>
-            <td>
-              [[item.address.street]]
+              [[item.address.street]] - [[item.address.number]]
             </td>
             <td>
               <span class="label label-success" ng-show="item.active == true">Ativo</span>
@@ -132,6 +145,14 @@
                   <label class="col-lg-2 control-label">Ativo</label>
                   <div class="col-lg-10">
                     <input type="checkbox" checked ng-model="place.active">
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-lg-2 control-label">Compra</label>
+                  <div class="col-lg-10">
+                    <input type="checkbox" ng-model="place.can_buy">
+                    <small class="help-block">Este local compra lixo</small>
                   </div>
                 </div>
 

@@ -9,12 +9,32 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Service\PlaceService;
 
 $app->get('/', function () use ($app) {
-    return $app['json']->setData(['sample' => 1]);
+    return $app['json']->setData([
+      'now' => new \DateTime()
+    ]);
 });
 
 $app->post('/token', function() use(&$app) {
 
+  $clientData = $app['data'];
+
+  if(!isset($clientData['id']) || !isset($clientData['secret'])) {
+   
+    return $app['json']->setData(['error' => 'Required id and secret'])
+    ->setStatusCode(400);  
+
+  }
+
+  $id = $clientData['id'];
+  $secret = $clientData['secret'];
+
+  if($id !== '324' && $secret !== '54') {
+    return $app['json']->setData(['error' => 'Client not found'])
+    ->setStatusCode(404);  
+  }
+
   $token = $app['service.auth']->generate();
+
   return $app['json']->setData($token);
 
 });
@@ -83,7 +103,9 @@ $app->get('/materials', function() use(&$app){
 
 $app->get('/places', function () use ($app) {
 
-    $json = $app['service.place']->findAll(array(), true);
+    $query = $app['request']->query->all();
+
+    $json = $app['service.place']->findAll($query, true);
 
     return $app['json']->setData($json);
 
