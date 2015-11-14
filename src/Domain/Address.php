@@ -127,15 +127,21 @@ class Address {
   static public function create(array $data) {
 
     $add = new self;
-    $add->setStreet($data['street']);
+    
+    if(isset($data['street']))
+      $add->setStreet($data['street']);
 
-    $add->setCity($data['city']);
+    if(isset($data['city']))
+      $add->setCity($data['city']);
 
-    $add->setState($data['state']);
+    if(isset($data['state']))
+      $add->setState($data['state']);
 
-    $add->setCountry($data['country']);
+    if(isset($data['country']))
+      $add->setCountry($data['country']);
 
-    $add->setNeighborhood($data['neighborhood']);
+    if(isset($data['neighborhood']))
+      $add->setNeighborhood($data['neighborhood']);
 
     if(isset($data['number'])) {
       $add->setNumber((int)$data['number']);
