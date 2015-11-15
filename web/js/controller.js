@@ -91,7 +91,10 @@ function($scope, $global, $http, PlacesApi, GoogleMaps, $window){
 
     }, function(r){
       $scope.loading = false;
-      alert("Erro de validação. Verifique os dados");
+      if(r.status == 422)
+        alert("Erro de validação. Verifique os dados");
+      else 
+        alert("Ocorreu um erro desconhecido");
     });
 
   };
