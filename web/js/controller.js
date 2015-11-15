@@ -1,4 +1,5 @@
 var dmap = angular.module('dmap');
+
 dmap.controller('MainController', ['$scope', 'global', '$http', 'PlacesApi', 'GoogleMaps', '$window',
 function($scope, $global, $http, PlacesApi, GoogleMaps, $window){
 
@@ -122,6 +123,54 @@ function($scope, $global, $http, PlacesApi, GoogleMaps, $window){
   // Escuta latitude e longitude
   $scope.$watchCollection('place.position', function(n, o){
     GoogleMaps.updateLatLng(n);
+  });
+
+}]);
+
+
+dmap.controller('MapController', 
+  ['$scope', 'global', '$http', 'PlacesApi', 'GoogleMaps', '$window', 
+function($scope, global, $http, PlacesApi, GoogleMaps, $window){
+
+  $scope.places = {};
+
+  var element = document.getElementById('main-map');
+
+  var mMap = new google.maps.Map(element, {
+    center: new google.maps.LatLng(-30.029391, -51.211427),
+    zoom: 8,
+    mapTypeId: google.maps.MapTypeId.ROADMAP,
+    disableDefaultUI: true
+  });
+
+  google.maps.event.trigger(mMap, 'resize');
+
+  $scope.addMarks = function(places){
+
+    angular.forEach(places, function(item){
+
+      mMarker = new google.maps.Marker({
+        position: {lat: item.position.latitude, lng: item.position.longitude},
+        title: item.name,
+        draggable: false,
+        icon: {
+          url: '/img/ic_mark_'+item.type.toLowerCase()+'.png'
+        }
+      });  
+      mMarker.setMap(mMap);
+    });
+
+  };
+
+
+  PlacesApi.get(function(s){
+
+    if(s.status == 200) {
+      $scope.addMarks(s.data);
+    }
+
+  }, function(e){
+
   });
 
 }]);

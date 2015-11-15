@@ -1,0 +1,21 @@
+{% extends "skin.html" %}
+
+{% block content %}
+
+{% include "menu.html" %}
+
+<div id="main" class="container">
+
+  <div ng-controller='MapController'>
+
+  [[map]]
+
+  <div class="map" id="main-map" style="min-height:480px">
+  </div>
+
+  </div> 
+  <!-- MainController -->
+
+</div>
+
+{% endblock %}

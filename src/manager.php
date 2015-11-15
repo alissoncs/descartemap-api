@@ -35,4 +35,16 @@ $manager->get('/', function() use (&$app){
 
 });
 
+$manager->get('/locais', function() use (&$app){
+
+  return $app['twig']->render('index.html');
+
+});
+
+$manager->get('/pmap', function() use (&$app){
+
+  return $app['twig']->render('pmap.html');
+
+});
+
 $app->mount('/manager', $manager);
