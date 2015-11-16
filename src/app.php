@@ -77,9 +77,7 @@ $app['data'] = function() use(&$app) {
 
 $app->before(function() use (&$app){
 
-  $token = $app['request']->headers->get("Authorization");
-
-  if($app['request']->getPathInfo() === "/token") {
+  if($app['request']->getPathInfo() === "/api/token") {
     return;
   }
 
@@ -92,6 +90,8 @@ $app->before(function() use (&$app){
   if($app['session']->has('user')) {
     return;
   }
+
+  $token = $app['request']->headers->get("Authorization");
 
   // Caso não tenha Token
   if($token == null) {

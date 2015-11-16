@@ -8,13 +8,15 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 use Service\PlaceService;
 
-$app->get('/', function () use ($app) {
+$api = $app['controllers_factory'];
+
+$api->get('/', function () use ($app) {
     return $app['json']->setData([
       'now' => new \DateTime()
     ]);
 });
 
-$app->post('/token', function() use(&$app) {
+$api->post('/token', function() use(&$app) {
 
   $clientData = $app['data'];
 
@@ -39,7 +41,7 @@ $app->post('/token', function() use(&$app) {
 
 });
 
-$app->get('/types', function () use ($app) {
+$api->get('/types', function () use ($app) {
 
   $in = [
     'ALL' => 'Todos',
@@ -61,7 +63,7 @@ $app->get('/types', function () use ($app) {
 
 });
 
-$app->get('/materials', function() use(&$app){
+$api->get('/materials', function() use(&$app){
 
   $in = [
     'Papelão',
@@ -108,7 +110,7 @@ $app->get('/materials', function() use(&$app){
 
 });
 
-$app->get('/places', function () use ($app) {
+$api->get('/places', function () use ($app) {
 
     $query = $app['request']->query->all();
 
@@ -118,7 +120,7 @@ $app->get('/places', function () use ($app) {
 
 });
 
-$app->get('/places/{id}', function($id) use ($app) {
+$api->get('/places/{id}', function($id) use ($app) {
 
     $json = $app['service.place']->findOne($id, true);
 
@@ -126,7 +128,7 @@ $app->get('/places/{id}', function($id) use ($app) {
 
 });
 
-$app->post('/places', function () use ($app) {
+$api->post('/places', function () use ($app) {
 
     $created = $app['service.place']->insert($app['data']);
 
@@ -138,7 +140,7 @@ $app->post('/places', function () use ($app) {
 
 });
 
-$app->put('/places/{id}', function ($id) use ($app) {
+$api->put('/places/{id}', function ($id) use ($app) {
 
     $app['service.place']->update($id, $app['data']);
 
@@ -146,7 +148,7 @@ $app->put('/places/{id}', function ($id) use ($app) {
 
 });
 
-$app->delete('/places/{id}', function($id) use ($app) {
+$api->delete('/places/{id}', function($id) use ($app) {
 
     if($app['service.place']->delete($id) == true) {
 
@@ -159,3 +161,6 @@ $app->delete('/places/{id}', function($id) use ($app) {
     }
 
 });
+
+
+$app->mount('/api', $api);
