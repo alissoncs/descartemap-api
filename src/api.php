@@ -65,58 +65,7 @@ $api->get('/types', function () use ($app) {
 
 $api->get('/materials', function() use(&$app){
 
-  $in = [
-    'Papelão',
-    'Caixa de leite',
-    'Garrafas pet',
-    'Frascos de produtos',
-    'Tubos PVC',
-    'Caneta sem tinta',
-    'Jornais e revistas',
-    'Listas telefônicas',
-    'Papel Sulfite',
-    'Papel',
-    'Caixas',
-    'Adesivos',
-    'Garrafas de vidro',
-    'Tampa de garrafa',
-    'Latinhas',
-    'Panelas',
-    'Ferragens',
-    'Pregos',
-    'Papel alumínio limpo',
-    'Clipes',
-    'Grampos',
-    'Solventes',
-    'Alumínio',
-    'Cobre',
-    'Zinco',
-    'Lâmpada',
-    'Cartucho de impressora',
-    'Gesso',
-    'Galhos',
-    'Pneu',
-    'Plásticos',
-    'Móveis',
-    'Caliça',
-    'Telhas',
-    'Materiais de construção',
-    'Óleo de cozinha',
-    'Arame',
-    'Esponja de aço',
-    'PVC',
-    'Espuma',
-    'Isopor',
-    'Acrílicos',
-    'Latas de alimentos',
-    'Porcelana',
-    'Cerâmica'
-  ];
-
-  $data = array();
-  foreach($in as $index => $value) {
-    $data[] = ['ref' => $index, 'name' => $value];
-  }
+  $data = $app['service.material']->findAll();
 
   return $app['json']->setData($data);
 

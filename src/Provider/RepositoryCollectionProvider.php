@@ -6,6 +6,7 @@ use Silex\Application;
 use Silex\ServiceProviderInterface;
 use Service\PlaceService;
 use Service\AuthService;
+use Service\MaterialService;
 
 class RepositoryCollectionProvider implements ServiceProviderInterface {
 
@@ -20,6 +21,12 @@ class RepositoryCollectionProvider implements ServiceProviderInterface {
         $app['service.place'] = $app->share(function() use(&$app){
           
           return new PlaceService($app);
+
+        });
+
+        $app['service.material'] = $app->share(function() use(&$app){
+          
+          return new MaterialService($app);
 
         });
 
