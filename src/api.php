@@ -100,7 +100,17 @@ $api->get('/materials', function() use(&$app){
     'Móveis',
     'Caliça',
     'Telhas',
-    'Materiais de construção'
+    'Materiais de construção',
+    'Óleo de cozinha',
+    'Arame',
+    'Esponja de aço',
+    'PVC',
+    'Espuma',
+    'Isopor',
+    'Acrílicos',
+    'Latas de alimentos',
+    'Porcelana',
+    'Cerâmica'
   ];
 
   $data = array();
@@ -109,7 +119,6 @@ $api->get('/materials', function() use(&$app){
   }
 
   return $app['json']->setData($data);
-
 
 });
 
