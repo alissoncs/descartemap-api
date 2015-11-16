@@ -58,6 +58,16 @@ class Place {
   private $canBuy = false;
 
   /**
+   * @ODM\Int(name="thumbs_up")
+   */
+  private $thumbsUp = 0;
+
+  /**
+   * @ODM\Int(name="thumbs_down")
+   */
+  private $thumbsDown = 0;
+
+  /**
    * @ODM\Collection
    */
   private $materials = [];
