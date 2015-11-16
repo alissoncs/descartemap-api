@@ -90,6 +90,7 @@ $api->get('/materials', function() use(&$app){
     'Solventes',
     'Alumínio',
     'Cobre',
+    'Zinco',
     'Lâmpada',
     'Cartucho de impressora',
     'Gesso',
@@ -97,7 +98,9 @@ $api->get('/materials', function() use(&$app){
     'Pneu',
     'Plásticos',
     'Móveis',
-    'Caliça'
+    'Caliça',
+    'Telhas',
+    'Materiais de construção'
   ];
 
   $data = array();
