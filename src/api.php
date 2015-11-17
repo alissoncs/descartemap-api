@@ -103,6 +103,14 @@ $api->post('/places', function () use ($app) {
 
 $api->put('/places/{id}', function ($id) use ($app) {
 
+    // Somente avaliação
+    if($app['request']->query->get('avaliate') != null) {
+      
+      $app['service.place']->avaliate($id, $app['request']->query->get('avaliate'));
+
+      return $app['json']->setStatusCode(202);
+    }
+
     $app['service.place']->update($id, $app['data']);
 
     return $app['json']->setStatusCode(202);

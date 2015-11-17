@@ -19,12 +19,15 @@ abstract class BaseTest extends \PHPUnit_Framework_TestCase {
 
   protected function client() {
 
-  	$url = rtrim(BASE_URL, '/');
-
+  	//$url = rtrim(BASE_URL, '/');
     if($this->httpClient == null) {
+      $url = BASE_URL;
       $this->httpClient = new Client([
       	'http_errors' => false,
-      	'base_uri' => $url
+      	'base_uri' => $url,
+        'headers' => [
+          'Authorization' => AUTHORIZATION
+        ]
       ]);
     }
 

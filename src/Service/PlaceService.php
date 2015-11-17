@@ -32,7 +32,7 @@ class PlaceService {
     $this->v->add('address[city]', 'required');
     $this->v->add('address[state]', 'required | regex(/^\w{2}$/)');
     $this->v->add('address[country]', 'required');
-    $this->v->add('address[number]', 'number | regex(/^\d+$/)');
+    $this->v->add('address[number]', 'required | number | regex(/^\d+$/)');
     $this->v->add('address[zipcode]', 'regex', ['pattern'=>'/^(\d+\-?\d+|)$/']);
 
   }
@@ -134,6 +134,32 @@ class PlaceService {
 
     $mongo = $this->app['mongo.dm'];
     $mongo->persist(Place::create($data, $current));
+    $mongo->flush();
+
+  }
+
+  public function avaliate($id, $type = '1') {
+
+    // Retorna Item
+    $place = $this->findOne($id);
+    if($place == null) {
+      throw new \Exception\NotFoundException();
+    }
+
+    // Pega o tipo
+    $type = (int) $type;
+    $type = ($type !== 1 ? 0 : 1);
+
+    // Caso tipo seja 1, incrementa
+    if($type === 1) {
+      $place->setThumbsUp($place->getThumbsUp() + 1);
+    } else {
+      $place->setThumbsDown($place->getThumbsDown() - 1);
+    }
+
+    // Salva
+    $mongo = $this->app['mongo.dm'];
+    $mongo->persist($place);
     $mongo->flush();
 
   }

@@ -72,6 +72,11 @@ class Place {
    */
   private $materials = [];
 
+  /**
+   * @ODM\Date
+   */
+  private $date;
+
   public function __construct($name = null, $type = null, Position $position = null) {
 
     if($name !== null)
@@ -209,6 +214,19 @@ class Place {
 
   }
 
+  public function setThumbsUp($thumbsUp) {
+    $this->thumbsUp = $thumbsUp;
+  }
+  public function setThumbsDown($thumbsDown) {
+    $this->thumbsDown = $thumbsDown;
+  }
+  public function getThumbsUp() {
+    return $this->thumbsUp;
+  }
+  public function getThumbsDown() {
+    return $this->thumbsDown; 
+  }
+
   static public function create(array $data, $place = null) {
 
     if($place == null) {
@@ -242,6 +260,8 @@ class Place {
     if(isset($data['materials'])) {
       $place->materials = $data['materials'];
     }
+
+    $place->date = new \DateTime();
 
     return $place;
 
