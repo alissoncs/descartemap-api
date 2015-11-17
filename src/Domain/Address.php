@@ -64,6 +64,8 @@ class Address {
     if(!is_string($street))
       throw new \InvalidArgumentException('Invalid street');
 
+    $street = ucwords($street);
+
     $this->street = $street;
   }
   public function getStreet() {

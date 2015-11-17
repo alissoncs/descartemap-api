@@ -43,7 +43,7 @@ class PlacesTest extends BaseTest {
 			'address' => [
 				'city' => 'São Leopold',
 				'country' => 'Brasil',
-				'street' => 'Rua X, 548',
+				'street' => 'rua brasil milano',
 				'state' => 'RS',
 				'number' => '548',
 				'neighborhood' => 'Centro'
@@ -68,6 +68,7 @@ class PlacesTest extends BaseTest {
 		$data = json_decode($res->getBody(), true);
 
 		$this->assertEquals(200, $res->getStatusCode());
+		$this->assertEquals('Rua Brasil Milano', $data['address']['street']);
 
 		// Exclui o elemento
 		$res = $this->client()->delete('/api/places/'.$_id);
@@ -127,7 +128,7 @@ class PlacesTest extends BaseTest {
 
 		// Verifica se o thumbs_up é igual a 1
 		$this->assertEquals(4, $data['thumbs_up']);
-		$this->assertEquals(-1, $data['thumbs_down']);
+		$this->assertEquals(1, $data['thumbs_down']);
 
 		// Excluindo item
 		$res = $this->client()->delete('/api/places/'.$_id);

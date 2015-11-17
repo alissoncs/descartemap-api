@@ -154,7 +154,7 @@ class PlaceService {
     if($type === 1) {
       $place->setThumbsUp($place->getThumbsUp() + 1);
     } else {
-      $place->setThumbsDown($place->getThumbsDown() - 1);
+      $place->setThumbsDown($place->getThumbsDown() + 1);
     }
 
     // Salva
