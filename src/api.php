@@ -37,7 +37,7 @@ $api->post('/token', function() use(&$app) {
 
   $token = $app['service.auth']->generate();
 
-  return $app['json']->setData($token);
+  return $app['json']->setStatusCode(201)->setData($token);
 
 });
 

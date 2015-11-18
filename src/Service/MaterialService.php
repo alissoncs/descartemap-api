@@ -8,7 +8,7 @@ class MaterialService {
 
 		$in = [
 	    'Papelão',
-	    'Caixa de leitse',
+	    'Caixa de leite',
 	    'Garrafas pet',
 	    'Frascos de produtos',
 	    'Tubos PVC',
