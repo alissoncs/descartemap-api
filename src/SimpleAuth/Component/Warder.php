@@ -2,28 +2,39 @@
 
 namespace SimpleAuth\Component;
 
-class Warder {
+use SimpleAuth\AccessToken;
+use SimpleAuth\Client;
 
-	private $grantType;
+class Warder {
 
 	private $client;
 
 	private $token;
 
-	/**
-	 * Somente ... podem consumir
-	 * @param  int|array $grant
-	 * @return Handler
-	 */
-	public function only($grant) {
+	public function __construct(AccessToken $token, Client $client) {
 
-		return $this;
+		$this->client = $client;
+		$this->token = $token;
 
 	}
 
-	public function not($grant) {
+	/**
+	 * Somente ... podem consumir
+	 * @param  array $grant
+	 */
+	public function only(array $grant) {
 
-		return $this;
+		return function(){
+
+		};
+
+	}
+
+	public function not(array $grant) {
+
+		return function(){
+			
+		};
 
 	}
 
