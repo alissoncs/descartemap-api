@@ -4,6 +4,7 @@ namespace Service;
 
 use Silex\Application;
 use SimpleAuth\AccessToken;
+use InvalidArgumentException;
 
 class AuthService {
 
@@ -14,7 +15,7 @@ class AuthService {
   public function setTokenUrl($tokenUrl) {
 
     if(!is_string($tokenUrl)) {
-      throw new \InvalidArgumentException('String required');
+      throw new InvalidArgumentException('String required');
     }
 
     $this->tokenUrl = $tokenUrl;

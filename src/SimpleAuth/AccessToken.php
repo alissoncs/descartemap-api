@@ -4,6 +4,8 @@ namespace SimpleAuth;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 
+use SimpleAuth\Client;
+
 /**
  * @ODM\Document(collection="auth_tokens")
  */
@@ -33,6 +35,12 @@ class AccessToken {
 	 * @ODM\String
      */
 	private $expires;
+
+	/**
+	 * @ODM\Integer(name="grant_type")
+	 * @var int
+	 */
+	private $grantType = Client::GRANT_LEVEL_1;
 
 	/**
 	 * @ODM\Date
@@ -82,6 +90,9 @@ class AccessToken {
 		}
 		if(isset($data['refresh_token'])) {
 			$client->setRefreshToken($data['refresh_token']);
+		}
+		if(isset($data['grant_type'])) {
+			$client->setGrantType($data['grant_type']);
 		}
 
 		return $client;
