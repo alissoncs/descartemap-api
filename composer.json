@@ -18,5 +18,8 @@
     },
     "autoload-dev": {
         "psr-4": { "FuncTest\\": "test/func" }
-      }
+      },
+    "require-dev": {
+        "mockery/mockery": "^0.9.4"
+    }
 }

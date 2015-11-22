@@ -32,13 +32,15 @@ class Authenticator {
 	 */
 	public function getAccess($token = null) {
 
-		if(null != $this->accessToken && $token == null) {
-
-			return $this->accessToken;
-
+		if($token == null || empty($token)) {
+			return;
 		}
 
-		if(!is_string($token)) {
+		if(null != $this->accessToken) {
+			return $this->accessToken;
+		}
+
+		if($token !== null && !is_string($token)) {
 			throw new InvalidArgumentException('Token must be string');
 		}
 
@@ -46,6 +48,18 @@ class Authenticator {
 		$token = $this->flushToken($token);
 
 		// Consulta no banco
+		$at = null;
+
+		$qb = $this->manager->createQueryBuilder('SimpleAuth\AccessToken');
+
+		$at = $qb
+		->field('token')->equals($token)
+		->getQuery()
+		->getSingleResult();
+
+		if($at !== null) {
+			return $at;
+		}
 
 		return null;
 

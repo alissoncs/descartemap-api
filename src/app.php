@@ -73,31 +73,9 @@ $app['data'] = function() use(&$app) {
 
 $app->before(function() use (&$app){
 
-  if($app['request']->getPathInfo() === "/api/token") {
-    return;
-  }
-
-  // Login no manager não pode ter acesso
-  if($app['request']->getPathInfo() === "/manager/login") {
-    return;
-  }
-
-  // Caso tenha um usuário na sessão, deixa acessar
-  if($app['session']->has('user')) {
-    return;
-  }
-
-  $token = $app['request']->headers->get("Authorization");
-
-  // Caso não tenha Token
-  if($token == null) {
-    return $app['json']->setStatusCode(403);
-  }
-
-  // Permissão via Token
-  if(!$app['service.auth']->isAllowed($token)) {
-    return $app['json']->setStatusCode(403);
-  }
+  $authStr = $app['request']->headers->get('Authorization');
+  $token = $app['auth.authenticator']->getAccess($authStr);
+  $app['auth.warder']->initialize($token);
 
 });
 
