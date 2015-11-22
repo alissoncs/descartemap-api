@@ -29,13 +29,7 @@ class Client {
 	/**
 	 * @ODM\Int
      */
-	private $grant_type = 2;
-
-	const GRANT_ALL = 1;
-	const GRANT_BASIC = 2;
-	const GRANT_LEVEL_1 = 3;
-	const GRANT_LEVEL_2 = 4;
-	const GRANT_LEVEL_3 = 5;
+	private $grant_type = 0;
 
 	public function __construct() {
 

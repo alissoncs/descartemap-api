@@ -5,6 +5,7 @@ namespace SimpleAuth;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 
 use SimpleAuth\Client;
+use SimpleAuth\Grant;
 
 /**
  * @ODM\Document(collection="auth_tokens")
@@ -40,7 +41,7 @@ class AccessToken {
 	 * @ODM\Integer(name="grant_type")
 	 * @var int
 	 */
-	private $grantType = Client::GRANT_LEVEL_1;
+	private $grantType = Grant::LEVEL_1;
 
 	/**
 	 * @ODM\Date
@@ -78,24 +79,40 @@ class AccessToken {
 		return $this->expires;
 	}
 
-	static public function create(array $data, $client = null) {
-		if($client == null)
-			$client = new self;
+	public function setGrantType($grant) {
+
+		if(!Grant::isValid($grant)) {
+			throw new InvalidArgumentException('Grant type isn\'t valid');
+		}
+
+		$this->grantType = $grant;
+
+	}
+
+	static public function create(array $data, $self = null) {
+		if($self == null)
+			$self = new self;
 
 		if(isset($data['id'])) {
-			$client->setId($data['id']);
+			$self->setId($data['id']);
 		}
 		if(isset($data['token'])) {
-			$client->setToken($data['token']);
+			$self->setToken($data['token']);
 		}
 		if(isset($data['refresh_token'])) {
-			$client->setRefreshToken($data['refresh_token']);
+			$self->setRefreshToken($data['refresh_token']);
 		}
 		if(isset($data['grant_type'])) {
-			$client->setGrantType($data['grant_type']);
+			$self->setGrantType($data['grant_type']);
+		}
+		if(isset($data['status'])) {
+			$self->setStatus($data['status']);
+		}
+		if(isset($data['expires'])) {
+			$self->setExpires($data['expires']);	
 		}
 
-		return $client;
+		return $self;
 
 	}
 

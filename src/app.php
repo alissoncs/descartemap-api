@@ -17,6 +17,8 @@ use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Provider\RepositoryCollectionProvider;
 use Provider\MongoConnectionProvider;
 
+use SimpleAuth\Silex\Provider as AuthProvider;
+
 use Sirius\Validation\Validator;
 
 use Exception\ValidationException;
@@ -30,33 +32,27 @@ $app->register(new RepositoryCollectionProvider());
 // Serviço do Mongo
 $app->register(new MongoConnectionProvider());
 
-// Validator
-$app->register(new Silex\Provider\ValidatorServiceProvider());
+// Serviço de autenticação
+$app->register(new AuthProvider());
 
+// Debug, caso possua um arquivo production no diretório root
 $app['debug'] = !file_exists(ROOT . 'production');
 
-$app['serializer'] = $app->share(function(){
-
-  $encoders = array(new XmlEncoder(), new JsonEncoder());
-  $normalizers = array(new ObjectNormalizer());
-
-  return new Serializer($normalizers, $encoders);
-
-});
-
+// Serviço de session
 $app['session'] = $app->share(function(){
   $session = new Session();
   $session->start();
   return $session;
 });
 
+// Validador Sirius
 $app['validator'] = function(){
 
   return new Validator;
 
 };
 
-// Retorna array com request
+// Dados do array request serializados
 $app['data'] = function() use(&$app) {
 
   $raw = $app['request']->getContent();
