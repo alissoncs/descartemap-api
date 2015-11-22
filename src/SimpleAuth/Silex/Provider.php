@@ -5,6 +5,9 @@ namespace SimpleAuth\Silex;
 use Silex\ServiceProviderInterface;
 use Silex\Application;
 
+use SimpleAuth\Component\Warder as Warder;
+use SimpleAuth\Component\Authenticator as Authr;
+
 class Provider implements ServiceProviderInterface {
 
 	const PREFIX = 'auth.';
@@ -13,8 +16,14 @@ class Provider implements ServiceProviderInterface {
 
     	$app[self::PREFIX . 'debug'] = $app['debug'];
 
-    	$app[self::PREFIX . 'auth'] = $app->share(function(){
-    		return 'sample authentication';
+    	$app[self::PREFIX . Authr::NAME] = $app->share(function() use(&$app){
+    		return new Authr($app['mongo.dm']);
+    	});
+
+    	$app[self::PREFIX . Warder::NAME] = $app->share(function(){
+
+    		return new Warder;
+
     	});
 
     }

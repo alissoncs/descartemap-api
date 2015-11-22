@@ -4,16 +4,21 @@ namespace SimpleAuth\Component;
 
 use SimpleAuth\AccessToken;
 use SimpleAuth\Client;
+use RuntimeException;
 
 class Warder {
 
-	private $client;
+	const NAME = 'warder';
 
 	private $token;
 
-	public function __construct(AccessToken $token, Client $client) {
+	/** @var boolean */
+	private $isInitialized = false;
 
-		$this->client = $client;
+	public function initialize(AccessToken $token) {
+
+		$this->isInitialized = true;
+
 		$this->token = $token;
 
 	}
@@ -24,6 +29,10 @@ class Warder {
 	 */
 	public function only(array $grant) {
 
+		if($this->isInitialized == false) {
+			throw new RuntimeException('Warder was not initialized');
+		}
+
 		return function(){
 
 		};
@@ -31,6 +40,10 @@ class Warder {
 	}
 
 	public function not(array $grant) {
+
+		if($this->isInitialized == false) {
+			throw new RuntimeException('Warder was not initialized');
+		}
 
 		return function(){
 			

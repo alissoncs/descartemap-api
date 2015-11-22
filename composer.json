@@ -10,7 +10,8 @@
         "fzaninotto/faker":"*",
         "twig/twig": "^1.23",
         "guzzlehttp/guzzle": "~6.1",
-        "siriusphp/validation": "~2.1"
+        "siriusphp/validation": "~2.1",
+        "jdesrosiers/silex-cors-provider": "~0.1"
     },
     "autoload": {
         "psr-0": { "": "src/" }

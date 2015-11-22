@@ -27,24 +27,20 @@ class Client {
 	private $secret;
 
 	/**
-	 * @ODM\Int
+	 * @ODM\Int(name="grant_type")
      */
-	private $grant_type = 0;
+	private $grantType = 0;
 
 	public function __construct() {
 
 	}
 
 	public function getId() {
-		
 		return $this->id;
-
 	}
 
 	public function setId($id) {
-
 		$this->id = $id;
-
 	}
 
 	public function setName($name) {
@@ -73,7 +69,7 @@ class Client {
 			throw new InvalidArgumentException('Grant type not exists');
 		}
 
-		$this->grant_type = $grant;
+		$this->grantType = $grant;
 
 	}
 

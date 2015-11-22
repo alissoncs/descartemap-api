@@ -11,10 +11,10 @@ class WarderTest extends BaseTest {
 
 	public function setUp() {
 		parent::setUp();
-		$this->instance = new w(new AccessToken, new Client);
+		$this->instance = new w();
 	}
 
-	private function accessTokenMock($grant) {
+	private function accessTokenMock($grant = null) {
 		$mock = $this->getMockBuilder('SimpleAuth\AccessToken')->getMock();
 		$mock->method('getGrantType')->willReturn($grant);
 		return $mock;
@@ -24,8 +24,28 @@ class WarderTest extends BaseTest {
 		$this->assertInstanceOf(self::CLASSNAME, $this->instance);
 	}
 
+	/**
+	 * @expectedException RuntimeException
+	 */
+	public function testUsingMethodOnlyWithoutInitialize() {
+
+		$return = $this->instance->only([]);
+		$this->assertInstanceOf('Closure', $return);
+
+	}
+	/**
+	 * @expectedException RuntimeException
+	 */
+	public function testUsingMethodNotWithoutInitialize() {
+
+		$return = $this->instance->not([]);
+		$this->assertInstanceOf('Closure', $return);
+
+	}
+
 	public function testOnlyReturnClosure() {
 
+		$this->instance->initialize($this->accessTokenMock());
 		$return = $this->instance->only([]);
 		$this->assertInstanceOf('Closure', $return);
 
@@ -33,8 +53,15 @@ class WarderTest extends BaseTest {
 
 	public function testNotReturnClosure() {
 
+		$this->instance->initialize($this->accessTokenMock());
 		$return = $this->instance->not([]);
 		$this->assertInstanceOf('Closure', $return);
+
+	}
+
+	public function testInitializingWarderWithAnAccessToken() {
+
+		$this->instance->initialize($this->accessTokenMock());
 
 	}
 
