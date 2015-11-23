@@ -20,10 +20,9 @@ class Provider implements ServiceProviderInterface {
     		return new Authr($app['mongo.dm']);
     	});
 
-    	$app[self::PREFIX . Warder::NAME] = $app->share(function(){
-
-    		return new Warder;
-
+    	$app[self::PREFIX . Warder::NAME] = $app->share(function() use(&$app){
+            $warder = new Warder;
+            return $warder;
     	});
 
     }

@@ -25,6 +25,15 @@ class WarderTest extends BaseTest {
 	}
 
 	/**
+	 * @expectedException InvalidArgumentException
+	 */
+	public function testInvalidParameterInitializeMustThrowAnException() {
+
+		$this->instance->initialize(new stdclass);
+
+	}
+
+	/**
 	 * @expectedException RuntimeException
 	 */
 	public function testUsingMethodOnlyWithoutInitialize() {

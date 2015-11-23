@@ -9,10 +9,7 @@ use Silex\Provider\HttpFragmentServiceProvider;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Session\Session;
 
-use Symfony\Component\Serializer\Serializer;
-use Symfony\Component\Serializer\Encoder\XmlEncoder;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\HttpFoundation\Request;
 
 use Provider\RepositoryCollectionProvider;
 use Provider\MongoConnectionProvider;
@@ -71,11 +68,10 @@ $app['data'] = function() use(&$app) {
 
 };
 
-$app->before(function() use (&$app){
+$app->before(function(Request $request, Application $app) {
 
   $authStr = $app['request']->headers->get('Authorization');
-  $token = $app['auth.authenticator']->getAccess($authStr);
-  $app['auth.warder']->initialize($token);
+  $app['auth.authenticator']->getAccess($authStr);
 
 });
 

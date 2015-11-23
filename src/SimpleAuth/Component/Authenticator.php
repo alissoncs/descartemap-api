@@ -48,17 +48,15 @@ class Authenticator {
 		$token = $this->flushToken($token);
 
 		// Consulta no banco
-		$at = null;
-
 		$qb = $this->manager->createQueryBuilder('SimpleAuth\AccessToken');
 
-		$at = $qb
+		$object = $qb
 		->field('token')->equals($token)
 		->getQuery()
 		->getSingleResult();
 
-		if($at !== null) {
-			return $at;
+		if($object !== null) {
+			return $object;
 		}
 
 		return null;

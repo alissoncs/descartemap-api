@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Redirectjson;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 use Service\PlaceService;
+use SimpleAuth\Grant;
 
 $api = $app['controllers_factory'];
 
@@ -14,7 +15,8 @@ $api->get('/', function () use ($app) {
     return $app['json']->setData([
       'now' => new \DateTime()
     ]);
-});
+})
+->before($app['auth.warder']->only([]));
 
 $api->post('/token', function() use(&$app) {
 

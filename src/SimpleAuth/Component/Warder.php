@@ -5,6 +5,10 @@ namespace SimpleAuth\Component;
 use SimpleAuth\AccessToken;
 use SimpleAuth\Client;
 use RuntimeException;
+use InvalidArgumentException;
+use Exception;
+use Symfony\Component\HttpFoundation\Request;
+use Silex\Application;
 
 class Warder {
 
@@ -15,25 +19,17 @@ class Warder {
 	/** @var boolean */
 	private $isInitialized = false;
 
-	public function initialize(AccessToken $token) {
-
-		$this->isInitialized = true;
-
-		$this->token = $token;
-
-	}
-
 	/**
 	 * Somente ... podem consumir
 	 * @param  array $grant
 	 */
 	public function only(array $grant) {
 
-		if($this->isInitialized == false) {
-			throw new RuntimeException('Warder was not initialized');
-		}
+		return function(Request $request, Application $app){
 
-		return function(){
+			$token = $app['auth.authenticator']->getAccess();
+
+			return $app['json']->setStatusCode(403);
 
 		};
 
@@ -46,6 +42,8 @@ class Warder {
 		}
 
 		return function(){
+
+			return null;
 			
 		};
 
