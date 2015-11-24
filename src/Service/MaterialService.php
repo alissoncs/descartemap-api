@@ -51,7 +51,15 @@ class MaterialService {
 	    'Acrílicos',
 	    'Latas de alimentos',
 	    'Porcelana',
-	    'Cerâmica'
+	    'Cerâmica',
+	    'Pilhas',
+	    'Baterias',
+	    'Celular',
+	    'Medicamentos',
+	    'Agulhas',
+	    'Utensílios hospitalares',
+	    'Entulho',
+	    'Materiais de construção'
 	  ];
 
 	  $data = array();
