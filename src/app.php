@@ -9,13 +9,12 @@ use Silex\Provider\HttpFragmentServiceProvider;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Session\Session;
 
-use Symfony\Component\Serializer\Serializer;
-use Symfony\Component\Serializer\Encoder\XmlEncoder;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\HttpFoundation\Request;
 
 use Provider\RepositoryCollectionProvider;
 use Provider\MongoConnectionProvider;
+
+use SimpleAuth\Silex\Provider as AuthProvider;
 
 use Sirius\Validation\Validator;
 
@@ -30,33 +29,27 @@ $app->register(new RepositoryCollectionProvider());
 // Serviço do Mongo
 $app->register(new MongoConnectionProvider());
 
-// Validator
-$app->register(new Silex\Provider\ValidatorServiceProvider());
+// Serviço de autenticação
+$app->register(new AuthProvider());
 
+// Debug, caso possua um arquivo production no diretório root
 $app['debug'] = !file_exists(ROOT . 'production');
 
-$app['serializer'] = $app->share(function(){
-
-  $encoders = array(new XmlEncoder(), new JsonEncoder());
-  $normalizers = array(new ObjectNormalizer());
-
-  return new Serializer($normalizers, $encoders);
-
-});
-
+// Serviço de session
 $app['session'] = $app->share(function(){
   $session = new Session();
   $session->start();
   return $session;
 });
 
+// Validador Sirius
 $app['validator'] = function(){
 
   return new Validator;
 
 };
 
-// Retorna array com request
+// Dados do array request serializados
 $app['data'] = function() use(&$app) {
 
   $raw = $app['request']->getContent();
@@ -75,33 +68,10 @@ $app['data'] = function() use(&$app) {
 
 };
 
-$app->before(function() use (&$app){
+$app->before(function(Request $request, Application $app) {
 
-  if($app['request']->getPathInfo() === "/api/token") {
-    return;
-  }
-
-  // Login no manager não pode ter acesso
-  if($app['request']->getPathInfo() === "/manager/login") {
-    return;
-  }
-
-  // Caso tenha um usuário na sessão, deixa acessar
-  if($app['session']->has('user')) {
-    return;
-  }
-
-  $token = $app['request']->headers->get("Authorization");
-
-  // Caso não tenha Token
-  if($token == null) {
-    return $app['json']->setStatusCode(403);
-  }
-
-  // Permissão via Token
-  if(!$app['service.auth']->isAllowed($token)) {
-    return $app['json']->setStatusCode(403);
-  }
+  $authStr = $app['request']->headers->get('Authorization');
+  $app['auth.authenticator']->getAccess($authStr);
 
 });
 

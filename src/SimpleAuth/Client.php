@@ -27,30 +27,20 @@ class Client {
 	private $secret;
 
 	/**
-	 * @ODM\Int
+	 * @ODM\Int(name="grant_type")
      */
-	private $grant_type = 2;
-
-	const GRANT_ALL = 1;
-	const GRANT_BASIC = 2;
-	const GRANT_LEVEL_1 = 3;
-	const GRANT_LEVEL_2 = 4;
-	const GRANT_LEVEL_3 = 5;
+	private $grantType = 0;
 
 	public function __construct() {
 
 	}
 
 	public function getId() {
-		
 		return $this->id;
-
 	}
 
 	public function setId($id) {
-
 		$this->id = $id;
-
 	}
 
 	public function setName($name) {
@@ -79,7 +69,7 @@ class Client {
 			throw new InvalidArgumentException('Grant type not exists');
 		}
 
-		$this->grant_type = $grant;
+		$this->grantType = $grant;
 
 	}
 

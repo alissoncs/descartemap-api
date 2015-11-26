@@ -41,14 +41,6 @@ vendor/
 !bin/symfony_requirements
 /vendor/
 
-# Assets and user uploads
-/web/bundles/
-/web/uploads/
-
-# PHPUnit
-/app/phpunit.xml
-/phpunit.xml
-
 # Build data
 /build/
 
