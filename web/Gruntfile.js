@@ -9,14 +9,22 @@ cssmin: {
 	},
 	target: {
 		files: {
-		  'dist/css/output.min.css': [
+			'dist/css/output.min.css': [
 				'bower_components/bootstrap/dist/css/bootstrap.min.css',
 				'bower_components/bootstrap-material-design/dist/css/material.min.css',
 				'bower_components/bootstrap-material-design/dist/css/ripples.min.css',
 				'bower_components/bootstrap-material-design/dist/css/roboto.min.css',
 				'bower_components/chosen/chosen.min.css',
 				'css/custom.css'
+			],
+
+			//site
+			'dist/css/site.min.css': [
+				'bower_components/bootstrap/dist/css/bootstrap.min.css',
+				'bower_components/bootstrap-material-design/dist/css/material.min.css',
+				'css/site.css'
 			]
+
 		}
 	}
 },
@@ -36,6 +44,13 @@ uglify: {
 				'js/controller.js',
 				'js/service.js',
 				'js/custom.js'
+			],
+
+			// site
+			'dist/js/site.min.js': [
+				'bower_components/jquery/dist/jquery.min.js',
+				'bower_components/bootstrap/dist/js/bootstrap.min.js',
+				'bower_components/bootstrap-material-design/dist/js/material.min.js'
 			]
 		}
 	}

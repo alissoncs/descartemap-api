@@ -6,14 +6,22 @@ use Symfony\Component\HttpFoundation\Jsonjson;
 use Symfony\Component\HttpFoundation\Redirectjson;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
+use Silex\Application;
+
 use Service\PlaceService;
 
-$public = $app['controllers_factory'];
+$site = $app['controllers_factory'];
 
-$public->match('/', function() use(&$app){
+$site->before(function(Request $req, Application $app){
 
-	return "Web App";
+	$app['twig.path'] = ROOT . 'view/site/';
 
 });
 
-$app->mount('/', $public);
+$site->match('/', function() use(&$app){
+
+	return $app['twig']->render('index.html');
+
+});
+
+$app->mount('/', $site);

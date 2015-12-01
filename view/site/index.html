@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DescarteMap</title>
+
+  <link href='https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700,300' rel='stylesheet' type='text/css'>
+
+  {% if app.debug == false %}
+  
+    <link rel="stylesheet" href="/dist/css/site.min.css">
+    <script src='/dist/js/site.min.js'></script>
+  
+  {% else %}
+
+  <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/bower_components/bootstrap-material-design/dist/css/material.min.css">
+  <link rel="stylesheet" href="css/site.css">
+
+  <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="/bower_components/bootstrap-material-design/dist/js/material.min.js"></script>
+  
+  {% endif %}
+</head>
+<body ng-app="dmap">
+
+<header id="main-header" class="main-header">
+  
+  <div class="container">
+    
+    <div class="col-md-4">
+      <div id="logo">
+        <img src='/img/site/logo.png' class="icon" alt="DescarteMap">
+        <img src='/img/site/title.png' class="title" alt="DescarteMap">
+      </div>
+    </div>
+
+    <div class="col-md-8">
+      
+      <nav class="menu">
+        <ul>
+          <li>
+            <a href="#about">Conheça o projeto</a>
+          </li>
+          <!-- <li>
+            <a href="#new">Notícias</a>
+          </li> -->
+          <li>
+            <a href="#faq">FAQ</a>
+          </li>
+        </ul>
+      </nav>
+
+    </div>
+
+  </div>
+
+</header>
+
+<main id="main">
+
+<section id="main-content">
+  
+  <div class="container">
+    
+    <div class="col-md-6 intro-block">
+      <h1>Saiba onde descartar lixo corretamente, na sua cidade</h1>
+        
+      <h6>Download</h6>
+      <a href="https://play.google.com/store/apps/details?id=webalissoncs.descartemap" class="btn btn-lg btn-primary btn-block btn-raised gplay-download" title="Baixar na Google Play" target="_blank">
+      <img src="/img/site/googleplay-small.png" alt="Google Play">
+      </a>
+
+      <h6>Versão online</h6>
+      <a href="#online" class="btn btn-lg btn-primary btn-block btn-raised online-edition" title="Versão online" disabled>
+      Em breve! <span class="sr-only">!</span>
+      </a>
+
+
+    </div>
+
+    <div class="col-md-6 right-block ">
+      <div class="img-splash text-center">
+      <img src="/img/site/splash.png" alt="Splash">
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section id="grimp-section">
+  
+  <div class="container">
+
+  <div class="col-xs-12 center-block">
+    <div class="row grimp-box well well-lg">
+        
+      <div class="col-md-3">
+        <h3>
+          <i class="icon i-city"></i>
+          <strong>8</strong>
+           <small>cidades</small>
+        </h3>
+      </div>
+      <div class="col-md-4">
+        <h3>
+          <i class="icon i-users"></i>
+          <strong>84</strong>
+           <small>usuários</small>
+        </h3>
+      </div>
+      <div class="col-md-5 cmp-places">
+        <h3>
+          <i class="icon i-places"></i>
+          <strong>178</strong>
+
+          <small>locais disponíveis</small>
+        </h3>
+      </div>
+
+    </div>
+  </div>
+
+  </div>
+
+</section>
+
+<section id="about">
+  
+  <div class="container">
+    <div class="col-xs-12 center-block">
+      
+      <div class="mwell row">
+        
+        <div class="col-md-8 center-block">
+          
+          <h2>
+            Conheça o projeto
+          </h2>
+          <p>
+            DescarteMap é um aplicativo 100% comunitário que indica locais de coleta para descarte de materiais como óleo de cozinha, eletrônicos, recicláveis, entre outros, com informações detalhadas do local e os materiais que podem ser descartados. 
+            </p>
+    <p>
+    O aplicativo DescarteMap está disponível para as plataformas web, <a href="https://play.google.com/store/apps/details?id=webalissoncs.descartemap" target="_blank">Android</a> e em breve IOS (iPhone), utilizando a sua localização do GPS, o aplicativo fornece a posição dos locais de coleta de materiais (lixos e resíduos) para descarte de forma ecológica próxima de você. Disponível para todo o Brasil, os locais são totalmente de domínio dos usuários que utilizam o aplicativo e fornecem os dados para o uso público.
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+</section>
+
+<section id="faq">
+  <div class="container">
+  <div class="faq-component">
+
+    <h2>FAQ</h2>
+    
+    <article class="question">
+      <h4>Porque eu deveria usar o aplicativo?</h4>
+      <p>DescarteMap além de um mapa que indica os locais para descarte de resíduos sólidos e lixo, você estará motivado a fazer o descarte dos materiais de forma ecológica, melhorando as condições da sua cidade e do meio-ambiente no geral.</p>
+    </article>
+    <article class="question">
+      <h4>Os locais disponíveis realmente existem?</h4>
+      <p>Normalmente sim, porém é fundamental que você verifique a avaliação de outras pessoas referente ao local, pois é um aplicativo que depende das ações voluntárias dos usuários do aplicativo. Antes de ir ao local, certifique-se de que ele realmente existe, ligando ou entrando em contato.</p>
+    </article>
+    <article class="question">
+      <h4>Posso sugerir um local  ?</h4>
+      <p>Por equanto não, mas em breve esta funcionalidade estará disponível.</p>
+    </article>
+    <article class="question">
+      <h4>Como faço para utilizar o aplicativo?</h4>
+      <p>Depois de baixa-lo na loja de aplicativos da Android (Google Play), você deverá somente abrir o aplicativo. O mapa com os locais estará disponível e caso sua geolocalização esteja habilitada, o mapa irá se posicionar onde você estiver, facilitando a visualização dos locais. Para ver os detalhes de cada local, basta clicar em uma marcação!</p>
+    </article>
+
+  </div>
+  </div>
+
+</section>
+
+<footer id="footer">
+  
+  <div class="container">
+    <nav>
+      <ul>
+        <li>
+          <a href="#" data-toggle="modal" data-target="#contact-modal">Contato</a>
+        </li>  
+      </ul>
+    </nav>
+  </div>
+
+  <div class="modal fade" tabindex="-1" role="dialog" id="contact-modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Contato</h4>
+        </div>
+        <div class="modal-body">
+          <p>Estamos apenas começando! Envie um e-mail: </p>
+          <p><strong>webalissoncs@gmail.com</strong> ou para 
+          <strong>carlosmacario27@gmail.com</strong></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Entendi!</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+</footer>
+
+</main>

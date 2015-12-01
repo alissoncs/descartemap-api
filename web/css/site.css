@@ -1,0 +1,239 @@
+.center-block {
+	float: none;
+	margin: 0 auto;
+}
+
+@media (min-width:768px){
+	.container{
+		width:650px
+	}
+}
+
+@media (min-width:992px){
+	.container{
+		width:808px
+	}
+}
+
+@media (min-width:1200px){
+	.container{
+		width:980px
+	}
+}
+
+body {
+	font-family: "Roboto Condensed", "Roboto", Arial, Tahoma, sans-serif;
+	cursor:default;
+	background: #FFFFFF;
+	font-size: 15px;
+}
+p {
+	font-size: 1.2em;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: inherit;
+	font-weight: bold;
+}
+
+.main-header {
+	background: #FFF;
+	border-bottom: 1px solid #CCCCCC;
+	border-top: 5px solid #00a450;
+	padding: 16px 0;
+}
+
+.main-header #logo {
+	position: relative;
+	display: block;
+}
+.main-header #logo:after {
+	content:" ";
+	display: block;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	left: 0;
+	top: 0;
+}
+.main-header #logo .icon {
+	margin-right: 1em;
+	
+}
+.main-header #logo .title {
+	margin-top: 0.48488em;
+}
+
+.menu {
+	text-align: right;
+	font-size: 1.2em;
+	padding: 8px 0 0 0;
+}
+.menu a {
+	color: #999999;
+	font-weight: normal;
+	padding: 12px 28px;
+	text-decoration: none;
+}
+.menu a:hover {
+	color:#00a450;
+}
+.menu li {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.btn.gplay-download {
+
+}
+
+#main-content {
+	padding: 38px 0;
+	background: #EEE;
+}
+
+.intro-block h1 {
+	color: #989898;
+	line-height: 1.0em;
+	letter-spacing: -0.0458em;
+	font-size: 4em;
+	padding: 40px 0;
+	font-weight: 100;
+	font-family: "Roboto Condensed", "Roboto", Arial, sans-serif;
+}
+.intro-block h6 {
+	color:#999;
+	text-align: center;
+}
+.intro-block .btn {
+	padding: 18px ;
+	border-radius: 2px;
+	margin-bottom: 46px;
+}
+.intro-block .btn.online-edition {
+	background: #D24359;
+}
+.intro-block .btn.online-edition:hover {
+	background: #D24359;
+}
+.img-splash {
+
+}
+
+#grimp-section {
+	margin: -18px 0 40px 0;	
+}
+.grimp-box.well {
+	background: #00C161;
+	border-radius: 8px;
+	color: #FFFFFF;
+	padding: 28px 10px;
+}
+.grimp-box h3 {
+	font-size: 4em;
+	font-weight: normal;
+	margin: 0;
+	font-family: inherit;
+	color: #FFFFFF;
+	line-height: 1;
+	letter-spacing: -0.045em;
+}
+.grimp-box h3 > strong {
+	display: inline-block;
+	vertical-align: middle;
+	line-height: 0.8;
+	font-weight: inherit;
+}
+.grimp-box small {
+	font-family: inherit;
+	color:inherit;
+	font-weight: 100;
+	font-size: .4em;
+	vertical-align: middle;
+	display: inline-block;
+	line-height: 1;
+	letter-spacing: 0;
+}
+
+.grimp-box .icon {
+	background: url('/img/site/icons.png') 0 0 no-repeat;
+	display: inline-block;
+	vertical-align: middle;
+	width: 42px;
+	height: 50px;
+	background-position: 0 -6px;
+}
+.grimp-box .icon.i-users {
+	background-position: -43px -6px;
+	height: 42px;
+}
+.grimp-box .icon.i-places {
+	background-position: -84px 0px;	
+	height: 49px;
+	width: 38px;
+}
+
+.mwell {
+	background:#FFF;
+	border: 1px solid #DDD;
+	border-radius: 5px;
+	box-shadow: 0 4px 2px #DDD;
+	padding: 28px 0;
+}
+.mwell h2 {
+	color: #00a450;
+	font-weight: 100;
+	margin-top:0;
+}
+.mwell p {
+	font-size: 1.2em;
+	color:#666;
+}
+
+#faq {
+
+}
+
+.faq-component {
+	padding: 28px;
+	font-family: "Roboto Condensed", Arial, sans-serif;
+}
+.faq-component h1,
+.faq-component h2,
+.faq-component h4 {
+	color: #00A450;
+	font-family: inherit;
+	font-weight: bold;
+}
+.faq-component h2 {
+	font-weight: normal;
+}
+.faq-component .question {
+	padding: 4px 10px;
+}
+
+#footer {
+	border-top: 1px solid #DDDDDD;
+	padding: 18px;
+	text-align: center;
+	color: #999;
+}
+#footer li {
+	display: inline-block;
+	vertical-align: middle;
+	list-style: none;
+}
+#footer a {
+	color: inherit;
+	text-transform: uppercase;
+	font-size: 14px;
+	font-weight: normal;
+}
+
+.modal-body p {
+	font-size: 1.2em;
+}
+.modal-content .modal-title {
+	margin-bottom: 28px;
+	font-size: 2em;
+}
