@@ -21,6 +21,11 @@
 	}
 }
 
+img {
+	max-width: 100%;
+	height: auto;
+}
+
 body {
 	font-family: "Roboto Condensed", "Roboto", Arial, Tahoma, sans-serif;
 	cursor:default;
