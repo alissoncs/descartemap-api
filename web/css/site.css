@@ -43,10 +43,12 @@ h1, h2, h3, h4, h5, h6 {
 	padding: 16px 0;
 }
 
+.img-splash,
 .main-header #logo {
 	position: relative;
 	display: block;
 }
+.img-splash:after,
 .main-header #logo:after {
 	content:" ";
 	display: block;
