@@ -9,3 +9,19 @@ O aplicativo DescarteMap está disponível para as plataformas web, Android e em
 [Acessar site](http://descartemap.com.br/)
 
 [Google Play](https://play.google.com/store/apps/details?id=webalissoncs.descartemap)
+
+### Tecnologias utilizadas
+
+- PHP 5.6
+- MongoDB
+- Silex Framework
+- Composer
+- Symfony Components
+- PHPUnit
+- GuzzleHTTP
+
+- HTML5, CSS3 e Javascript
+- AngularJS
+- Grunt
+- Bower
+- Google Maps v3.0 API
