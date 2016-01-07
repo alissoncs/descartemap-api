@@ -108,6 +108,7 @@ sudo sed -i 's/display_errors = .*/display_errors = On/g' /etc/php5/cli/php.ini
 sudo sed -i 's/display_startup_errors = .*/display_startup_errors = Off/g' /etc/php5/cli/php.ini
 sudo sed -i 's/display_errors = .*/display_errors = On/g' /etc/php5/fpm/php.ini
 sudo sed -i 's/display_startup_errors = .*/display_startup_errors = Off/g' /etc/php5/fpm/php.ini
+sudo sed -i 's/html_errors = .*/html_errors = Off/g' /etc/php5/fpm/php.ini
 
 sudo service php5-fpm restart
 sudo service mongod restart
