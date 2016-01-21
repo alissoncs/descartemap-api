@@ -7,7 +7,7 @@ use Silex\Provider\ValidatorServiceProvider;
 use Silex\Provider\ServiceControllerServiceProvider;
 use Silex\Provider\HttpFragmentServiceProvider;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Session\Session;]
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Yaml\Parser;
 
 use Symfony\Component\HttpFoundation\Request;
