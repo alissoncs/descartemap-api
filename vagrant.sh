@@ -39,7 +39,7 @@ sudo apt-get install -y php-pear make php5-fpm php5-cli php5-gd php5-dev php5-cu
 echo 'Installed PHP'
 
 #configuring mongo
-sudo pecl install mongo
+printf "\n" | sudo pecl install mongo
 sudo apt-get install -y libsasl2-dev
 sudo -i
 echo "extension=mongo.so" >> /etc/php5/fpm/php.ini
