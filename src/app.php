@@ -7,7 +7,8 @@ use Silex\Provider\ValidatorServiceProvider;
 use Silex\Provider\ServiceControllerServiceProvider;
 use Silex\Provider\HttpFragmentServiceProvider;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Session\Session;]
+use Symfony\Component\Yaml\Parser;
 
 use Symfony\Component\HttpFoundation\Request;
 
@@ -35,7 +36,11 @@ $app->register(new AuthProvider());
 // Debug, caso possua um arquivo production no diretório root
 $app['debug'] = !file_exists(ROOT . 'production');
 
-$app['config'] = 
+if(!file_exists(ROOT . 'config.yml')) {
+  throw new \RuntimeException('config.yml not found', 2);
+}
+
+$app['config'] = (new Parser())->parse(file_get_contents(ROOT . 'config.yml'));
 
 // Serviço de session
 $app['session'] = $app->share(function(){
