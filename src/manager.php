@@ -1,5 +1,7 @@
 <?php
 
+use Silex\Application as Silex;
+
 $manager = $app['controllers_factory'];
 
 $manager->get('/login', function() use (&$app){
@@ -8,12 +10,14 @@ $manager->get('/login', function() use (&$app){
 
 });
 
-$manager->post('/login', function() use (&$app){
+$manager->post('/login', function(Silex $app) use (&$app){
 
 	$login = $app['request']->request->get('login');
 	$pass = $app['request']->request->get('pass');
 
-	if($login == 'owyxl1' && $pass == '1lx98154') {
+	$users = $app['config']['admin_list'];
+
+	if(isset($users[$login]) && $users[$login] == $pass) {
 		$app['session']->set('user', md5($login.$pass));
 		return $app->redirect('/manager');
 	} else {
@@ -33,18 +37,29 @@ $manager->get('/', function() use (&$app){
 
   return $app['twig']->render('index.html');
 
-});
+})->bind('manager');
 
 $manager->get('/locais', function() use (&$app){
 
   return $app['twig']->render('index.html');
 
-});
+})->bind('locais');
 
-$manager->get('/pmap', function() use (&$app){
+$manager->get('/mapa', function() use (&$app){
 
-  return $app['twig']->render('pmap.html');
+  return $app['twig']->render('mapa.html');
 
-});
+})->bind('map');
+
+$manager->get('/estatisticas', function() use (&$app){
+
+	// Cidades
+	$cities = $app['service.place']->cities();
+
+ return $app['twig']->render('estatisticas.html', array(
+ 	'cities' => $cities
+ ));
+
+})->bind('estatisticas');
 
 $app->mount('/manager', $manager);

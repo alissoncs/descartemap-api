@@ -1,0 +1,40 @@
+{% extends "skin.html" %}
+
+{% block content %}
+
+{% include "menu.html" %}
+
+<div id="main" class="container">
+
+	<h2>Estatísticas</h2>
+
+	<hr>
+	<div class="row">
+
+		<div class="panel panel-default col-xs-4">
+		  <div class="panel-body">
+					<h4>Cidades</h4>
+					<ul>
+					{% for city in cities %}
+						<li>{{city}}</li>
+					{% endfor %}
+					</ul>
+				</div>
+		</div>
+
+		<div class="panel panel-default col-xs-8">
+		  <div class="panel-body">
+					<h4>Usuários</h4>
+					<ul>
+					{% for city in cities %}
+						<li>{{city}}</li>
+					{% endfor %}
+					</ul>
+				</div>
+		</div>
+
+</div>
+
+</div>
+
+{% endblock %}

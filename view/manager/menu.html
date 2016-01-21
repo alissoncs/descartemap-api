@@ -8,12 +8,31 @@
   </div>
 
   <ul class="nav navbar-nav">
+    
+    {% if app.request.attributes.get('_route') == 'manager' %}
     <li class="active">
+    {% else %}
+    <li>
+    {% endif %}
       <a href="/manager/">Locais</a>
     </li>
+
+    {% if app.request.attributes.get('_route') == 'map' %}
+    <li class="active">
+    {% else %}
     <li>
-      <a href="/manager/pmap">Mapa</a>
+    {% endif %}
+      <a href="/manager/mapa">Mapa</a>
     </li>
+
+    {% if app.request.attributes.get('_route') == 'estatisticas' %}
+    <li class="active">
+    {% else %}
+    <li>
+    {% endif %}
+      <a href="/manager/estatisticas">Estatísticas</a>
+    </li>
+
     <li><a href="/manager/logout">Sair</a></li>
   </ul>
 

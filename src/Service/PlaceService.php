@@ -164,4 +164,17 @@ class PlaceService {
 
   }
 
+  public function cities() {
+
+    $cities = $this->app['mongo.dm']
+    ->createQueryBuilder('Domain\Place')
+    ->select('address.city')
+    ->distinct('address.city')
+    ->hydrate(false)
+    ->getQuery()->execute()->toArray();
+
+    return $cities;
+
+  }
+
 }

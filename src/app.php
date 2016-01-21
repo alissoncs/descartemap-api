@@ -9,6 +9,7 @@ use Silex\Provider\HttpFragmentServiceProvider;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Yaml\Parser;
+use JDesrosiers\Silex\Provider\CorsServiceProvider;
 
 use Symfony\Component\HttpFoundation\Request;
 
@@ -131,5 +132,12 @@ $app->error(function(\Exception $e, $code) use (&$app){
   }
 
 });
+
+$app->register(new CorsServiceProvider(array(
+  'cors.allowCredentials' => true,
+  'cors.allowMethods' => 'GET,POST,PUT,DELETE,OPTIONS'
+)));
+
+$app->after($app['cors']);
 
 return $app;
