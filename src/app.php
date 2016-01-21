@@ -35,6 +35,8 @@ $app->register(new AuthProvider());
 // Debug, caso possua um arquivo production no diretório root
 $app['debug'] = !file_exists(ROOT . 'production');
 
+$app['config'] = 
+
 // Serviço de session
 $app['session'] = $app->share(function(){
   $session = new Session();
