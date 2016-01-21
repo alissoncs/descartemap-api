@@ -97,21 +97,13 @@ echo 'server {
 sudo mv tmp.conf /etc/nginx/sites-available/descartemap
 sudo ln -fs /etc/nginx/sites-available/descartemap /etc/nginx/sites-enabled/descartemap
 
-sudo service nginx start
-
 echo 'NGINX configurations end!'
-
-sudo service php5-fpm restart
-sudo service nginx restart
 
 sudo sed -i 's/display_errors = .*/display_errors = On/g' /etc/php5/cli/php.ini
 sudo sed -i 's/display_startup_errors = .*/display_startup_errors = Off/g' /etc/php5/cli/php.ini
 sudo sed -i 's/display_errors = .*/display_errors = On/g' /etc/php5/fpm/php.ini
 sudo sed -i 's/display_startup_errors = .*/display_startup_errors = Off/g' /etc/php5/fpm/php.ini
 sudo sed -i 's/html_errors = .*/html_errors = Off/g' /etc/php5/fpm/php.ini
-
-sudo service php5-fpm restart
-sudo service mongod restart
 
 #node 
 sudo apt-get remove --purge node
@@ -122,6 +114,10 @@ npm -v
 sudo npm install -g bower
 sudo npm install -g grunt
 sudo npm install -g grunt-cli
+
+sudo service php5-fpm restart
+sudo service nginx restart
+sudo service mongod restart
 
 # phpunit
 cd /tmp/

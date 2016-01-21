@@ -1,8 +1,8 @@
-debug: false
+debug: true
 
 admin_list:
- - you2w: 484648
- - jwyhw: 008493
+ you2w: 484648
+ jwyhw: 008493
 
 database:
  host: '127.0.0.1'

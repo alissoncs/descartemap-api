@@ -33,14 +33,14 @@ $app->register(new MongoConnectionProvider());
 // Serviço de autenticação
 $app->register(new AuthProvider());
 
-// Debug, caso possua um arquivo production no diretório root
-$app['debug'] = !file_exists(ROOT . 'production');
-
 if(!file_exists(ROOT . 'config.yml')) {
   throw new \RuntimeException('config.yml not found', 2);
 }
 
 $app['config'] = (new Parser())->parse(file_get_contents(ROOT . 'config.yml'));
+
+// Debug, caso possua um arquivo production no diretório root
+$app['debug'] = @$app['config']['debug'] === true;
 
 // Serviço de session
 $app['session'] = $app->share(function(){

@@ -20,6 +20,9 @@ $site->before(function(Request $req, Application $app){
 
 $site->match('/', function() use(&$app){
 
+	// Busca quantidade de cidades
+	
+
 	return $app['twig']->render('index.html');
 
 });

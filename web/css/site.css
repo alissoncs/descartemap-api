@@ -53,6 +53,10 @@ h1, h2, h3, h4, h5, h6 {
 	position: relative;
 	display: block;
 }
+#logo {
+	margin: 0;
+	line-height: 1;
+}
 .img-splash:after,
 .main-header #logo:after {
 	content:" ";
@@ -64,11 +68,11 @@ h1, h2, h3, h4, h5, h6 {
 	top: 0;
 }
 .main-header #logo .icon {
-	margin-right: 1em;
+	margin-right: 0.4em;
 	
 }
 .main-header #logo .title {
-	margin-top: 0.48488em;
+	margin-top: 0.16em;
 }
 
 .menu {
@@ -104,7 +108,7 @@ h1, h2, h3, h4, h5, h6 {
 	line-height: 1.0em;
 	letter-spacing: -0.0458em;
 	font-size: 4em;
-	padding: 40px 0;
+	padding: 36px 0;
 	font-weight: 100;
 	font-family: "Roboto Condensed", "Roboto", Arial, sans-serif;
 }
@@ -224,6 +228,9 @@ h1, h2, h3, h4, h5, h6 {
 	padding: 18px;
 	text-align: center;
 	color: #999;
+}
+#footer ul {
+	padding: 0;
 }
 #footer li {
 	display: inline-block;
