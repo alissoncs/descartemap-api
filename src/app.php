@@ -41,7 +41,7 @@ if(!file_exists(ROOT . 'config.yml')) {
 $app['config'] = (new Parser())->parse(file_get_contents(ROOT . 'config.yml'));
 
 // Debug, caso possua um arquivo production no diretório root
-$app['debug'] = @$app['config']['debug'] === true;
+$app['debug'] = isset($app['config']['debug']) && $app['config']['debug'] == true;
 
 // Serviço de session
 $app['session'] = $app->share(function(){
