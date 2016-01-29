@@ -62,4 +62,18 @@ $manager->get('/estatisticas', function() use (&$app){
 
 })->bind('estatisticas');
 
+$manager->get('/places.json', function() use(&$app) {
+
+	$qb = $app['mongo.dm']
+    ->createQueryBuilder('Domain\Place');
+
+	$data = $qb
+				->hydrate(false)
+    ->getQuery()
+    ->execute();
+
+ return $app->json($data->toArray(false), 200);
+
+});
+
 $app->mount('/manager', $manager);

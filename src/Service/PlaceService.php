@@ -78,6 +78,8 @@ class PlaceService {
       $qb->field('type')->in(explode(',', $options['type']));
     }
 
+    $qb->field('active')->equals(true);
+
     $qb->limit(500);
 
     $data = $qb->hydrate(!$resultArray)

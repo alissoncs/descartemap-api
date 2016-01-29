@@ -4,7 +4,8 @@ dmap.service('PlacesApi', ['$http', 'global', function($http, $global){
 
   this.get = function(success, error){
 
-    $http.get($global.url('/places')).then(function(response){
+    $http.get('/manager/places.json').then(function(response){
+      console.log(response);
       success(response);
     }, function(response){
       error(response);
