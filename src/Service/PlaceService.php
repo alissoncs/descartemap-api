@@ -5,6 +5,7 @@ namespace Service;
 use Silex\Application;
 use Domain\Place;
 use Domain\Position;
+use Domain\Rectification;
 use Exception\ValidationException;
 
 class PlaceService {
@@ -168,7 +169,20 @@ class PlaceService {
 
   public function pushRectification($placeId, array $data) {
 
-    
+    $place = $this->findOne($placeId);
+
+    $rectification = $place->getRectification(); 
+    if($rectification == null) {
+      $rectification = new Rectification($data);
+    } else {
+      $rectification->assign($data);
+    }
+
+    $place->setRectification($rectification);
+
+    $mongo = $this->app['mongo.dm'];
+    $mongo->persist($place);
+    $mongo->flush();
 
   }
 

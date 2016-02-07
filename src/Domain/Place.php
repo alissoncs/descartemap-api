@@ -43,6 +43,11 @@ class Place {
   private $contact;
 
   /**
+   * @ODM\EmbedOne(targetDocument="Rectification")
+   */
+  private $rectification;
+
+  /**
    * @ODM\String
    */
   private $type;
@@ -76,6 +81,7 @@ class Place {
    * @ODM\Date
    */
   private $date;
+
 
   public function __construct($name = null, $type = null, Position $position = null) {
 
@@ -225,6 +231,18 @@ class Place {
   }
   public function getThumbsDown() {
     return $this->thumbsDown; 
+  }
+
+  public function setRectification(Rectification $rectification) {
+    
+    $this->rectification = $rectification;
+
+  }
+  
+  public function getRectification() {
+
+    return $this->rectification;
+
   }
 
   static public function create(array $data, $place = null) {
