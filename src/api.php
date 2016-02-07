@@ -83,6 +83,12 @@ $api->get('/places', function () use ($app) {
 
 });
 
+$api->post('/suggestions', function() use(&$app) {
+  $data = $app['request']->request->all();
+
+  return $app->abort(405);
+});
+
 $api->get('/places/{id}', function($id) use ($app) {
 
     $json = $app['service.place']->findOne($id, true);
@@ -100,6 +106,19 @@ $api->post('/places', function () use ($app) {
 
     return $app['json']->setStatusCode(201)
     ->setData(['id' => $created->getId()]);
+
+});
+
+$api->post('/places/{id}/rectifications', function ($id) use($app){
+
+  $service = $app['service.place'];
+  $data = $app['request']->request->all();
+  $info = $service->pushRectification($id, $data);
+
+  if($info) 
+    return $app['json']->setStatusCode(201);
+  else
+    return $app['json']->setStatusCode(500);
 
 });
 

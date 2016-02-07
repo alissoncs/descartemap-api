@@ -166,6 +166,12 @@ class PlaceService {
 
   }
 
+  public function pushRectification($placeId, array $data) {
+
+    
+
+  }
+
   public function cities() {
 
     $cities = $this->app['mongo.dm']
