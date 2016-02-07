@@ -184,6 +184,26 @@ class PlaceService {
     $mongo->persist($place);
     $mongo->flush();
 
+    return true;
+
+  }
+
+  public function getWithRetifications() {
+
+    $qb = $this->app['mongo.dm']
+    ->createQueryBuilder('Domain\Place');
+
+    $data = $qb
+    ->addOr($qb->expr()->field('rectification.not_exists')->gt(0))
+    ->addOr($qb->expr()->field('rectification.wrong_address')->gt(0))
+    ->addOr($qb->expr()->field('rectification.wrong_phone')->gt(0))
+    ->addOr($qb->expr()->field('rectification.wrong_acceptance')->gt(0))
+    ->limit(100)
+    ->getQuery()
+    ->execute();
+
+    return $data;
+
   }
 
   public function cities() {

@@ -62,6 +62,16 @@ $manager->get('/estatisticas', function() use (&$app){
 
 })->bind('estatisticas');
 
+$manager->get('/retificacoes', function() use (&$app){
+
+	$retifications = $app['service.place']->getWithRetifications();
+
+ return $app['twig']->render('retificacoes.html', array(
+ 	'retifications' => $retifications
+ ));
+
+})->bind('retificacoes');
+
 $manager->get('/places.json', function() use(&$app) {
 
 	$qb = $app['mongo.dm']

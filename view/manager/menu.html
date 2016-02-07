@@ -33,6 +33,14 @@
       <a href="/manager/estatisticas">Estatísticas</a>
     </li>
 
+    {% if app.request.attributes.get('_route') == 'retificacoes' %}
+    <li class="active">
+    {% else %}
+    <li>
+    {% endif %}
+      <a href="/manager/retificacoes">Retificações</a>
+    </li>
+
     <li><a href="/manager/logout">Sair</a></li>
   </ul>
 

@@ -8,22 +8,22 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 class Rectification {
 
   /**
-   * @ODM\Int
+   * @ODM\Int(name="not_exists")
    */
   private $notExists = 0;
 
   /**
-   * @ODM\Int
+   * @ODM\Int(name="wrong_address")
    */
   private $wrongAddress = 0;
 
   /**
-   * @ODM\Int
+   * @ODM\Int(name="wrong_phone")
    */
   private $wrongPhone = 0;
 
   /**
-   * @ODM\Int
+   * @ODM\Int(name="wrong_acceptance")
    */
   private $wrongAcceptance = 0;
 
@@ -49,19 +49,19 @@ class Rectification {
     }
 
   }
-  public function getNotExists($n) {
+  public function getNotExists() {
     return $this->notExists;
   }
 
-  public function getWrongAddress($n) {
+  public function getWrongAddress() {
     return $this->wrongAddress;
   }
 
-  public function getWrongPhone($n) {
+  public function getWrongPhone() {
     return $this->wrongPhone;
   }
 
-  public function getWrongAcceptance($n) {
+  public function getWrongAcceptance() {
     return $this->wrongAcceptance;
   }
 

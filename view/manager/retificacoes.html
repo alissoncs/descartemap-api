@@ -1,0 +1,52 @@
+{% extends "skin.html" %}
+
+{% block content %}
+
+{% include "menu.html" %}
+
+<div id="main" class="container">
+
+  <div>
+			<h2>Retificações</h2>
+
+	<div class="panel panel-default">
+		  <div class="panel-body">
+					
+				<table class="table">
+					<thead>
+						<th>Nome do local</th>
+						<th>Não existe</th>
+						<th>Endereço errado</th>
+						<th>Telefone errado</th>
+						<th>Aceitação errada</th>
+						<th></th>
+					</thead>
+					<tbody>
+						{% for place in retifications %}
+						<tr>
+							<td>
+								{{ place.name }}
+							</td>
+							<td>{{place.rectification.notExists}}</td>
+							<td>{{place.rectification.wrongAddress}}</td>
+							<td>{{place.rectification.wrongPhone}}</td>
+							<td>{{place.rectification.wrongAcceptance}}</td>
+							<td>
+								<button class="btn btn-sm btn-warning" disabled>Delete</button>
+							</td>
+						</tr>
+						{% endfor%}
+					</tbody>
+				</table>
+
+				</div>
+		</div>
+
+		
+
+  </div> 
+  <!-- MainController -->
+
+</div>
+
+{% endblock %}
