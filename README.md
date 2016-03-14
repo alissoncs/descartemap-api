@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/alissoncs/descartemap-api.svg?branch=master)](https://travis-ci.org/alissoncs/descartemap-api)
 ## descartemap-api
 
 API Restful para conexões do aplicativo DescarteMap
