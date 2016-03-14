@@ -35,10 +35,10 @@ class Rectification {
 
   public function assign(array $data = array()) {
 
-    if(isset($data['not_exists']) && ((bool)$data['not_exists'])) == true) {
+    if(isset($data['not_exists']) && ((bool)$data['not_exists']) == true) {
       $this->setNotExists();
     }
-    if(isset($data['wrong_address']) && ((bool)$data['wrong_address'])) == true) {
+    if(isset($data['wrong_address']) && ((bool)$data['wrong_address']) == true) {
       $this->setWrongAddress();
     }
     if(isset($data['wrong_phone']) && ((bool)$data['wrong_phone']) == true) {
