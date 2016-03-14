@@ -113,7 +113,7 @@ class Place {
   public function setName($name) {
 
     if(!is_string($name)) {
-      throw new Invalid('Name must be int');
+      throw new Invalid('Name must be string');
     }
 
     $this->name = $name;
@@ -263,8 +263,10 @@ class Place {
     if(isset($data['can_buy']))
       $place->setCanBuy($data['can_buy']);
 
-    $position = new Position($data['position']['latitude'], $data['position']['longitude']);
-    $place->setPosition($position);
+    if(isset($data['position']) && isset($data['position']['latitude']) && isset($data['position']['longitude'])) {
+      $position = new Position($data['position']['latitude'], $data['position']['longitude']);
+      $place->setPosition($position);
+    }
 
     if(isset($data['address']))
       $place->setAddress(Address::create($data['address']));
