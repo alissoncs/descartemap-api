@@ -41,36 +41,14 @@ abstract class BaseTest extends \PHPUnit_Framework_TestCase {
 
 	}
 
-	public function getMock($originalClassName, 
-		$methods = array(), 
-		array $arguments = array(), 
-		$mockClassName = '', 
-		$callOriginalConstructor = true, 
-		$callOriginalClone = true, 
-		$callAutoload = true, 
-		$cloneArguments = false, 
-		$callOriginalMethods = false) {
-
-		$callOriginalConstructor	= false;
-
-		return parent::getMock(
-			$originalClassName, 
-			$methods, 
-			$arguments, 
-			$mockClassName, 
-			$callOriginalConstructor, 
-			$callOriginalClone, 
-			$callAutoload, 
-			$cloneArguments
-		);
-
-	}
-
 	public function getQueryBuilderMock(array $methods = null) {
 
 		$methods = array('field', 'hydrate', 'equals', 'getQuery', 'execute');
 
-		$mock = $this->getMock('Doctrine\MongoDB\Query\Builder', $methods);
+		$mock = $this->getMockBuilder('Doctrine\MongoDB\Query\Builder')
+		->disableOriginalConstructor()
+		->setMethods($methods)
+		->getMock();
 		$mock->expects($this->any())->method('field')->will($this->returnSelf());
 		$mock->expects($this->any())->method('hydrate')->will($this->returnSelf());
 		$mock->expects($this->any())->method('getQuery')->will($this->returnSelf());
