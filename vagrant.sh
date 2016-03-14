@@ -88,8 +88,8 @@ echo 'server {
         return 404;
     }
 
-    error_log /home/vagrant/logs/error.log;
-    access_log /home/vagrant/logs/access.log;
+    error_log /vagrant/var/error.log;
+    access_log /vagrant/var/access.log;
 
 
 }
