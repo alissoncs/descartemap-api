@@ -41,15 +41,15 @@ abstract class BaseTest extends \PHPUnit_Framework_TestCase {
 
 	}
 
-	public function getMock(
-		$originalClassName, 
+	public function getMock($originalClassName, 
 		$methods = array(), 
 		array $arguments = array(), 
 		$mockClassName = '', 
-		$callOriginalConstructor = TRUE, 
-		$callOriginalClone = TRUE, 
-		$callAutoload = TRUE, 
-		$cloneArguments = FALSE) {
+		$callOriginalConstructor = true, 
+		$callOriginalClone = true, 
+		$callAutoload = true, 
+		$cloneArguments = false, 
+		$callOriginalMethods = false) {
 
 		$callOriginalConstructor	= false;
 
