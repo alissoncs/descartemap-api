@@ -4,16 +4,16 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Manager</title>
+  <title>Manager - {{site_name}}</title>
 
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBMc2jGxgZ4LV-HTuU_m2ljhuYINIIVx3w"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key={{google_maps_token}}"></script>
   <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,500' rel='stylesheet' type='text/css'>
 
   {% if app.debug == false %}
-  
+
   <link rel="stylesheet" href="/dist/css/output.min.css">
-  <script src='/dist/js/output.min.js'></script>  
-  
+  <script src='/dist/js/output.min.js'></script>
+
   {% else %}
 
   <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
@@ -23,12 +23,11 @@
   <link rel="stylesheet" href="/bower_components/bootstrap-material-design/dist/css/ripples.min.css">
   <link rel="stylesheet" href="/bower_components/chosen/chosen.min.css">
   <link rel="stylesheet" href="/css/custom.css">
+
   <script src='/bower_components/jquery/dist/jquery.min.js'></script>
   <script src='/bower_components/chosen/chosen.jquery.min.js'></script>
-
   <script src='/bower_components/angular/angular.min.js'></script>
   <script src='/js/angular-chosen.min.js'></script>
-  
   <script src='/bower_components/bootstrap/dist/js/bootstrap.min.js'></script>
   <script src='/bower_components/bootstrap-material-design/dist/js/material.min.js'></script>
   <script src='/bower_components/bootstrap-material-design/dist/js/ripples.min.js'></script>
@@ -36,11 +35,13 @@
   <script src='/js/service.js'></script>
   <script src='/js/controller.js'></script>
   <script src='/js/custom.js'></script>
-  {% endif %}
-</head>
-<body ng-app="dmap">
 
+  {% endif %}
+
+</head>
+
+<body ng-app="dmap">
 {% block content %}{% endblock %}
-  
 </body>
+
 </html>

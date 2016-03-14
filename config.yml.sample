@@ -4,6 +4,10 @@ admin_list:
  abc: 123
  jwyhw: 008493
 
+google_maps_js: 'AIzaSyBiAxbDg1wQOjdfYcxTMY5Sz31574qLONI'
+
+site_name: 'DescarteMap'
+
 database:
  host: '127.0.0.1'
  user: root
