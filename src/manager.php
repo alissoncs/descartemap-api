@@ -1,13 +1,28 @@
 <?php
 
 use Silex\Application as Silex;
+use Symfony\Component\HttpFoundation\Request;
 
 $manager = $app['controllers_factory'];
 
+$manager->before(function(Request $request) use ($app) {
+
+	// valida session
+	if($request->getRequestUri() !== '/manager/login' && $app['session']->get('user') == null) {
+		return $app->redirect('/manager/login');
+	}
+
+  $siteName = isset($app['config']['site_name']) ? $app['config']['site_name'] : '';
+  $googleMaps = isset($app['config']['google_maps_js']) ? 
+                              $app['config']['google_maps_js'] : '';
+
+  $app['twig']->addGlobal('google_maps_token', $googleMaps);
+  $app['twig']->addGlobal('site_name', $siteName);
+
+});
+
 $manager->get('/login', function() use (&$app){
-
   return $app['twig']->render('login.html');
-
 });
 
 $manager->post('/login', function(Silex $app) use (&$app){

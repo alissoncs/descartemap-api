@@ -107,15 +107,6 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
     ]
 ));
 
-$app->before(function(Request $request) use ($app) {
-  $siteName = isset($app['config']['site_name']) ? $app['config']['site_name'] : '';
-  $googleMaps = isset($app['config']['google_maps_js']) ? 
-                              $app['config']['google_maps_js'] : '';
-
-  $app['twig']->addGlobal('google_maps_token', $googleMaps);
-  $app['twig']->addGlobal('site_name', $siteName);
-});
-
 $app->error(function(\Exception $e, $code) use (&$app){
 
   if($e instanceof ValidationException) {
