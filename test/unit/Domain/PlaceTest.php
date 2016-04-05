@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 use Domain\Place;
 
@@ -13,7 +13,7 @@ class PlaceTest extends BaseTest {
 	public function testInstanceType() {
 
 		$add = new Place();
-		$this->assertInstanceOf('Domain\Place', $add);
+		$this->assertInstanceOf('Domain\Plac/e', $add);
 
 	}
 
