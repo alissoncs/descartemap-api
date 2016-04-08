@@ -12,10 +12,10 @@
   <link href='https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700,300' rel='stylesheet' type='text/css'>
 
   {% if app.debug == false %}
-  
+
     <link rel="stylesheet" href="/dist/css/site.min.css">
     <script src='/dist/js/site.min.js'></script>
-  
+
   {% else %}
 
   <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
@@ -25,15 +25,15 @@
   <script src="/bower_components/jquery/dist/jquery.min.js"></script>
   <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="/bower_components/bootstrap-material-design/dist/js/material.min.js"></script>
-  
+
   {% endif %}
 </head>
 <body ng-app="dmap">
 
 <header id="main-header" class="main-header">
-  
+
   <div class="container">
-    
+
     <div class="col-md-4">
       <h1 id="logo">
         <img src='/img/site/logo.png' class="icon" alt="DescarteMap">
@@ -42,7 +42,7 @@
     </div>
 
     <div class="col-md-8">
-      
+
       <nav class="menu">
         <ul>
           <li>
@@ -66,12 +66,12 @@
 <main id="main">
 
 <section id="main-content">
-  
+
   <div class="container">
-    
+
     <div class="col-md-6 intro-block">
       <h1>Saiba onde descartar lixo corretamente, na sua cidade</h1>
-        
+
       <h6>Download</h6>
       <a href="https://play.google.com/store/apps/details?id=webalissoncs.descartemap" class="btn btn-lg btn-primary btn-block btn-raised gplay-download" title="Baixar na Google Play" target="_blank">
       <img src="/img/site/googleplay-small.png" alt="Google Play">
@@ -97,12 +97,12 @@
 </section>
 
 <section id="grimp-section">
-  
+
   <div class="container">
 
   <div class="col-xs-12 center-block">
     <div class="row grimp-box well well-lg">
-        
+
       <div class="col-md-3">
         <h3>
           <i class="icon i-city"></i>
@@ -133,19 +133,19 @@
 </section>
 
 <section id="about">
-  
+
   <div class="container">
     <div class="col-xs-12 center-block">
-      
+
       <div class="mwell row">
-        
+
         <div class="col-md-8 center-block">
-          
+
           <h2>
             Conheça o projeto
           </h2>
           <p>
-            DescarteMap é um aplicativo 100% comunitário que indica locais de coleta para descarte de materiais como óleo de cozinha, eletrônicos, recicláveis, entre outros, com informações detalhadas do local e os materiais que podem ser descartados. 
+            DescarteMap é um aplicativo 100% comunitário que indica locais de coleta para descarte de materiais como óleo de cozinha, eletrônicos, recicláveis, entre outros, com informações detalhadas do local e os materiais que podem ser descartados.
             </p>
     <p>
     O aplicativo DescarteMap está disponível para as plataformas web, <a href="https://play.google.com/store/apps/details?id=webalissoncs.descartemap" target="_blank">Android</a> e em breve IOS (iPhone), utilizando a sua localização do GPS, o aplicativo fornece a posição dos locais de coleta de materiais (lixos e resíduos) para descarte de forma ecológica próxima de você. Disponível para todo o Brasil, os locais são totalmente de domínio dos usuários que utilizam o aplicativo e fornecem os dados para o uso público.
@@ -165,7 +165,7 @@
   <div class="faq-component">
 
     <h2>FAQ</h2>
-    
+
     <article class="question">
       <h4>Porque eu deveria usar o aplicativo?</h4>
       <p>DescarteMap além de um mapa que indica os locais para descarte de resíduos sólidos e lixo, você estará motivado a fazer o descarte dos materiais de forma ecológica, melhorando as condições da sua cidade e do meio-ambiente no geral.</p>
@@ -189,7 +189,7 @@
 </section>
 
 <footer id="footer">
-  
+
   <div class="container">
     <nav>
       <ul>
@@ -197,7 +197,12 @@
           <a href="#" data-toggle="modal" data-target="#contact-modal" class="btn">
           Contato
           </a>
-        </li>  
+        </li>
+        <li>
+          <a href="https://github.com/alissoncs/descartemap-api/" target="_blank" class="btn">
+          GitHub
+          </a>
+        </li>
       </ul>
     </nav>
   </div>
