@@ -10,8 +10,8 @@ git checkout -- .
 git pull origin master
 
 # atualiza o composer
-sudo composer update
-sudo composer dump-autoload --optimize
+sudo composer self-update
+sudo composer install --no-dev --no-interaction --no-progress --no-scripts --optimize-autoloader
 
 #atualiza pacotes NPM
 cd web/
@@ -54,7 +54,7 @@ sudo chown -R www-data:www-data .
 sudo chmod -R 770 .
 
 # restarta os serviços
-sudo service php5-fpm restart
-sudo service nginx restart
+sudo service php5-fpm start
+sudo service nginx start
 
 echo "Deploy finalizado"
